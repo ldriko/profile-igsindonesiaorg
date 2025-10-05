@@ -3,11 +3,13 @@
 namespace App\Filament\Resources\PersonalInfos\Schemas;
 
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Pixelpeter\FilamentLanguageTabs\Forms\Components\LanguageTabs;
 
 class PersonalInfoForm
 {
@@ -20,6 +22,20 @@ class PersonalInfoForm
                         TextInput::make('name')
                             ->required()
                             ->maxLength(255),
+                        FileUpload::make('picture')
+                            ->image()
+                            ->disk('public')
+                            ->directory('personal-info')
+                            ->visibility('public')
+                            ->maxSize(2048)
+                            ->columnSpanFull(),
+                        LanguageTabs::make([
+                            Textarea::make('short_description')
+                                ->label('Short Description')
+                                ->rows(3)
+                                ->maxLength(500),
+                        ])
+                            ->columnSpanFull(),
                         TextInput::make('academic_titles')
                             ->required()
                             ->maxLength(255),

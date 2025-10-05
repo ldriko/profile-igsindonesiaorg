@@ -11,10 +11,38 @@ class PersonalInfo extends Model
     /** @use HasFactory<\Database\Factories\PersonalInfoFactory> */
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'picture',
+        'short_description',
+        'academic_titles',
+        'nidn',
+        'nip',
+        'birth_place',
+        'birth_date',
+        'gender',
+        'marital_status',
+        'functional_position',
+        'structural_position',
+        'academic_position',
+        'institution',
+        'address_office',
+        'address_home',
+        'phone',
+        'email',
+        'produced_graduates_s1',
+        'produced_graduates_s2',
+        'produced_graduates_s3',
+        'scopus_id',
+        'sinta_id',
+        'google_scholar_id',
+    ];
+
     protected function casts(): array
     {
         return [
             'birth_date' => 'date',
+            'short_description' => 'array',
         ];
     }
 

@@ -14,6 +14,11 @@ class PersonalInfoSeeder extends Seeder
     {
         PersonalInfo::create([
             'name' => 'Dr. Ir. I Gede Susrama Mas Diyasa, ST., MT., IPU',
+            'picture' => null,
+            'short_description' => [
+                'en' => 'A distinguished academic serving as Vice Dean I and Lecturer in Master of Information Technology at the Faculty of Computer Science, UPN "Veteran" Jawa Timur. With a Lektor functional position, he has supervised 82 graduates across undergraduate, masters, and doctoral programs, demonstrating exceptional commitment to academic excellence and research mentorship.',
+                'id' => 'Seorang akademisi terkemuka yang menjabat sebagai Wakil Dekan I dan Dosen di Program Magister Teknologi Informasi pada Fakultas Ilmu Komputer, UPN "Veteran" Jawa Timur. Dengan jabatan fungsional Lektor, beliau telah membimbing 82 lulusan di berbagai jenjang sarjana, magister, dan doktoral, menunjukkan komitmen luar biasa terhadap keunggulan akademik dan pembimbingan riset.',
+            ],
             'academic_titles' => 'Dr. Ir.',
             'nidn' => '0019067008',
             'nip' => '197006192021211009',
@@ -23,7 +28,7 @@ class PersonalInfoSeeder extends Seeder
             'marital_status' => 'Get married',
             'functional_position' => 'Lektor',
             'structural_position' => 'Vice Dean I',
-            'academic_position' => 'Lecturer in Master of Information Technology-Faculty of Computer Science – UPN "Veteran" Jawa Timur',
+            'academic_position' => 'Lecturer in Master of Information Technology-Faculty of Computer Science',
             'institution' => 'UPN "Veteran" Jawa Timur',
             'address_office' => 'Jalan Rungkut Madya Gunung Anyar Surabaya',
             'address_home' => 'Jalan Gunung Anyar Jaya III, Perum. New Syandana A9 Surabaya',

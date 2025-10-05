@@ -33,7 +33,22 @@ interface ModelCategory {
     route: string;
 }
 
+interface PersonalInfo {
+    name: string;
+    picture: string | null;
+    short_description: {
+        en: string;
+        id: string;
+    };
+    institution: string;
+    academic_position: string;
+    scopus_id: string;
+    sinta_id: string;
+    google_scholar_id: string;
+}
+
 interface Props {
+    personal_info: PersonalInfo | null;
     awards_count: number;
     book_writings_count: number;
     community_services_count: number;
@@ -52,6 +67,7 @@ interface Props {
 }
 
 export default function ProfileIndex({
+    personal_info,
     book_writings_count,
     community_services_count,
     conferences_count,
@@ -255,32 +271,116 @@ export default function ProfileIndex({
 
             <div className="min-h-screen bg-background">
                 <div className="mx-auto max-w-screen-lg px-4 py-8">
-                    <div className="space-y-8">
-                        {/* Hero Section */}
-                        <div className="text-center">
-                            <h1 className="mb-4 text-4xl font-bold text-foreground">
-                                {t("Academic Profile")}
-                            </h1>
-                            <p className="mx-auto max-w-3xl text-xl text-muted-foreground">
-                                {t(
-                                    "Explore comprehensive academic achievements, research contributions, and professional experience. Select a category below to view detailed information.",
-                                )}
-                            </p>
-                        </div>
+                    <div className="space-y-16">
+                        {/* Personal Info Section */}
+                        {personal_info && (
+                            <Card className="bg-gradient-to-tb from-card to-muted/20 py-0">
+                                <div className="p-8">
+                                    <div className="flex flex-col items-center gap-12 md:flex-row md:items-start">
+                                        {/* Profile Picture */}
+                                        {personal_info.picture && (
+                                            <div className="flex-shrink-0">
+                                                <img
+                                                    src={`/storage/${personal_info.picture}`}
+                                                    alt={personal_info.name}
+                                                    className="h-full border-2 rounded-lg object-cover shadow-lg"
+                                                />
+                                            </div>
+                                        )}
 
+                                        {/* Profile Info */}
+                                        <div className="flex-1 text-center md:text-justify">
+                                            <h2 className="mb-2 text-3xl font-bold text-foreground">
+                                                {personal_info.name}
+                                            </h2>
+                                            <p className="mb-2 text-lg font-medium text-primary">
+                                                {personal_info.academic_position}
+                                            </p>
+                                            <p className="mb-4 text-sm text-muted-foreground">
+                                                {personal_info.institution}
+                                            </p>
+                                            <p className="text-base leading-relaxed text-foreground">
+                                                {locale === "en"
+                                                    ? personal_info.short_description.en
+                                                    : personal_info.short_description.id}
+                                            </p>
+                                            
+                                            {/* Academic Profile Links */}
+                                            <div className="mt-6 flex flex-wrap gap-8">
+                                                {personal_info.scopus_id && (
+                                                    <a
+                                                        href={`https://www.scopus.com/authid/detail.uri?authorId=${personal_info.scopus_id}`}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="transition-opacity hover:opacity-80"
+                                                    >
+                                                        <img
+                                                            src="/img/scopus.png"
+                                                            alt="SCOPUS"
+                                                            className="h-12 w-auto object-contain"
+                                                        />
+                                                    </a>
+                                                )}
+                                                {personal_info.sinta_id && (
+                                                    <a
+                                                        href={`https://sinta.kemdiktisaintek.go.id/authors/profile/${personal_info.sinta_id}`}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="transition-opacity hover:opacity-80"
+                                                    >
+                                                        <img
+                                                            src="/img/sinta.jpg"
+                                                            alt="SINTA"
+                                                            className="h-12 w-auto object-contain"
+                                                        />
+                                                    </a>
+                                                )}
+                                                {personal_info.google_scholar_id && (
+                                                    <a
+                                                        href={`https://scholar.google.com/citations?user=${personal_info.google_scholar_id}`}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="transition-opacity hover:opacity-80"
+                                                    >
+                                                        <img
+                                                            src="/img/scholar.jpg"
+                                                            alt="Google Scholar"
+                                                            className="h-12 w-auto object-contain"
+                                                        />
+                                                    </a>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Card>
+                        )}
+                        
                         {/* Search Bar */}
-                        <div className="mx-auto max-w-md">
-                            <div className="group relative">
-                                <SearchIcon className="absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-primary" />
-                                <Input
-                                    type="text"
-                                    className="pl-10"
-                                    placeholder={t("Search categories...")}
-                                    value={searchTerm}
-                                    onChange={(e) =>
-                                        setSearchTerm(e.target.value)
-                                    }
-                                />
+                        <div className="space-y-8">
+                            <div className="text-center">
+                                <h1 className="mb-4 text-4xl font-bold text-foreground">
+                                    {t("Academic Profile")}
+                                </h1>
+                                <p className="mx-auto max-w-3xl text-xl text-muted-foreground">
+                                    {t(
+                                        "Explore comprehensive academic achievements, research contributions, and professional experience. Select a category below to view detailed information.",
+                                    )}
+                                </p>
+                            </div>
+                            <div className="mx-auto max-w-md">
+                                <div className="group relative">
+                                    <SearchIcon className="absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-primary" />
+                                    <Input
+                                        type="text"
+                                        className="pl-10"
+                                        placeholder={t("Search categories...")}
+                                        value={searchTerm}
+                                        onChange={(e) =>
+                                            setSearchTerm(e.target.value)
+                                        }
+                                    />
+                                </div>
                             </div>
                         </div>
 
