@@ -61,13 +61,8 @@ class PublicationForm
                     ->required(),
                 TextInput::make('rank')
                     ->maxLength(255),
-                Select::make('author_role')
-                    ->options([
-                        '1st Author' => '1st Author',
-                        'Co-Author' => 'Co-Author',
-                        'Corresponding Author' => 'Corresponding Author',
-                    ])
-                    ->required(),
+                TextInput::make('author_role')
+                    ->maxLength(255),
             ]);
     }
 }

@@ -5,15 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use SolutionForest\FilamentTree\Concern\ModelTree;
 
 class PublicationCategory extends Model
 {
     /** @use HasFactory<\Database\Factories\PublicationCategoryFactory> */
     use HasFactory;
+    use ModelTree;
+
+    protected $fillable = [
+        'parent_id',
+        'order',
+        'title',
+        'code',
+        'description',
+        'is_active',
+    ];
 
     protected function casts(): array
     {
         return [
+            'parent_id' => 'integer',
+            'order' => 'integer',
             'is_active' => 'boolean',
         ];
     }

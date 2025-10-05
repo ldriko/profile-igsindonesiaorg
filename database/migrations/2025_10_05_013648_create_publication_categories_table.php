@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('publication_categories', function (Blueprint $table) {
             $table->id();
-            $table->integer('parent_id')->default(-1);
-            $table->integer('order')->default(0);
+            $table->integer('parent_id')->default(-1)->index();
+            $table->integer('order')->default(0)->index();
             $table->string('title');
             $table->string('code')->nullable();
             $table->text('description')->nullable();

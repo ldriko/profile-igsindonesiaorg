@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('publisher')->nullable();
             $table->enum('index_type', ['Scopus', 'Sinta', 'Other']);
             $table->string('rank')->nullable();
-            $table->enum('author_role', ['1st Author', 'Co-Author', 'Corresponding Author']);
+            $table->string('author_role')->nullable();
             $table->timestamps();
         });
     }

@@ -13,20 +13,17 @@ class PublicationCategoryForm
     {
         return $schema
             ->components([
-                TextInput::make('parent_id')
-                    ->required()
-                    ->numeric()
-                    ->default(-1),
-                TextInput::make('order')
-                    ->required()
-                    ->numeric()
-                    ->default(0),
                 TextInput::make('title')
-                    ->required(),
-                TextInput::make('code'),
+                    ->required()
+                    ->maxLength(255),
+                TextInput::make('code')
+                    ->maxLength(255)
+                    ->placeholder('e.g., J, P, B'),
                 Textarea::make('description')
+                    ->rows(3)
                     ->columnSpanFull(),
                 Toggle::make('is_active')
+                    ->default(true)
                     ->required(),
             ]);
     }

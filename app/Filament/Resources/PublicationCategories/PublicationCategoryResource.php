@@ -5,6 +5,7 @@ namespace App\Filament\Resources\PublicationCategories;
 use App\Filament\Resources\PublicationCategories\Pages\CreatePublicationCategory;
 use App\Filament\Resources\PublicationCategories\Pages\EditPublicationCategory;
 use App\Filament\Resources\PublicationCategories\Pages\ListPublicationCategories;
+use App\Filament\Resources\PublicationCategories\Pages\PublicationCategoryTree;
 use App\Filament\Resources\PublicationCategories\Schemas\PublicationCategoryForm;
 use App\Filament\Resources\PublicationCategories\Tables\PublicationCategoriesTable;
 use App\Models\PublicationCategory;
@@ -40,7 +41,8 @@ class PublicationCategoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListPublicationCategories::route('/'),
+            'index' => PublicationCategoryTree::route('/'),
+            'list' => ListPublicationCategories::route('/list'),
             'create' => CreatePublicationCategory::route('/create'),
             'edit' => EditPublicationCategory::route('/{record}/edit'),
         ];
