@@ -267,9 +267,9 @@ export default function ProfileIndex({
             <Head title="Academic Profile - IGS Indonesia" />
 
             <div className="min-h-screen bg-background">
-                <div className="mx-auto max-w-screen-lg px-4 py-4 lg:py-8">
-                    <div className="space-y-16">
-                        {/* Personal Info Section */}
+                <div>
+                    {/* Personal Info Section */}
+                    <div className="mx-auto max-w-screen-lg px-4 py-4 lg:py-16">
                         {personal_info && (
                             <Card className="bg-gradient-to-tb overflow-hidden from-card to-muted/20 py-6 lg:py-0">
                                 <div className="flex flex-col items-center gap-6 lg:flex-row lg:items-start lg:gap-12">
@@ -352,114 +352,136 @@ export default function ProfileIndex({
                                 </div>
                             </Card>
                         )}
+                    </div>
 
-                        {/* Search Bar */}
-                        <div className="space-y-8">
-                            <div className="text-center">
-                                <h1 className="mb-4 text-4xl font-bold text-foreground">
-                                    {t("Academic Profile")}
-                                </h1>
-                                <p className="mx-auto max-w-3xl text-lg text-muted-foreground">
-                                    {t(
-                                        "Explore comprehensive academic achievements, research contributions, and professional experience. Select a category below to view detailed information.",
-                                    )}
-                                </p>
-                            </div>
-                            <div className="mx-auto max-w-md">
-                                <div className="group relative">
-                                    <SearchIcon className="absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-primary" />
-                                    <Input
-                                        type="text"
-                                        className="pl-10"
-                                        placeholder={t("Search categories...")}
-                                        value={searchTerm}
-                                        onChange={(e) =>
-                                            setSearchTerm(e.target.value)
-                                        }
-                                    />
+                    {/* Search and Categories Section */}
+                    <div className="border-y-1 bg-muted/30 py-8 lg:py-16">
+                        <div className="mx-auto max-w-screen-lg px-4">
+                            <div className="space-y-8">
+                                <div className="text-center">
+                                    <h1 className="mb-4 text-4xl font-bold text-foreground">
+                                        {t("Academic Profile")}
+                                    </h1>
+                                    <p className="mx-auto max-w-3xl text-lg text-muted-foreground">
+                                        {t(
+                                            "Explore comprehensive academic achievements, research contributions, and professional experience. Select a category below to view detailed information.",
+                                        )}
+                                    </p>
                                 </div>
+                                <div className="mx-auto max-w-md">
+                                    <div className="group relative">
+                                        <SearchIcon className="absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-primary" />
+                                        <Input
+                                            type="text"
+                                            className="pl-10"
+                                            placeholder={t(
+                                                "Search categories...",
+                                            )}
+                                            value={searchTerm}
+                                            onChange={(e) =>
+                                                setSearchTerm(e.target.value)
+                                            }
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Categories Grid */}
+                                {filteredCategories.length > 0 ? (
+                                    <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+                                        {filteredCategories.map(
+                                            (category, index) => {
+                                                const IconComponent =
+                                                    category.icon;
+                                                return (
+                                                    <Link
+                                                        key={index}
+                                                        href={category.route}
+                                                        className="group w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-1rem)]"
+                                                    >
+                                                        <Card className="h-full transform border-border bg-muted p-0.5 transition-all duration-500 hover:-translate-y-2 hover:scale-105 hover:border-primary hover:shadow-xl">
+                                                            <Card className="h-full p-6">
+                                                                <div className="flex flex-col items-center space-y-4 text-center">
+                                                                    {/* Icon */}
+                                                                    <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 to-primary/20 transition-colors group-hover:from-primary/20 group-hover:to-primary/30">
+                                                                        <IconComponent className="h-8 w-8 text-primary" />
+                                                                    </div>
+
+                                                                    <div className="space-y-1">
+                                                                        {/* Category Name */}
+                                                                        <h3 className="text-xl font-semibold text-foreground transition-colors group-hover:text-primary">
+                                                                            {getLocalizedName(
+                                                                                category,
+                                                                            )}
+                                                                        </h3>
+                                                                        {/* Description */}
+                                                                        <p className="text-sm leading-relaxed text-muted-foreground">
+                                                                            {getLocalizedDescription(
+                                                                                category,
+                                                                            )}
+                                                                        </p>
+                                                                    </div>
+
+                                                                    {/* Count */}
+                                                                    <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                                                                        <FileText className="h-4 w-4" />
+                                                                        <span>
+                                                                            {
+                                                                                category.count
+                                                                            }{" "}
+                                                                            {t(
+                                                                                "items",
+                                                                            )}
+                                                                        </span>
+                                                                    </div>
+
+                                                                    {/* Arrow */}
+                                                                    <div className="flex items-center text-primary transition-transform group-hover:translate-x-1">
+                                                                        <span className="text-sm font-medium">
+                                                                            {t(
+                                                                                "View Details",
+                                                                            )}
+                                                                        </span>
+                                                                        <svg
+                                                                            className="ml-2 h-4 w-4"
+                                                                            fill="none"
+                                                                            stroke="currentColor"
+                                                                            viewBox="0 0 24 24"
+                                                                        >
+                                                                            <path
+                                                                                strokeLinecap="round"
+                                                                                strokeLinejoin="round"
+                                                                                strokeWidth={
+                                                                                    2
+                                                                                }
+                                                                                d="M9 5l7 7-7 7"
+                                                                            />
+                                                                        </svg>
+                                                                    </div>
+                                                                </div>
+                                                            </Card>
+                                                        </Card>
+                                                    </Link>
+                                                );
+                                            },
+                                        )}
+                                    </div>
+                                ) : (
+                                    /* No Results Message */
+                                    <div className="py-12 text-center">
+                                        <SearchIcon className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+                                        <p className="text-lg text-muted-foreground">
+                                            {t(
+                                                "No categories found matching your search.",
+                                            )}
+                                        </p>
+                                    </div>
+                                )}
                             </div>
                         </div>
+                    </div>
 
-                        {/* Categories Grid */}
-                        {filteredCategories.length > 0 ? (
-                            <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-                                {filteredCategories.map((category, index) => {
-                                    const IconComponent = category.icon;
-                                    return (
-                                        <Link
-                                            key={index}
-                                            href={category.route}
-                                            className="group w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-1rem)]"
-                                        >
-                                            <Card className="h-full transform border-border p-6 transition-all duration-500 hover:-translate-y-2 hover:scale-105 hover:border-primary hover:shadow-xl">
-                                                <div className="flex flex-col items-center space-y-4 text-center">
-                                                    {/* Icon */}
-                                                    <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 to-primary/20 transition-colors group-hover:from-primary/20 group-hover:to-primary/30">
-                                                        <IconComponent className="h-8 w-8 text-primary" />
-                                                    </div>
-
-                                                    {/* Category Name */}
-                                                    <h3 className="text-xl font-semibold text-foreground transition-colors group-hover:text-primary">
-                                                        {getLocalizedName(
-                                                            category,
-                                                        )}
-                                                    </h3>
-
-                                                    {/* Description */}
-                                                    <p className="text-sm leading-relaxed text-muted-foreground">
-                                                        {getLocalizedDescription(
-                                                            category,
-                                                        )}
-                                                    </p>
-
-                                                    {/* Count */}
-                                                    <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                                                        <FileText className="h-4 w-4" />
-                                                        <span>
-                                                            {category.count}{" "}
-                                                            {t("items")}
-                                                        </span>
-                                                    </div>
-
-                                                    {/* Arrow */}
-                                                    <div className="flex items-center text-primary transition-transform group-hover:translate-x-1">
-                                                        <span className="text-sm font-medium">
-                                                            {t("View Details")}
-                                                        </span>
-                                                        <svg
-                                                            className="ml-2 h-4 w-4"
-                                                            fill="none"
-                                                            stroke="currentColor"
-                                                            viewBox="0 0 24 24"
-                                                        >
-                                                            <path
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                                strokeWidth={2}
-                                                                d="M9 5l7 7-7 7"
-                                                            />
-                                                        </svg>
-                                                    </div>
-                                                </div>
-                                            </Card>
-                                        </Link>
-                                    );
-                                })}
-                            </div>
-                        ) : (
-                            /* No Results Message */
-                            <div className="py-12 text-center">
-                                <SearchIcon className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
-                                <p className="text-lg text-muted-foreground">
-                                    {t(
-                                        "No categories found matching your search.",
-                                    )}
-                                </p>
-                            </div>
-                        )}
-
-                        {/* Stats Section */}
+                    {/* Stats Section */}
+                    <div className="mx-auto max-w-screen-lg p-4 lg:py-16">
                         <Card className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground">
                             <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
                                 <div>

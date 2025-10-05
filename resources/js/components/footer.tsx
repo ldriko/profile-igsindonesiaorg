@@ -31,7 +31,7 @@ export function Footer() {
                                 href="/"
                                 className="text-sm text-muted-foreground transition-colors hover:text-primary"
                             >
-                                {t("Profile")}
+                                {t("Home")}
                             </Link>
                             <Link
                                 href="/contact"
