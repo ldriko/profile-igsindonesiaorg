@@ -121,7 +121,7 @@ CMD ["php-fpm"]
 FROM production AS development
 
 # Use ARG to define environment variables passed from the Docker build command or Docker Compose.
-ARG XDEBUG_ENABLED=true
+ARG XDEBUG_ENABLED=false
 ARG XDEBUG_MODE=develop,coverage,debug,profile
 ARG XDEBUG_HOST=host.docker.internal
 ARG XDEBUG_IDE_KEY=DOCKER
@@ -129,6 +129,9 @@ ARG XDEBUG_LOG=/dev/stdout
 ARG XDEBUG_LOG_LEVEL=0
 
 USER root
+
+# Copy custom PHP configuration for development (includes OPcache settings)
+COPY ./docker/common/php-fpm/php.ini /usr/local/etc/php/conf.d/custom.ini
 
 # Configure Xdebug if enabled
 RUN if [ "${XDEBUG_ENABLED}" = "true" ]; then \

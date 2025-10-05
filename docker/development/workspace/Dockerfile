@@ -33,12 +33,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Use ARG to define environment variables passed from the Docker build command or Docker Compose.
-ARG XDEBUG_ENABLED
-ARG XDEBUG_MODE
-ARG XDEBUG_HOST
-ARG XDEBUG_IDE_KEY
-ARG XDEBUG_LOG
-ARG XDEBUG_LOG_LEVEL
+ARG XDEBUG_ENABLED=false
+ARG XDEBUG_MODE=develop,coverage,debug,profile
+ARG XDEBUG_HOST=host.docker.internal
+ARG XDEBUG_IDE_KEY=DOCKER
+ARG XDEBUG_LOG=/dev/stdout
+ARG XDEBUG_LOG_LEVEL=0
+
+# Copy custom PHP configuration for workspace (includes OPcache settings)
+COPY ./docker/development/workspace/php.ini /usr/local/etc/php/conf.d/custom.ini
 
 # Configure Xdebug if enabled
 RUN if [ "${XDEBUG_ENABLED}" = "true" ]; then \
