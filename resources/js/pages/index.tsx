@@ -274,86 +274,82 @@ export default function ProfileIndex({
                     <div className="space-y-16">
                         {/* Personal Info Section */}
                         {personal_info && (
-                            <Card className="bg-gradient-to-tb from-card to-muted/20 py-0">
-                                <div className="p-8">
-                                    <div className="flex flex-col items-center gap-12 md:flex-row md:items-start">
-                                        {/* Profile Picture */}
-                                        {personal_info.picture && (
-                                            <div className="md:self-stretch">
-                                                <img
-                                                    src={`/storage/${personal_info.picture}`}
-                                                    alt={personal_info.name}
-                                                    className="h-full rounded-lg border-2 object-cover shadow-lg"
-                                                />
-                                            </div>
-                                        )}
+                            <Card className="bg-gradient-to-tb from-card to-muted/20 py-6 lg:py-0 overflow-hidden">
+                                <div className="flex flex-col items-center gap-6 lg:gap-12 lg:flex-row lg:items-start">
+                                    {/* Profile Picture */}
+                                    {personal_info.picture && (
+                                        <div className="lg:self-stretch aspect-square lg:aspect-auto px-6 lg:px-0">
+                                            <img
+                                                src={`/storage/${personal_info.picture}`}
+                                                alt={personal_info.name}
+                                                className="h-full rounded-lg lg:rounded-none object-cover aspect-square lg:aspect-auto border-2 lg:border-0 lg:border-r-2"
+                                            />
+                                        </div>
+                                    )}
 
-                                        {/* Profile Info */}
-                                        <div className="flex-1 text-center md:text-justify">
-                                            <h2 className="mb-2 text-3xl font-bold text-foreground">
-                                                {personal_info.name}
-                                            </h2>
-                                            <p className="mb-2 text-lg font-medium text-primary">
-                                                {
-                                                    personal_info.academic_position
-                                                }
-                                            </p>
-                                            <p className="mb-4 text-sm text-muted-foreground">
-                                                {personal_info.institution}
-                                            </p>
-                                            <p className="text-base leading-relaxed text-foreground">
-                                                {locale === "en"
-                                                    ? personal_info
-                                                          .short_description.en
-                                                    : personal_info
-                                                          .short_description.id}
-                                            </p>
+                                    {/* Profile Info */}
+                                    <div className="flex-1 text-center lg:text-justify px-6 pb-12 lg:px-0 lg:py-12 lg:pr-12">
+                                        <h2 className="mb-2 text-3xl font-bold text-foreground">
+                                            {personal_info.name}
+                                        </h2>
+                                        <p className="mb-2 text-lg font-medium text-primary">
+                                            {personal_info.academic_position}
+                                        </p>
+                                        <p className="mb-4 text-sm text-muted-foreground">
+                                            {personal_info.institution}
+                                        </p>
+                                        <p className="text-base leading-relaxed text-foreground">
+                                            {locale === "en"
+                                                ? personal_info
+                                                      .short_description.en
+                                                : personal_info
+                                                      .short_description.id}
+                                        </p>
 
-                                            {/* Academic Profile Links */}
-                                            <div className="mt-6 flex flex-wrap gap-8">
-                                                {personal_info.scopus_id && (
-                                                    <a
-                                                        href={`https://www.scopus.com/authid/detail.uri?authorId=${personal_info.scopus_id}`}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="transition-opacity hover:opacity-80"
-                                                    >
-                                                        <img
-                                                            src="/img/scopus.png"
-                                                            alt="SCOPUS"
-                                                            className="h-12 w-auto object-contain"
-                                                        />
-                                                    </a>
-                                                )}
-                                                {personal_info.sinta_id && (
-                                                    <a
-                                                        href={`https://sinta.kemdiktisaintek.go.id/authors/profile/${personal_info.sinta_id}`}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="transition-opacity hover:opacity-80"
-                                                    >
-                                                        <img
-                                                            src="/img/sinta.jpg"
-                                                            alt="SINTA"
-                                                            className="h-12 w-auto object-contain"
-                                                        />
-                                                    </a>
-                                                )}
-                                                {personal_info.google_scholar_id && (
-                                                    <a
-                                                        href={`https://scholar.google.com/citations?user=${personal_info.google_scholar_id}`}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="transition-opacity hover:opacity-80"
-                                                    >
-                                                        <img
-                                                            src="/img/scholar.jpg"
-                                                            alt="Google Scholar"
-                                                            className="h-12 w-auto object-contain"
-                                                        />
-                                                    </a>
-                                                )}
-                                            </div>
+                                        {/* Academic Profile Links */}
+                                        <div className="mt-6 flex flex-wrap justify-center gap-8">
+                                            {personal_info.scopus_id && (
+                                                <a
+                                                    href={`https://www.scopus.com/authid/detail.uri?authorId=${personal_info.scopus_id}`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="transition-opacity hover:opacity-80"
+                                                >
+                                                    <img
+                                                        src="/img/scopus.png"
+                                                        alt="SCOPUS"
+                                                        className="h-12 w-auto object-contain"
+                                                    />
+                                                </a>
+                                            )}
+                                            {personal_info.sinta_id && (
+                                                <a
+                                                    href={`https://sinta.kemdiktisaintek.go.id/authors/profile/${personal_info.sinta_id}`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="transition-opacity hover:opacity-80"
+                                                >
+                                                    <img
+                                                        src="/img/sinta.jpg"
+                                                        alt="SINTA"
+                                                        className="h-12 w-auto object-contain"
+                                                    />
+                                                </a>
+                                            )}
+                                            {personal_info.google_scholar_id && (
+                                                <a
+                                                    href={`https://scholar.google.com/citations?user=${personal_info.google_scholar_id}`}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="transition-opacity hover:opacity-80"
+                                                >
+                                                    <img
+                                                        src="/img/scholar.jpg"
+                                                        alt="Google Scholar"
+                                                        className="h-12 w-auto object-contain"
+                                                    />
+                                                </a>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
