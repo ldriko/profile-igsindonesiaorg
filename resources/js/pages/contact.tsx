@@ -1,4 +1,3 @@
-import { Navbar } from "@/components/navbar";
 import { Card } from "@/components/ui/card";
 import { Head } from "@inertiajs/react";
 import { Mail, MapPin, Phone } from "lucide-react";
@@ -9,8 +8,6 @@ export default function Contact() {
     return (
         <>
             <Head title="Contact Us - IGS Indonesia" />
-
-            <Navbar />
 
             <div className="min-h-screen bg-background">
                 <div className="mx-auto max-w-screen-lg px-4 py-8">

@@ -1,4 +1,3 @@
-import { Navbar } from "@/components/navbar";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useLanguage } from "@/contexts/language-context";
@@ -267,28 +266,26 @@ export default function ProfileIndex({
         <>
             <Head title="Academic Profile - IGS Indonesia" />
 
-            <Navbar />
-
             <div className="min-h-screen bg-background">
                 <div className="mx-auto max-w-screen-lg px-4 py-8">
                     <div className="space-y-16">
                         {/* Personal Info Section */}
                         {personal_info && (
-                            <Card className="bg-gradient-to-tb from-card to-muted/20 py-6 lg:py-0 overflow-hidden">
-                                <div className="flex flex-col items-center gap-6 lg:gap-12 lg:flex-row lg:items-start">
+                            <Card className="bg-gradient-to-tb overflow-hidden from-card to-muted/20 py-6 lg:py-0">
+                                <div className="flex flex-col items-center gap-6 lg:flex-row lg:items-start lg:gap-12">
                                     {/* Profile Picture */}
                                     {personal_info.picture && (
-                                        <div className="lg:self-stretch aspect-square lg:aspect-auto px-6 lg:px-0">
+                                        <div className="aspect-square px-6 lg:aspect-auto lg:self-stretch lg:px-0">
                                             <img
                                                 src={`/storage/${personal_info.picture}`}
                                                 alt={personal_info.name}
-                                                className="h-full rounded-lg lg:rounded-none object-cover aspect-square lg:aspect-auto border-2 lg:border-0 lg:border-r-2"
+                                                className="aspect-square h-full rounded-lg border-2 object-cover lg:aspect-auto lg:rounded-none lg:border-0 lg:border-r-2"
                                             />
                                         </div>
                                     )}
 
                                     {/* Profile Info */}
-                                    <div className="flex-1 text-center lg:text-justify px-6 pb-12 lg:px-0 lg:py-12 lg:pr-12">
+                                    <div className="flex-1 px-6 pb-12 text-center lg:px-0 lg:py-12 lg:pr-12 lg:text-justify">
                                         <h2 className="mb-2 text-3xl font-bold text-foreground">
                                             {personal_info.name}
                                         </h2>
@@ -464,34 +461,32 @@ export default function ProfileIndex({
 
                         {/* Stats Section */}
                         <Card className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground">
-                            <div className="p-8">
-                                <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
-                                    <div>
-                                        <div className="mb-2 text-3xl font-bold">
-                                            {categories.length}
-                                        </div>
-                                        <div className="text-primary-foreground/80">
-                                            {t("Categories")}
-                                        </div>
+                            <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
+                                <div>
+                                    <div className="mb-2 text-3xl font-bold">
+                                        {categories.length}
                                     </div>
-                                    <div>
-                                        <div className="mb-2 text-3xl font-bold">
-                                            {categories.reduce(
-                                                (sum, cat) => sum + cat.count,
-                                                0,
-                                            )}
-                                        </div>
-                                        <div className="text-primary-foreground/80">
-                                            {t("Total Items")}
-                                        </div>
+                                    <div className="text-primary-foreground/80">
+                                        {t("Categories")}
                                     </div>
-                                    <div>
-                                        <div className="mb-2 text-3xl font-bold">
-                                            {new Date().getFullYear()}
-                                        </div>
-                                        <div className="text-primary-foreground/80">
-                                            {t("Updated")}
-                                        </div>
+                                </div>
+                                <div>
+                                    <div className="mb-2 text-3xl font-bold">
+                                        {categories.reduce(
+                                            (sum, cat) => sum + cat.count,
+                                            0,
+                                        )}
+                                    </div>
+                                    <div className="text-primary-foreground/80">
+                                        {t("Total Items")}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className="mb-2 text-3xl font-bold">
+                                        {new Date().getFullYear()}
+                                    </div>
+                                    <div className="text-primary-foreground/80">
+                                        {t("Updated")}
                                     </div>
                                 </div>
                             </div>
