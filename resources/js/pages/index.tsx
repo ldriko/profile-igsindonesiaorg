@@ -72,141 +72,158 @@ export default function ProfileIndex({
     const categories: ModelCategory[] = [
         {
             name: "Book Writings",
-            name_en: "Book Writings",
-            name_id: "Penulisan Buku",
-            description_en: "Published books and written works",
-            description_id: "Buku yang diterbitkan dan karya tulis",
+            name_en: t("Book Writings"),
+            name_id: t("Book Writings"),
+            description_en: t("Published books and written works"),
+            description_id: t("Published books and written works"),
             icon: BookOpen,
             count: book_writings_count,
             route: "/book-writings",
         },
         {
             name: "Community Services",
-            name_en: "Community Services",
-            name_id: "Layanan Masyarakat",
-            description_en: "Contributions and services to the community",
-            description_id: "Kontribusi dan layanan kepada masyarakat",
+            name_en: t("Community Services"),
+            name_id: t("Community Services"),
+            description_en: t("Contributions and services to the community"),
+            description_id: t("Contributions and services to the community"),
             icon: Users,
             count: community_services_count,
             route: "/community-services",
         },
         {
             name: "Conferences",
-            name_en: "Conferences",
-            name_id: "Konferensi",
-            description_en: "Academic conferences and presentations attended",
-            description_id: "Konferensi akademik dan presentasi yang dihadiri",
+            name_en: t("Conferences"),
+            name_id: t("Conferences"),
+            description_en: t(
+                "Academic conferences and presentations attended",
+            ),
+            description_id: t(
+                "Academic conferences and presentations attended",
+            ),
             icon: Presentation,
             count: conferences_count,
             route: "/conferences",
         },
         {
             name: "Education",
-            name_en: "Education",
-            name_id: "Pendidikan",
-            description_en:
+            name_en: t("Education"),
+            name_id: t("Education"),
+            description_en: t(
                 "Educational background and academic qualifications",
-            description_id:
-                "Latar belakang pendidikan dan kualifikasi akademik",
+            ),
+            description_id: t(
+                "Educational background and academic qualifications",
+            ),
             icon: GraduationCap,
             count: educations_count,
             route: "/education",
         },
         {
             name: "Institution Positions",
-            name_en: "Institution Positions",
-            name_id: "Posisi Institusi",
-            description_en: "Positions held within various institutions",
-            description_id: "Posisi yang dipegang dalam berbagai institusi",
+            name_en: t("Institution Positions"),
+            name_id: t("Institution Positions"),
+            description_en: t("Positions held within various institutions"),
+            description_id: t("Positions held within various institutions"),
             icon: Briefcase,
             count: institution_positions_count,
             route: "/institution-positions",
         },
         {
             name: "Intellectual Properties",
-            name_en: "Intellectual Properties",
-            name_id: "Kekayaan Intelektual",
-            description_en:
+            name_en: t("Intellectual Properties"),
+            name_id: t("Intellectual Properties"),
+            description_en: t(
                 "Patents, copyrights, and other intellectual property rights",
-            description_id:
-                "Paten, hak cipta, dan hak kekayaan intelektual lainnya",
+            ),
+            description_id: t(
+                "Patents, copyrights, and other intellectual property rights",
+            ),
             icon: Lightbulb,
             count: intellectual_properties_count,
             route: "/intellectual-properties",
         },
         {
             name: "Organizations",
-            name_en: "Organizations",
-            name_id: "Organisasi",
-            description_en:
+            name_en: t("Organizations"),
+            name_id: t("Organizations"),
+            description_en: t(
                 "Professional and academic organizations memberships",
-            description_id: "Keanggotaan organisasi profesional dan akademik",
+            ),
+            description_id: t(
+                "Professional and academic organizations memberships",
+            ),
             icon: Building,
             count: organizations_count,
             route: "/organizations",
         },
         {
             name: "Policy Experiences",
-            name_en: "Policy Experiences",
-            name_id: "Pengalaman Kebijakan",
-            description_en: "Experience in policy-making and advisory roles",
-            description_id:
-                "Pengalaman dalam pembuatan kebijakan dan peran penasihat",
+            name_en: t("Policy Experiences"),
+            name_id: t("Policy Experiences"),
+            description_en: t("Experience in policy-making and advisory roles"),
+            description_id: t("Experience in policy-making and advisory roles"),
             icon: FileText,
             count: policy_experiences_count,
             route: "/policy-experiences",
         },
         {
             name: "Publications",
-            name_en: "Publications",
-            name_id: "Publikasi",
-            description_en: "Academic publications and research papers",
-            description_id: "Publikasi akademik dan makalah penelitian",
+            name_en: t("Publications"),
+            name_id: t("Publications"),
+            description_en: t("Academic publications and research papers"),
+            description_id: t("Academic publications and research papers"),
             icon: Newspaper,
             count: publications_count,
             route: "/publications",
         },
         {
             name: "Research",
-            name_en: "Research",
-            name_id: "Penelitian",
-            description_en: "Research projects and funded studies",
-            description_id: "Proyek penelitian dan studi yang didanai",
+            name_en: t("Research"),
+            name_id: t("Research"),
+            description_en: t("Research projects and funded studies"),
+            description_id: t("Research projects and funded studies"),
             icon: FlaskConical,
             count: researches_count,
             route: "/research",
         },
         {
             name: "Teaching Experiences",
-            name_en: "Teaching Experiences",
-            name_id: "Pengalaman Mengajar",
-            description_en:
+            name_en: t("Teaching Experiences"),
+            name_id: t("Teaching Experiences"),
+            description_en: t(
                 "Teaching positions and academic instruction experience",
-            description_id: "Posisi mengajar dan pengalaman instruksi akademik",
+            ),
+            description_id: t(
+                "Teaching positions and academic instruction experience",
+            ),
             icon: School,
             count: teaching_experiences_count,
             route: "/teaching-experiences",
         },
         {
             name: "Teaching Materials",
-            name_en: "Teaching Materials",
-            name_id: "Materi Pengajaran",
-            description_en:
+            name_en: t("Teaching Materials"),
+            name_id: t("Teaching Materials"),
+            description_en: t(
                 "Educational materials and course content developed",
-            description_id:
-                "Materi pendidikan dan konten kursus yang dikembangkan",
+            ),
+            description_id: t(
+                "Educational materials and course content developed",
+            ),
             icon: FileEdit,
             count: teaching_materials_count,
             route: "/teaching-materials",
         },
         {
             name: "Trainings",
-            name_en: "Trainings",
-            name_id: "Pelatihan",
-            description_en:
+            name_en: t("Trainings"),
+            name_id: t("Trainings"),
+            description_en: t(
                 "Professional development and training programs attended",
-            description_id:
-                "Pengembangan profesional dan program pelatihan yang diikuti",
+            ),
+            description_id: t(
+                "Professional development and training programs attended",
+            ),
             icon: Award,
             count: trainings_count,
             route: "/trainings",
@@ -242,16 +259,12 @@ export default function ProfileIndex({
                         {/* Hero Section */}
                         <div className="text-center">
                             <h1 className="mb-4 text-4xl font-bold text-foreground">
-                                {t({
-                                    id: "Profil Akademik",
-                                    en: "Academic Profile",
-                                })}
+                                {t("Academic Profile")}
                             </h1>
                             <p className="mx-auto max-w-3xl text-xl text-muted-foreground">
-                                {t({
-                                    id: "Jelajahi pencapaian akademik, kontribusi penelitian, dan pengalaman profesional yang komprehensif. Pilih kategori di bawah ini untuk melihat informasi detail.",
-                                    en: "Explore comprehensive academic achievements, research contributions, and professional experience. Select a category below to view detailed information.",
-                                })}
+                                {t(
+                                    "Explore comprehensive academic achievements, research contributions, and professional experience. Select a category below to view detailed information.",
+                                )}
                             </p>
                         </div>
 
@@ -262,10 +275,7 @@ export default function ProfileIndex({
                                 <Input
                                     type="text"
                                     className="pl-10"
-                                    placeholder={t({
-                                        id: "Cari kategori...",
-                                        en: "Search categories...",
-                                    })}
+                                    placeholder={t("Search categories...")}
                                     value={searchTerm}
                                     onChange={(e) =>
                                         setSearchTerm(e.target.value)
@@ -311,20 +321,14 @@ export default function ProfileIndex({
                                                         <FileText className="h-4 w-4" />
                                                         <span>
                                                             {category.count}{" "}
-                                                            {t({
-                                                                id: "item",
-                                                                en: "items",
-                                                            })}
+                                                            {t("items")}
                                                         </span>
                                                     </div>
 
                                                     {/* Arrow */}
                                                     <div className="flex items-center text-primary transition-transform group-hover:translate-x-1">
                                                         <span className="text-sm font-medium">
-                                                            {t({
-                                                                id: "Lihat Detail",
-                                                                en: "View Details",
-                                                            })}
+                                                            {t("View Details")}
                                                         </span>
                                                         <svg
                                                             className="ml-2 h-4 w-4"
@@ -351,10 +355,9 @@ export default function ProfileIndex({
                             <div className="py-12 text-center">
                                 <SearchIcon className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
                                 <p className="text-lg text-muted-foreground">
-                                    {t({
-                                        id: "Tidak ada kategori yang cocok dengan pencarian Anda.",
-                                        en: "No categories found matching your search.",
-                                    })}
+                                    {t(
+                                        "No categories found matching your search.",
+                                    )}
                                 </p>
                             </div>
                         )}
@@ -368,10 +371,7 @@ export default function ProfileIndex({
                                             {categories.length}
                                         </div>
                                         <div className="text-primary-foreground/80">
-                                            {t({
-                                                id: "Kategori",
-                                                en: "Categories",
-                                            })}
+                                            {t("Categories")}
                                         </div>
                                     </div>
                                     <div>
@@ -382,10 +382,7 @@ export default function ProfileIndex({
                                             )}
                                         </div>
                                         <div className="text-primary-foreground/80">
-                                            {t({
-                                                id: "Total Item",
-                                                en: "Total Items",
-                                            })}
+                                            {t("Total Items")}
                                         </div>
                                     </div>
                                     <div>
@@ -393,10 +390,7 @@ export default function ProfileIndex({
                                             {new Date().getFullYear()}
                                         </div>
                                         <div className="text-primary-foreground/80">
-                                            {t({
-                                                id: "Diperbarui",
-                                                en: "Updated",
-                                            })}
+                                            {t("Updated")}
                                         </div>
                                     </div>
                                 </div>

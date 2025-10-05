@@ -11,6 +11,7 @@ class Education extends Model
 {
     /** @use HasFactory<\Database\Factories\EducationFactory> */
     use HasFactory;
+
     use HasTranslations;
 
     protected $table = 'educations';

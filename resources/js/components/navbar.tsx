@@ -34,9 +34,7 @@ export function Navbar() {
                                 asChild
                                 className={navigationMenuTriggerStyle()}
                             >
-                                <Link href="/">
-                                    {t({ id: "Profil", en: "Profile" })}
-                                </Link>
+                                <Link href="/">{t("Profile")}</Link>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
                         <NavigationMenuItem>
@@ -44,12 +42,7 @@ export function Navbar() {
                                 asChild
                                 className={navigationMenuTriggerStyle()}
                             >
-                                <Link href="/contact">
-                                    {t({
-                                        id: "Hubungi Kami",
-                                        en: "Contact Us",
-                                    })}
-                                </Link>
+                                <Link href="/contact">{t("Contact Us")}</Link>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
                     </NavigationMenuList>

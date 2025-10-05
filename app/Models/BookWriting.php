@@ -11,6 +11,7 @@ class BookWriting extends Model
 {
     /** @use HasFactory<\Database\Factories\BookWritingFactory> */
     use HasFactory;
+
     use HasTranslations;
 
     public array $translatable = ['title', 'publisher'];

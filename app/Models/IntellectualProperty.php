@@ -11,6 +11,7 @@ class IntellectualProperty extends Model
 {
     /** @use HasFactory<\Database\Factories\IntellectualPropertyFactory> */
     use HasFactory;
+
     use HasTranslations;
 
     public array $translatable = ['title'];

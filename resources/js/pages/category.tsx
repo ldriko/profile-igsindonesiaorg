@@ -48,7 +48,9 @@ export default function FaqCategory({ category }: Props) {
     };
 
     const getLocalizedDescription = () => {
-        return locale === "en" ? category.description_en : category.description_id;
+        return locale === "en"
+            ? category.description_en
+            : category.description_id;
     };
 
     const getLocalizedQuestion = (faq: Faq) => {
@@ -81,11 +83,13 @@ export default function FaqCategory({ category }: Props) {
                                 <li>
                                     <Link
                                         href="/faq"
-                                        className="text-muted-foreground hover:text-primary transition-colors group"
+                                        className="group text-muted-foreground transition-colors hover:text-primary"
                                     >
-                                        <Home className="h-5 w-5 group-hover:text-primary transition-colors" />
+                                        <Home className="h-5 w-5 transition-colors group-hover:text-primary" />
                                         <span className="sr-only">
-                                            {locale === "en" ? "Home" : "Beranda"}
+                                            {locale === "en"
+                                                ? "Home"
+                                                : "Beranda"}
                                         </span>
                                     </Link>
                                 </li>
@@ -94,7 +98,7 @@ export default function FaqCategory({ category }: Props) {
                                         <ChevronRight className="h-4 w-4 text-muted-foreground" />
                                         <Link
                                             href="/faq"
-                                            className="ml-3 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                                            className="ml-3 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
                                         >
                                             FAQ
                                         </Link>
@@ -112,22 +116,28 @@ export default function FaqCategory({ category }: Props) {
                         </nav>
 
                         {/* Category Header */}
-                        <Card className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground border-0">
+                        <Card className="border-0 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground">
                             <div className="p-8">
                                 <div className="flex items-center space-x-4">
-                                    <div className="w-16 h-16 bg-primary-foreground/20 rounded-xl flex items-center justify-center">
-                                        <span className="text-3xl">{category.icon || "📄"}</span>
+                                    <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-primary-foreground/20">
+                                        <span className="text-3xl">
+                                            {category.icon || "📄"}
+                                        </span>
                                     </div>
                                     <div>
-                                        <h1 className="text-3xl font-bold mb-2">{getLocalizedName()}</h1>
-                                        <p className="text-primary-foreground/80 text-lg">
+                                        <h1 className="mb-2 text-3xl font-bold">
+                                            {getLocalizedName()}
+                                        </h1>
+                                        <p className="text-lg text-primary-foreground/80">
                                             {getLocalizedDescription()}
                                         </p>
-                                        <div className="flex items-center mt-3 text-primary-foreground/70">
-                                            <HelpCircle className="w-4 h-4 mr-2" />
+                                        <div className="mt-3 flex items-center text-primary-foreground/70">
+                                            <HelpCircle className="mr-2 h-4 w-4" />
                                             <span>
                                                 {category.activeFaqs.length}{" "}
-                                                {locale === "en" ? "questions available" : "pertanyaan tersedia"}
+                                                {locale === "en"
+                                                    ? "questions available"
+                                                    : "pertanyaan tersedia"}
                                             </span>
                                         </div>
                                     </div>
@@ -138,9 +148,9 @@ export default function FaqCategory({ category }: Props) {
                         {category.activeFaqs.length > 0 ? (
                             <>
                                 {/* Search FAQ */}
-                                <div className="max-w-md mx-auto">
-                                    <div className="relative group">
-                                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground transition-colors group-focus-within:text-primary" />
+                                <div className="mx-auto max-w-md">
+                                    <div className="group relative">
+                                        <Search className="absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-primary" />
                                         <Input
                                             type="text"
                                             className="pl-10"
@@ -150,32 +160,42 @@ export default function FaqCategory({ category }: Props) {
                                                     : "Cari pertanyaan dalam kategori ini..."
                                             }
                                             value={searchTerm}
-                                            onChange={(e) => setSearchTerm(e.target.value)}
+                                            onChange={(e) =>
+                                                setSearchTerm(e.target.value)
+                                            }
                                         />
                                     </div>
                                 </div>
 
                                 {/* FAQ Accordion */}
                                 {filteredFaqs.length > 0 ? (
-                                    <div className="max-w-7xl mx-auto">
-                                        <Accordion type="single" collapsible className="space-y-4">
+                                    <div className="mx-auto max-w-7xl">
+                                        <Accordion
+                                            type="single"
+                                            collapsible
+                                            className="space-y-4"
+                                        >
                                             {filteredFaqs.map((faq) => (
                                                 <AccordionItem
                                                     key={faq.id}
                                                     value={`faq-${faq.id}`}
-                                                    className="border border-border rounded-xl overflow-hidden bg-card hover:shadow-lg transition-all duration-300"
+                                                    className="overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:shadow-lg"
                                                 >
-                                                    <AccordionTrigger className="px-6 py-5 text-left hover:no-underline group">
-                                                        <h3 className="text-lg font-semibold text-foreground pr-4 group-hover:text-primary transition-colors duration-200">
-                                                            {getLocalizedQuestion(faq)}
+                                                    <AccordionTrigger className="group px-6 py-5 text-left hover:no-underline">
+                                                        <h3 className="pr-4 text-lg font-semibold text-foreground transition-colors duration-200 group-hover:text-primary">
+                                                            {getLocalizedQuestion(
+                                                                faq,
+                                                            )}
                                                         </h3>
                                                     </AccordionTrigger>
                                                     <AccordionContent className="px-6 pb-6">
                                                         <div className="border-t border-border pt-4">
                                                             <div
-                                                                className="text-muted-foreground leading-relaxed prose prose-blue max-w-none"
+                                                                className="prose prose-blue max-w-none leading-relaxed text-muted-foreground"
                                                                 dangerouslySetInnerHTML={{
-                                                                    __html: getLocalizedAnswer(faq),
+                                                                    __html: getLocalizedAnswer(
+                                                                        faq,
+                                                                    ),
                                                                 }}
                                                             />
                                                         </div>
@@ -186,14 +206,16 @@ export default function FaqCategory({ category }: Props) {
                                     </div>
                                 ) : (
                                     /* No Results Message */
-                                    <div className="text-center py-16">
-                                        <div className="animate-bounce mb-6">
+                                    <div className="py-16 text-center">
+                                        <div className="mb-6 animate-bounce">
                                             <Search className="mx-auto h-16 w-16 text-primary/40" />
                                         </div>
-                                        <h3 className="text-xl font-semibold text-foreground mb-2">
-                                            {locale === "en" ? "No results found" : "Tidak ada hasil ditemukan"}
+                                        <h3 className="mb-2 text-xl font-semibold text-foreground">
+                                            {locale === "en"
+                                                ? "No results found"
+                                                : "Tidak ada hasil ditemukan"}
                                         </h3>
-                                        <p className="text-muted-foreground text-lg max-w-md mx-auto">
+                                        <p className="mx-auto max-w-md text-lg text-muted-foreground">
                                             {locale === "en"
                                                 ? "Try searching with different keywords or browse all questions below."
                                                 : "Coba cari dengan kata kunci yang berbeda atau lihat semua pertanyaan di bawah."}
@@ -203,23 +225,27 @@ export default function FaqCategory({ category }: Props) {
                             </>
                         ) : (
                             /* Empty State */
-                            <div className="text-center py-20">
-                                <div className="animate-pulse mb-6">
+                            <div className="py-20 text-center">
+                                <div className="mb-6 animate-pulse">
                                     <HelpCircle className="mx-auto h-20 w-20 text-primary/30" />
                                 </div>
-                                <h3 className="text-2xl font-bold text-foreground mb-3">
-                                    {locale === "en" ? "No FAQ Available Yet" : "Belum Ada FAQ"}
+                                <h3 className="mb-3 text-2xl font-bold text-foreground">
+                                    {locale === "en"
+                                        ? "No FAQ Available Yet"
+                                        : "Belum Ada FAQ"}
                                 </h3>
-                                <p className="text-muted-foreground text-lg max-w-md mx-auto mb-8">
+                                <p className="mx-auto mb-8 max-w-md text-lg text-muted-foreground">
                                     {locale === "en"
                                         ? "This category doesn't have any questions and answers yet. Check back later!"
                                         : "Kategori ini belum memiliki pertanyaan dan jawaban. Coba lagi nanti!"}
                                 </p>
                                 <Link
                                     href="/faq"
-                                    className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                                    className="inline-flex transform items-center rounded-xl bg-primary px-6 py-3 font-semibold text-primary-foreground shadow-lg transition-all duration-300 hover:scale-105 hover:bg-primary/90"
                                 >
-                                    {locale === "en" ? "Browse Other Categories" : "Lihat Kategori Lain"}
+                                    {locale === "en"
+                                        ? "Browse Other Categories"
+                                        : "Lihat Kategori Lain"}
                                 </Link>
                             </div>
                         )}

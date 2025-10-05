@@ -11,6 +11,7 @@ class InstitutionPosition extends Model
 {
     /** @use HasFactory<\Database\Factories\InstitutionPositionFactory> */
     use HasFactory;
+
     use HasTranslations;
 
     public array $translatable = ['position', 'institution', 'description'];

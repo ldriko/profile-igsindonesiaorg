@@ -11,6 +11,7 @@ class Research extends Model
 {
     /** @use HasFactory<\Database\Factories\ResearchFactory> */
     use HasFactory;
+
     use HasTranslations;
 
     protected $table = 'researches';

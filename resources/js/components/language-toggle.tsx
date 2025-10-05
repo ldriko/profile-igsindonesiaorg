@@ -11,18 +11,20 @@ import { Check, Globe } from "lucide-react";
 const languages = [
     {
         code: "id" as Locale,
-        name: "Indonesia",
+        name: "Indonesian",
+        nameKey: "Indonesian",
         flag: "🇮🇩",
     },
     {
         code: "en" as Locale,
         name: "English",
+        nameKey: "English",
         flag: "🇬🇧",
     },
 ];
 
 export function LanguageToggle() {
-    const { locale, setLocale } = useLanguage();
+    const { locale, setLocale, t } = useLanguage();
 
     const currentLanguage = languages.find((lang) => lang.code === locale);
 
@@ -50,7 +52,7 @@ export function LanguageToggle() {
                         <span className="text-lg leading-none">
                             {language.flag}
                         </span>
-                        <span>{language.name}</span>
+                        <span>{t(language.nameKey)}</span>
                         {locale === language.code && (
                             <Check className="ml-auto h-4 w-4" />
                         )}

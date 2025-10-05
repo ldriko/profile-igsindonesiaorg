@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -45,6 +46,31 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'locale' => app()->getLocale(),
+            'translations' => $this->getTranslations(),
         ];
+    }
+
+    /**
+     * Get all translations for the application
+     *
+     * @return array<string, array<string, string>>
+     */
+    private function getTranslations(): array
+    {
+        $translations = [];
+        $locales = ['id', 'en']; // Your supported locales
+
+        foreach ($locales as $locale) {
+            $path = lang_path("{$locale}.json");
+
+            if (File::exists($path)) {
+                $translations[$locale] = json_decode(File::get($path), true) ?? [];
+            } else {
+                $translations[$locale] = [];
+            }
+        }
+
+        return $translations;
     }
 }

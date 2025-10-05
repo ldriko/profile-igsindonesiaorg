@@ -11,6 +11,7 @@ class CommunityService extends Model
 {
     /** @use HasFactory<\Database\Factories\CommunityServiceFactory> */
     use HasFactory;
+
     use HasTranslations;
 
     public array $translatable = ['title', 'funding_source'];

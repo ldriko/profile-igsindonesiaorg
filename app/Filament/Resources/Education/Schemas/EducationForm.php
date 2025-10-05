@@ -3,8 +3,8 @@
 namespace App\Filament\Resources\Education\Schemas;
 
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 use Pixelpeter\FilamentLanguageTabs\Forms\Components\LanguageTabs;
 

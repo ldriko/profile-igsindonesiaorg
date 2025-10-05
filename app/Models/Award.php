@@ -11,6 +11,7 @@ class Award extends Model
 {
     /** @use HasFactory<\Database\Factories\AwardFactory> */
     use HasFactory;
+
     use HasTranslations;
 
     public array $translatable = ['title', 'organization', 'description'];

@@ -11,6 +11,7 @@ class TeachingExperience extends Model
 {
     /** @use HasFactory<\Database\Factories\TeachingExperienceFactory> */
     use HasFactory;
+
     use HasTranslations;
 
     public array $translatable = ['course_name', 'program'];

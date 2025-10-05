@@ -11,6 +11,7 @@ class Conference extends Model
 {
     /** @use HasFactory<\Database\Factories\ConferenceFactory> */
     use HasFactory;
+
     use HasTranslations;
 
     public array $translatable = ['title', 'conference_name', 'location', 'paper_title'];

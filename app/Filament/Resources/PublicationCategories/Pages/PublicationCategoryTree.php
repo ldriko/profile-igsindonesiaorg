@@ -66,7 +66,7 @@ class PublicationCategoryTree extends TreePage
 
     public function getTreeRecordIcon(?\Illuminate\Database\Eloquent\Model $record = null): ?string
     {
-        if (!$record) {
+        if (! $record) {
             return null;
         }
 
@@ -81,7 +81,7 @@ class PublicationCategoryTree extends TreePage
 
     public function getTreeRecordTitle(?\Illuminate\Database\Eloquent\Model $record = null): string
     {
-        if (!$record) {
+        if (! $record) {
             return '';
         }
 
@@ -93,7 +93,7 @@ class PublicationCategoryTree extends TreePage
         }
 
         // Add inactive indicator
-        if (!$record->is_active) {
+        if (! $record->is_active) {
             $title = "🚫 {$title}";
         }
 

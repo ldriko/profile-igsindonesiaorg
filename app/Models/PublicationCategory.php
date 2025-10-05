@@ -12,6 +12,7 @@ class PublicationCategory extends Model
 {
     /** @use HasFactory<\Database\Factories\PublicationCategoryFactory> */
     use HasFactory;
+
     use HasTranslations;
     use ModelTree;
 

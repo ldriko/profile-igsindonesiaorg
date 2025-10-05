@@ -11,6 +11,7 @@ class TeachingMaterial extends Model
 {
     /** @use HasFactory<\Database\Factories\TeachingMaterialFactory> */
     use HasFactory;
+
     use HasTranslations;
 
     public array $translatable = ['title', 'program', 'type'];

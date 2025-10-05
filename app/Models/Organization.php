@@ -11,6 +11,7 @@ class Organization extends Model
 {
     /** @use HasFactory<\Database\Factories\OrganizationFactory> */
     use HasFactory;
+
     use HasTranslations;
 
     public array $translatable = ['organization_name', 'role'];

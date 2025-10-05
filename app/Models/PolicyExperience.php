@@ -11,6 +11,7 @@ class PolicyExperience extends Model
 {
     /** @use HasFactory<\Database\Factories\PolicyExperienceFactory> */
     use HasFactory;
+
     use HasTranslations;
 
     public array $translatable = ['title', 'role', 'institution', 'description'];

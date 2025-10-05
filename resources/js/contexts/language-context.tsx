@@ -1,11 +1,27 @@
+import { usePage } from "@inertiajs/react";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 export type Locale = "id" | "en";
 
+interface TranslationMap {
+    [key: string]: string;
+}
+
 interface LanguageContextType {
     locale: Locale;
     setLocale: (locale: Locale) => void;
-    t: (translations: Record<Locale, string>) => string;
+    t: (key: string, replacements?: Record<string, string | number>) => string;
+    trans: (translations: Record<Locale, string>) => string;
+}
+
+interface PageProps {
+    translations?: {
+        id: TranslationMap;
+        en: TranslationMap;
+    };
+    locale?: Locale;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [key: string]: any;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(
@@ -13,24 +29,55 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 );
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-    const [locale, setLocaleState] = useState<Locale>(() => {
-        // Get from localStorage or default to 'id' (Indonesian)
-        if (typeof window !== "undefined") {
-            const saved = localStorage.getItem("locale");
-            return (saved === "id" || saved === "en" ? saved : "id") as Locale;
+    const page = usePage<PageProps>();
+    const serverLocale = page.props.locale || "id";
+    const translations = page.props.translations;
+
+    // Always use server locale as the source of truth
+    const [locale, setLocaleState] = useState<Locale>(serverLocale);
+
+    // Sync with server locale when it changes (e.g., after page navigation)
+    useEffect(() => {
+        if (serverLocale && serverLocale !== locale) {
+            setLocaleState(serverLocale);
         }
-        return "id";
-    });
+    }, [serverLocale, locale]);
 
     const setLocale = (newLocale: Locale) => {
-        setLocaleState(newLocale);
-        if (typeof window !== "undefined") {
-            localStorage.setItem("locale", newLocale);
-        }
+        // Immediately redirect to Laravel to update session
+        window.location.href = `/language/${newLocale}?redirect=${encodeURIComponent(window.location.pathname)}`;
     };
 
-    // Translation helper function for simple translations
-    const t = (translations: Record<Locale, string>): string => {
+    /**
+     * Laravel translation function - uses translations from Laravel
+     * @param key - Translation key from Laravel language files
+     * @param replacements - Key-value pairs for :placeholder replacement
+     */
+    const t = (
+        key: string,
+        replacements?: Record<string, string | number>,
+    ): string => {
+        const translationMap = translations?.[locale] || {};
+        let translation = translationMap[key] || key;
+
+        // Handle :placeholder replacements (Laravel style)
+        if (replacements) {
+            Object.entries(replacements).forEach(([placeholder, value]) => {
+                translation = translation.replace(
+                    new RegExp(`:${placeholder}`, "g"),
+                    String(value),
+                );
+            });
+        }
+
+        return translation;
+    };
+
+    /**
+     * Inline translation helper - for quick translations without Laravel keys
+     * @param translations - Object with id and en keys
+     */
+    const trans = (translations: Record<Locale, string>): string => {
         return translations[locale] || translations.id;
     };
 
@@ -42,7 +89,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     }, [locale]);
 
     return (
-        <LanguageContext.Provider value={{ locale, setLocale, t }}>
+        <LanguageContext.Provider value={{ locale, setLocale, t, trans }}>
             {children}
         </LanguageContext.Provider>
     );

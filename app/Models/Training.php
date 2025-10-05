@@ -11,6 +11,7 @@ class Training extends Model
 {
     /** @use HasFactory<\Database\Factories\TrainingFactory> */
     use HasFactory;
+
     use HasTranslations;
 
     public array $translatable = ['title', 'organizer'];
