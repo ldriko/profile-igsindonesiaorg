@@ -271,7 +271,7 @@ export default function ProfileIndex({
                     {/* Personal Info Section */}
                     <div className="mx-auto max-w-screen-lg px-4 py-4 lg:py-16">
                         {personal_info && (
-                            <Card className="bg-gradient-to-tb overflow-hidden from-card to-muted/20 py-6 lg:py-0">
+                            <Card className="overflow-hidden bg-gradient-to-br from-card to-muted/30 py-6 lg:py-0">
                                 <div className="flex flex-col items-center gap-6 lg:flex-row lg:items-start lg:gap-12">
                                     {/* Profile Picture */}
                                     {personal_info.picture && (
@@ -399,7 +399,7 @@ export default function ProfileIndex({
                                                         className="group w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-1rem)]"
                                                     >
                                                         <Card className="h-full transform border-border bg-muted p-0.5 transition-all duration-500 hover:-translate-y-2 hover:scale-105 hover:border-primary hover:shadow-xl">
-                                                            <Card className="h-full p-6">
+                                                            <Card className="h-full bg-gradient-to-br from-card to-muted p-6 group-hover:from-card group-hover:to-primary/5">
                                                                 <div className="flex flex-col items-center space-y-4 text-center">
                                                                     {/* Icon */}
                                                                     <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 to-primary/20 transition-colors group-hover:from-primary/20 group-hover:to-primary/30">

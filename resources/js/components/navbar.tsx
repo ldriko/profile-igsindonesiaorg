@@ -157,7 +157,7 @@ export function Navbar() {
                                 {t("Profile")}
                             </NavigationMenuTrigger>
                             <NavigationMenuContent>
-                                <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                                <ul className="grid w-[400px] gap-3 bg-gradient-to-br from-card to-muted/30 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                                     {profileMenuItems.map((item) => {
                                         const Icon = item.icon;
                                         return (
@@ -165,10 +165,10 @@ export function Navbar() {
                                                 <NavigationMenuLink asChild>
                                                     <Link
                                                         href={item.href}
-                                                        className="flex flex-col gap-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                                                        className="flex flex-col gap-1 rounded-lg border border-transparent bg-gradient-to-br from-card/50 to-muted/20 p-3 leading-none no-underline transition-all outline-none select-none hover:border-border hover:from-card hover:to-primary/10 focus:from-card focus:to-primary/10"
                                                     >
                                                         <div className="flex items-center gap-2">
-                                                            <Icon className="h-4 w-4" />
+                                                            <Icon className="h-4 w-4 text-primary" />
                                                             <div className="text-sm leading-none font-medium">
                                                                 {t(item.title)}
                                                             </div>
