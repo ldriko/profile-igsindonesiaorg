@@ -1,4 +1,5 @@
 import { LanguageToggle } from "@/components/language-toggle";
+import { Button } from "@/components/ui/button";
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -8,6 +9,13 @@ import {
     NavigationMenuTrigger,
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import {
+    Sheet,
+    SheetContent,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet";
 import { useLanguage } from "@/contexts/language-context";
 import { Link } from "@inertiajs/react";
 import {
@@ -20,14 +28,100 @@ import {
     FlaskConical,
     GraduationCap,
     Lightbulb,
+    Menu,
     Newspaper,
     Presentation,
     School,
     Users,
 } from "lucide-react";
+import { useState } from "react";
+
+// Navigation menu items configuration
+const profileMenuItems = [
+    {
+        href: "/book-writings",
+        icon: BookOpen,
+        title: "Book Writings",
+        description: "Published books and written works",
+    },
+    {
+        href: "/community-services",
+        icon: Users,
+        title: "Community Services",
+        description: "Contributions and services to the community",
+    },
+    {
+        href: "/conferences",
+        icon: Presentation,
+        title: "Conferences",
+        description: "Academic conferences and presentations attended",
+    },
+    {
+        href: "/education",
+        icon: GraduationCap,
+        title: "Education",
+        description: "Educational background and academic qualifications",
+    },
+    {
+        href: "/institution-positions",
+        icon: Briefcase,
+        title: "Institution Positions",
+        description: "Positions held within various institutions",
+    },
+    {
+        href: "/intellectual-properties",
+        icon: Lightbulb,
+        title: "Intellectual Properties",
+        description:
+            "Patents, copyrights, and other intellectual property rights",
+    },
+    {
+        href: "/organizations",
+        icon: Building,
+        title: "Organizations",
+        description: "Professional and academic organizations memberships",
+    },
+    {
+        href: "/policy-experiences",
+        icon: FileText,
+        title: "Policy Experiences",
+        description: "Experience in policy-making and advisory roles",
+    },
+    {
+        href: "/publications",
+        icon: Newspaper,
+        title: "Publications",
+        description: "Academic publications and research papers",
+    },
+    {
+        href: "/research",
+        icon: FlaskConical,
+        title: "Research",
+        description: "Research projects and funded studies",
+    },
+    {
+        href: "/teaching-experiences",
+        icon: School,
+        title: "Teaching Experiences",
+        description: "Teaching positions and academic instruction experience",
+    },
+    {
+        href: "/teaching-materials",
+        icon: FileEdit,
+        title: "Teaching Materials",
+        description: "Educational materials and course content developed",
+    },
+    {
+        href: "/trainings",
+        icon: Award,
+        title: "Trainings",
+        description: "Professional development and training programs attended",
+    },
+];
 
 export function Navbar() {
     const { t } = useLanguage();
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     return (
         <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -42,8 +136,11 @@ export function Navbar() {
                     </Link>
                 </div>
 
-                {/* Navigation Menu */}
-                <NavigationMenu className="ml-auto" viewport={true}>
+                {/* Desktop Navigation Menu */}
+                <NavigationMenu
+                    className="ml-auto hidden lg:flex"
+                    viewport={true}
+                >
                     <NavigationMenuList>
                         <NavigationMenuItem>
                             <NavigationMenuLink
@@ -61,278 +158,31 @@ export function Navbar() {
                             </NavigationMenuTrigger>
                             <NavigationMenuContent>
                                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                                    <li>
-                                        <NavigationMenuLink asChild>
-                                            <Link
-                                                href="/book-writings"
-                                                className="flex flex-col gap-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                                            >
-                                                <div className="flex items-center gap-2">
-                                                    <BookOpen className="h-4 w-4" />
-                                                    <div className="text-sm leading-none font-medium">
-                                                        {t("Book Writings")}
-                                                    </div>
-                                                </div>
-                                                <p className="text-xs leading-snug text-muted-foreground">
-                                                    {t(
-                                                        "Published books and written works",
-                                                    )}
-                                                </p>
-                                            </Link>
-                                        </NavigationMenuLink>
-                                    </li>
-                                    <li>
-                                        <NavigationMenuLink asChild>
-                                            <Link
-                                                href="/community-services"
-                                                className="flex flex-col gap-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                                            >
-                                                <div className="flex items-center gap-2">
-                                                    <Users className="h-4 w-4" />
-                                                    <div className="text-sm leading-none font-medium">
-                                                        {t(
-                                                            "Community Services",
-                                                        )}
-                                                    </div>
-                                                </div>
-                                                <p className="text-xs leading-snug text-muted-foreground">
-                                                    {t(
-                                                        "Contributions and services to the community",
-                                                    )}
-                                                </p>
-                                            </Link>
-                                        </NavigationMenuLink>
-                                    </li>
-                                    <li>
-                                        <NavigationMenuLink asChild>
-                                            <Link
-                                                href="/conferences"
-                                                className="flex flex-col gap-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                                            >
-                                                <div className="flex items-center gap-2">
-                                                    <Presentation className="h-4 w-4" />
-                                                    <div className="text-sm leading-none font-medium">
-                                                        {t("Conferences")}
-                                                    </div>
-                                                </div>
-                                                <p className="text-xs leading-snug text-muted-foreground">
-                                                    {t(
-                                                        "Academic conferences and presentations attended",
-                                                    )}
-                                                </p>
-                                            </Link>
-                                        </NavigationMenuLink>
-                                    </li>
-                                    <li>
-                                        <NavigationMenuLink asChild>
-                                            <Link
-                                                href="/education"
-                                                className="flex flex-col gap-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                                            >
-                                                <div className="flex items-center gap-2">
-                                                    <GraduationCap className="h-4 w-4" />
-                                                    <div className="text-sm leading-none font-medium">
-                                                        {t("Education")}
-                                                    </div>
-                                                </div>
-                                                <p className="text-xs leading-snug text-muted-foreground">
-                                                    {t(
-                                                        "Educational background and academic qualifications",
-                                                    )}
-                                                </p>
-                                            </Link>
-                                        </NavigationMenuLink>
-                                    </li>
-                                    <li>
-                                        <NavigationMenuLink asChild>
-                                            <Link
-                                                href="/institution-positions"
-                                                className="flex flex-col gap-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                                            >
-                                                <div className="flex items-center gap-2">
-                                                    <Briefcase className="h-4 w-4" />
-                                                    <div className="text-sm leading-none font-medium">
-                                                        {t(
-                                                            "Institution Positions",
-                                                        )}
-                                                    </div>
-                                                </div>
-                                                <p className="text-xs leading-snug text-muted-foreground">
-                                                    {t(
-                                                        "Positions held within various institutions",
-                                                    )}
-                                                </p>
-                                            </Link>
-                                        </NavigationMenuLink>
-                                    </li>
-                                    <li>
-                                        <NavigationMenuLink asChild>
-                                            <Link
-                                                href="/intellectual-properties"
-                                                className="flex flex-col gap-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                                            >
-                                                <div className="flex items-center gap-2">
-                                                    <Lightbulb className="h-4 w-4" />
-                                                    <div className="text-sm leading-none font-medium">
-                                                        {t(
-                                                            "Intellectual Properties",
-                                                        )}
-                                                    </div>
-                                                </div>
-                                                <p className="text-xs leading-snug text-muted-foreground">
-                                                    {t(
-                                                        "Patents, copyrights, and other intellectual property rights",
-                                                    )}
-                                                </p>
-                                            </Link>
-                                        </NavigationMenuLink>
-                                    </li>
-                                    <li>
-                                        <NavigationMenuLink asChild>
-                                            <Link
-                                                href="/organizations"
-                                                className="flex flex-col gap-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                                            >
-                                                <div className="flex items-center gap-2">
-                                                    <Building className="h-4 w-4" />
-                                                    <div className="text-sm leading-none font-medium">
-                                                        {t("Organizations")}
-                                                    </div>
-                                                </div>
-                                                <p className="text-xs leading-snug text-muted-foreground">
-                                                    {t(
-                                                        "Professional and academic organizations memberships",
-                                                    )}
-                                                </p>
-                                            </Link>
-                                        </NavigationMenuLink>
-                                    </li>
-                                    <li>
-                                        <NavigationMenuLink asChild>
-                                            <Link
-                                                href="/policy-experiences"
-                                                className="flex flex-col gap-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                                            >
-                                                <div className="flex items-center gap-2">
-                                                    <FileText className="h-4 w-4" />
-                                                    <div className="text-sm leading-none font-medium">
-                                                        {t(
-                                                            "Policy Experiences",
-                                                        )}
-                                                    </div>
-                                                </div>
-                                                <p className="text-xs leading-snug text-muted-foreground">
-                                                    {t(
-                                                        "Experience in policy-making and advisory roles",
-                                                    )}
-                                                </p>
-                                            </Link>
-                                        </NavigationMenuLink>
-                                    </li>
-                                    <li>
-                                        <NavigationMenuLink asChild>
-                                            <Link
-                                                href="/publications"
-                                                className="flex flex-col gap-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                                            >
-                                                <div className="flex items-center gap-2">
-                                                    <Newspaper className="h-4 w-4" />
-                                                    <div className="text-sm leading-none font-medium">
-                                                        {t("Publications")}
-                                                    </div>
-                                                </div>
-                                                <p className="text-xs leading-snug text-muted-foreground">
-                                                    {t(
-                                                        "Academic publications and research papers",
-                                                    )}
-                                                </p>
-                                            </Link>
-                                        </NavigationMenuLink>
-                                    </li>
-                                    <li>
-                                        <NavigationMenuLink asChild>
-                                            <Link
-                                                href="/research"
-                                                className="flex flex-col gap-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                                            >
-                                                <div className="flex items-center gap-2">
-                                                    <FlaskConical className="h-4 w-4" />
-                                                    <div className="text-sm leading-none font-medium">
-                                                        {t("Research")}
-                                                    </div>
-                                                </div>
-                                                <p className="text-xs leading-snug text-muted-foreground">
-                                                    {t(
-                                                        "Research projects and funded studies",
-                                                    )}
-                                                </p>
-                                            </Link>
-                                        </NavigationMenuLink>
-                                    </li>
-                                    <li>
-                                        <NavigationMenuLink asChild>
-                                            <Link
-                                                href="/teaching-experiences"
-                                                className="flex flex-col gap-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                                            >
-                                                <div className="flex items-center gap-2">
-                                                    <School className="h-4 w-4" />
-                                                    <div className="text-sm leading-none font-medium">
-                                                        {t(
-                                                            "Teaching Experiences",
-                                                        )}
-                                                    </div>
-                                                </div>
-                                                <p className="text-xs leading-snug text-muted-foreground">
-                                                    {t(
-                                                        "Teaching positions and academic instruction experience",
-                                                    )}
-                                                </p>
-                                            </Link>
-                                        </NavigationMenuLink>
-                                    </li>
-                                    <li>
-                                        <NavigationMenuLink asChild>
-                                            <Link
-                                                href="/teaching-materials"
-                                                className="flex flex-col gap-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                                            >
-                                                <div className="flex items-center gap-2">
-                                                    <FileEdit className="h-4 w-4" />
-                                                    <div className="text-sm leading-none font-medium">
-                                                        {t(
-                                                            "Teaching Materials",
-                                                        )}
-                                                    </div>
-                                                </div>
-                                                <p className="text-xs leading-snug text-muted-foreground">
-                                                    {t(
-                                                        "Educational materials and course content developed",
-                                                    )}
-                                                </p>
-                                            </Link>
-                                        </NavigationMenuLink>
-                                    </li>
-                                    <li>
-                                        <NavigationMenuLink asChild>
-                                            <Link
-                                                href="/trainings"
-                                                className="flex flex-col gap-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                                            >
-                                                <div className="flex items-center gap-2">
-                                                    <Award className="h-4 w-4" />
-                                                    <div className="text-sm leading-none font-medium">
-                                                        {t("Trainings")}
-                                                    </div>
-                                                </div>
-                                                <p className="text-xs leading-snug text-muted-foreground">
-                                                    {t(
-                                                        "Professional development and training programs attended",
-                                                    )}
-                                                </p>
-                                            </Link>
-                                        </NavigationMenuLink>
-                                    </li>
+                                    {profileMenuItems.map((item) => {
+                                        const Icon = item.icon;
+                                        return (
+                                            <li key={item.href}>
+                                                <NavigationMenuLink asChild>
+                                                    <Link
+                                                        href={item.href}
+                                                        className="flex flex-col gap-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                                                    >
+                                                        <div className="flex items-center gap-2">
+                                                            <Icon className="h-4 w-4" />
+                                                            <div className="text-sm leading-none font-medium">
+                                                                {t(item.title)}
+                                                            </div>
+                                                        </div>
+                                                        <p className="text-xs leading-snug text-muted-foreground">
+                                                            {t(
+                                                                item.description,
+                                                            )}
+                                                        </p>
+                                                    </Link>
+                                                </NavigationMenuLink>
+                                            </li>
+                                        );
+                                    })}
                                 </ul>
                             </NavigationMenuContent>
                         </NavigationMenuItem>
@@ -348,6 +198,86 @@ export function Navbar() {
                         </NavigationMenuItem>
                     </NavigationMenuList>
                 </NavigationMenu>
+
+                {/* Mobile Menu Button */}
+                <div className="ml-auto flex items-center gap-2 lg:hidden">
+                    <Sheet
+                        open={mobileMenuOpen}
+                        onOpenChange={setMobileMenuOpen}
+                    >
+                        <SheetTrigger asChild>
+                            <Button
+                                variant="ghost"
+                                size="icon"
+                                className="lg:hidden"
+                            >
+                                <Menu className="h-5 w-5" />
+                                <span className="sr-only">Toggle menu</span>
+                            </Button>
+                        </SheetTrigger>
+                        <SheetContent
+                            side="left"
+                            className="flex w-[300px] flex-col p-0 sm:w-[400px]"
+                        >
+                            <SheetHeader className="px-4 pt-4 pb-2">
+                                <SheetTitle className="flex items-center gap-2">
+                                    <GraduationCap className="h-5 w-5 text-primary" />
+                                    IGS Indonesia
+                                </SheetTitle>
+                            </SheetHeader>
+                            <nav className="flex-1 overflow-y-auto px-4 pb-4">
+                                <div className="mt-0 flex flex-col gap-4">
+                                    {/* Home Link */}
+                                    <Link
+                                        href="/"
+                                        className="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                        {t("Home")}
+                                    </Link>
+
+                                    {/* Profile Section */}
+                                    <div className="flex flex-col gap-2">
+                                        <div className="px-3 text-sm font-semibold text-muted-foreground">
+                                            {t("Profile")}
+                                        </div>
+                                        <div className="flex flex-col gap-1">
+                                            {profileMenuItems.map((item) => {
+                                                const Icon = item.icon;
+                                                return (
+                                                    <Link
+                                                        key={item.href}
+                                                        href={item.href}
+                                                        className="flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+                                                        onClick={() =>
+                                                            setMobileMenuOpen(
+                                                                false,
+                                                            )
+                                                        }
+                                                    >
+                                                        <Icon className="h-4 w-4 shrink-0" />
+                                                        <span>
+                                                            {t(item.title)}
+                                                        </span>
+                                                    </Link>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+
+                                    {/* Contact Link */}
+                                    <Link
+                                        href="/contact"
+                                        className="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                        {t("Contact Us")}
+                                    </Link>
+                                </div>
+                            </nav>
+                        </SheetContent>
+                    </Sheet>
+                </div>
 
                 {/* Language Toggle */}
                 <div className="ml-2">

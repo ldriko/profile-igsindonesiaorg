@@ -267,7 +267,7 @@ export default function ProfileIndex({
             <Head title="Academic Profile - IGS Indonesia" />
 
             <div className="min-h-screen bg-background">
-                <div className="mx-auto max-w-screen-lg px-4 py-8">
+                <div className="mx-auto max-w-screen-lg px-4 py-4 lg:py-8">
                     <div className="space-y-16">
                         {/* Personal Info Section */}
                         {personal_info && (
