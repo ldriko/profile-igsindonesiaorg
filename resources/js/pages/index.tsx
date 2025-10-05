@@ -279,11 +279,11 @@ export default function ProfileIndex({
                                     <div className="flex flex-col items-center gap-12 md:flex-row md:items-start">
                                         {/* Profile Picture */}
                                         {personal_info.picture && (
-                                            <div className="flex-shrink-0">
+                                            <div className="md:self-stretch">
                                                 <img
                                                     src={`/storage/${personal_info.picture}`}
                                                     alt={personal_info.name}
-                                                    className="h-full border-2 rounded-lg object-cover shadow-lg"
+                                                    className="h-full rounded-lg border-2 object-cover shadow-lg"
                                                 />
                                             </div>
                                         )}
@@ -294,17 +294,21 @@ export default function ProfileIndex({
                                                 {personal_info.name}
                                             </h2>
                                             <p className="mb-2 text-lg font-medium text-primary">
-                                                {personal_info.academic_position}
+                                                {
+                                                    personal_info.academic_position
+                                                }
                                             </p>
                                             <p className="mb-4 text-sm text-muted-foreground">
                                                 {personal_info.institution}
                                             </p>
                                             <p className="text-base leading-relaxed text-foreground">
                                                 {locale === "en"
-                                                    ? personal_info.short_description.en
-                                                    : personal_info.short_description.id}
+                                                    ? personal_info
+                                                          .short_description.en
+                                                    : personal_info
+                                                          .short_description.id}
                                             </p>
-                                            
+
                                             {/* Academic Profile Links */}
                                             <div className="mt-6 flex flex-wrap gap-8">
                                                 {personal_info.scopus_id && (
@@ -355,14 +359,14 @@ export default function ProfileIndex({
                                 </div>
                             </Card>
                         )}
-                        
+
                         {/* Search Bar */}
                         <div className="space-y-8">
                             <div className="text-center">
                                 <h1 className="mb-4 text-4xl font-bold text-foreground">
                                     {t("Academic Profile")}
                                 </h1>
-                                <p className="mx-auto max-w-3xl text-xl text-muted-foreground">
+                                <p className="mx-auto max-w-3xl text-lg text-muted-foreground">
                                     {t(
                                         "Explore comprehensive academic achievements, research contributions, and professional experience. Select a category below to view detailed information.",
                                     )}

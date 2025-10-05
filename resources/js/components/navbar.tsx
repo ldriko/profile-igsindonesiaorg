@@ -32,7 +32,9 @@ export function Navbar() {
                         <NavigationMenuItem>
                             <NavigationMenuLink
                                 asChild
-                                className={navigationMenuTriggerStyle()}
+                                className={navigationMenuTriggerStyle({
+                                    className: "bg-transparent",
+                                })}
                             >
                                 <Link href="/">{t("Profile")}</Link>
                             </NavigationMenuLink>
@@ -40,7 +42,9 @@ export function Navbar() {
                         <NavigationMenuItem>
                             <NavigationMenuLink
                                 asChild
-                                className={navigationMenuTriggerStyle()}
+                                className={navigationMenuTriggerStyle({
+                                    className: "bg-transparent",
+                                })}
                             >
                                 <Link href="/contact">{t("Contact Us")}</Link>
                             </NavigationMenuLink>
