@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('institution_positions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('personal_info_id')->constrained('personal_infos')->cascadeOnDelete();
-            $table->string('position');
-            $table->string('institution');
+            $table->json('position');
+            $table->json('institution');
             $table->year('start_year')->nullable();
             $table->year('end_year')->nullable();
-            $table->text('description')->nullable();
+            $table->json('description')->nullable();
             $table->timestamps();
         });
     }

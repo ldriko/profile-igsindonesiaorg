@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('personal_info_id')->constrained('personal_infos')->cascadeOnDelete();
             $table->year('year');
-            $table->string('title');
-            $table->string('organization');
-            $table->text('description')->nullable();
+            $table->json('title');
+            $table->json('organization');
+            $table->json('description')->nullable();
             $table->string('url')->nullable();
             $table->timestamps();
         });

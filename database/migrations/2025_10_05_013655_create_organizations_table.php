@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('organizations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('personal_info_id')->constrained('personal_infos')->cascadeOnDelete();
-            $table->string('organization_name');
-            $table->string('role');
+            $table->json('organization_name');
+            $table->json('role');
             $table->enum('membership_type', ['Professional', 'Scientific', 'Other']);
             $table->year('start_year')->nullable();
             $table->year('end_year')->nullable();

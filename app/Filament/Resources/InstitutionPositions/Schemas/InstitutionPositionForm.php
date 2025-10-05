@@ -6,6 +6,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Pixelpeter\FilamentLanguageTabs\Forms\Components\LanguageTabs;
 
 class InstitutionPositionForm
 {
@@ -16,16 +17,18 @@ class InstitutionPositionForm
                 Select::make('personal_info_id')
                     ->relationship('personalInfo', 'name')
                     ->required(),
-                TextInput::make('position')
-                    ->required(),
-                TextInput::make('institution')
-                    ->required(),
+                LanguageTabs::make([
+                    TextInput::make('position')
+                        ->required(),
+                    TextInput::make('institution')
+                        ->required(),
+                    Textarea::make('description')
+                        ->columnSpanFull(),
+                ]),
                 TextInput::make('start_year')
                     ->numeric(),
                 TextInput::make('end_year')
                     ->numeric(),
-                Textarea::make('description')
-                    ->columnSpanFull(),
             ]);
     }
 }

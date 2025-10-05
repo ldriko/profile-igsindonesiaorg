@@ -6,6 +6,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Pixelpeter\FilamentLanguageTabs\Forms\Components\LanguageTabs;
 
 class ConferenceForm
 {
@@ -19,15 +20,17 @@ class ConferenceForm
                 TextInput::make('year')
                     ->required()
                     ->numeric(),
-                Textarea::make('title')
-                    ->required()
-                    ->columnSpanFull(),
-                TextInput::make('conference_name')
-                    ->required(),
-                TextInput::make('location'),
+                LanguageTabs::make([
+                    Textarea::make('title')
+                        ->required()
+                        ->columnSpanFull(),
+                    TextInput::make('conference_name')
+                        ->required(),
+                    TextInput::make('location'),
+                    TextInput::make('paper_title'),
+                ]),
                 TextInput::make('role')
                     ->required(),
-                TextInput::make('paper_title'),
                 TextInput::make('url')
                     ->url(),
             ]);

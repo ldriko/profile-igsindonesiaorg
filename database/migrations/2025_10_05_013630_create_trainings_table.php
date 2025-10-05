@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('personal_info_id')->constrained('personal_infos')->cascadeOnDelete();
             $table->year('year');
-            $table->text('title');
+            $table->json('title');
             $table->enum('type', ['Domestic', 'International']);
-            $table->string('organizer');
+            $table->json('organizer');
             $table->integer('duration_hours');
             $table->string('period');
             $table->string('url')->nullable();

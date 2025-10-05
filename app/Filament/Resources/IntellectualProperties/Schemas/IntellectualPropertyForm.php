@@ -6,6 +6,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Pixelpeter\FilamentLanguageTabs\Forms\Components\LanguageTabs;
 
 class IntellectualPropertyForm
 {
@@ -16,9 +17,11 @@ class IntellectualPropertyForm
                 Select::make('personal_info_id')
                     ->relationship('personalInfo', 'name')
                     ->required(),
-                Textarea::make('title')
-                    ->required()
-                    ->columnSpanFull(),
+                LanguageTabs::make([
+                    Textarea::make('title')
+                        ->required()
+                        ->columnSpanFull(),
+                ]),
                 TextInput::make('type')
                     ->required(),
                 TextInput::make('registration_number'),

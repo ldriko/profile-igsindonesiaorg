@@ -5,6 +5,7 @@ namespace App\Filament\Resources\TeachingExperiences\Schemas;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Pixelpeter\FilamentLanguageTabs\Forms\Components\LanguageTabs;
 
 class TeachingExperienceForm
 {
@@ -15,11 +16,13 @@ class TeachingExperienceForm
                 Select::make('personal_info_id')
                     ->relationship('personalInfo', 'name')
                     ->required(),
-                TextInput::make('course_name')
-                    ->required(),
+                LanguageTabs::make([
+                    TextInput::make('course_name')
+                        ->required(),
+                    TextInput::make('program')
+                        ->required(),
+                ]),
                 TextInput::make('level')
-                    ->required(),
-                TextInput::make('program')
                     ->required(),
                 TextInput::make('institution')
                     ->required(),

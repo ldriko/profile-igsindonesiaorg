@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('personal_info_id')->constrained('personal_infos')->cascadeOnDelete();
             $table->year('year');
-            $table->text('title');
-            $table->string('conference_name');
-            $table->string('location')->nullable();
+            $table->json('title');
+            $table->json('conference_name');
+            $table->json('location')->nullable();
             $table->enum('role', ['Presenter', 'Participant', 'Committee', 'KeynoteSpeaker']);
-            $table->string('paper_title')->nullable();
+            $table->json('paper_title')->nullable();
             $table->string('url')->nullable();
             $table->timestamps();
         });

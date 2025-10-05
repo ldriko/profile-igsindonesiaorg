@@ -23,8 +23,14 @@ class BookWritingSeeder extends Seeder
         $bookWritings = [
             [
                 'year' => 2025,
-                'title' => 'Dasar Perencanaan Proyek Sains Data - Buku Ajar Berbasis OBE',
-                'publisher' => 'Thalibul Ilmi Publishing & Education',
+                'title' => [
+                    'id' => 'Dasar Perencanaan Proyek Sains Data - Buku Ajar Berbasis OBE',
+                    'en' => 'Fundamentals of Data Science Project Planning - OBE-Based Textbook',
+                ],
+                'publisher' => [
+                    'id' => 'Thalibul Ilmi Publishing & Education',
+                    'en' => 'Thalibul Ilmi Publishing & Education',
+                ],
                 'isbn' => '978-634-7158-14-7',
                 'type' => 'Textbook',
                 'authors' => 'Dr. Ir. I Gede Susrama Mas Diyasa, ST., MT., IPU',
@@ -33,8 +39,14 @@ class BookWritingSeeder extends Seeder
             ],
             [
                 'year' => 2025,
-                'title' => 'ENTERPRISE RESOURCE PLANNING-Membangun Sistem Informasi Terintegrasi dengan Odoo dan Web: Pendekatan Problem-Based Learning',
-                'publisher' => 'Thalibul Ilmi Publishing & Education',
+                'title' => [
+                    'id' => 'ENTERPRISE RESOURCE PLANNING - Membangun Sistem Informasi Terintegrasi dengan Odoo dan Web: Pendekatan Problem-Based Learning',
+                    'en' => 'ENTERPRISE RESOURCE PLANNING - Building Integrated Information Systems with Odoo and Web: Problem-Based Learning Approach',
+                ],
+                'publisher' => [
+                    'id' => 'Thalibul Ilmi Publishing & Education',
+                    'en' => 'Thalibul Ilmi Publishing & Education',
+                ],
                 'isbn' => '978-634-7158-39-0',
                 'type' => 'Textbook',
                 'authors' => 'Dr. Ir. I Gede Susrama Mas Diyasa, ST., MT., IPU',
@@ -43,8 +55,14 @@ class BookWritingSeeder extends Seeder
             ],
             [
                 'year' => 2024,
-                'title' => 'Problem Based Learning, Bahan Ajar Enterprise Resource Planning (ERP) Berbasis ODOO',
-                'publisher' => 'Thalibul Ilmi Publishing & Education',
+                'title' => [
+                    'id' => 'Problem Based Learning, Bahan Ajar Enterprise Resource Planning (ERP) Berbasis ODOO',
+                    'en' => 'Problem Based Learning, ODOO-Based Enterprise Resource Planning (ERP) Teaching Materials',
+                ],
+                'publisher' => [
+                    'id' => 'Thalibul Ilmi Publishing & Education',
+                    'en' => 'Thalibul Ilmi Publishing & Education',
+                ],
                 'isbn' => '978-623-8224-63-0',
                 'type' => 'Textbook',
                 'authors' => 'Dr. Ir. I Gede Susrama Mas Diyasa, ST., MT., IPU',
@@ -53,8 +71,14 @@ class BookWritingSeeder extends Seeder
             ],
             [
                 'year' => 2024,
-                'title' => 'Enterprise Resource Planning dengan Odoo',
-                'publisher' => 'Thalibul Ilmi Publishing & Education',
+                'title' => [
+                    'id' => 'Enterprise Resource Planning dengan Odoo',
+                    'en' => 'Enterprise Resource Planning with Odoo',
+                ],
+                'publisher' => [
+                    'id' => 'Thalibul Ilmi Publishing & Education',
+                    'en' => 'Thalibul Ilmi Publishing & Education',
+                ],
                 'isbn' => '978-623-8224-29-6',
                 'type' => 'Textbook',
                 'authors' => 'Dr. Ir. I Gede Susrama Mas Diyasa, ST., MT., IPU',
@@ -63,8 +87,14 @@ class BookWritingSeeder extends Seeder
             ],
             [
                 'year' => 2023,
-                'title' => 'Enterprise Resource Planning',
-                'publisher' => 'Indomedia Pustaka',
+                'title' => [
+                    'id' => 'Enterprise Resource Planning',
+                    'en' => 'Enterprise Resource Planning',
+                ],
+                'publisher' => [
+                    'id' => 'Indomedia Pustaka',
+                    'en' => 'Indomedia Pustaka',
+                ],
                 'isbn' => '978-623-6133-82-8',
                 'type' => 'Textbook',
                 'authors' => 'Dr. Ir. I Gede Susrama Mas Diyasa, ST., MT., IPU',
@@ -73,8 +103,14 @@ class BookWritingSeeder extends Seeder
             ],
             [
                 'year' => 2023,
-                'title' => 'Smart Bali Backpacker: Sistem Informasi Rekomendasi Pemandu Perjalanan Wisata Backpacker',
-                'publisher' => 'Thalibul Ilmi Publishing & Education',
+                'title' => [
+                    'id' => 'Smart Bali Backpacker: Sistem Informasi Rekomendasi Pemandu Perjalanan Wisata Backpacker',
+                    'en' => 'Smart Bali Backpacker: Backpacker Travel Guide Recommendation Information System',
+                ],
+                'publisher' => [
+                    'id' => 'Thalibul Ilmi Publishing & Education',
+                    'en' => 'Thalibul Ilmi Publishing & Education',
+                ],
                 'isbn' => '978-623-99861-9-3',
                 'type' => 'Textbook',
                 'authors' => 'Dr. Ir. I Gede Susrama Mas Diyasa, ST., MT., IPU',
@@ -83,8 +119,14 @@ class BookWritingSeeder extends Seeder
             ],
             [
                 'year' => 2022,
-                'title' => 'Panduan Praktis LATEX untuk Membuat Dokumen Ilmiah Edisi 1.0',
-                'publisher' => 'Thalibul Ilmi Publishing & Education',
+                'title' => [
+                    'id' => 'Panduan Praktis LATEX untuk Membuat Dokumen Ilmiah Edisi 1.0',
+                    'en' => 'Practical Guide to LATEX for Creating Scientific Documents Edition 1.0',
+                ],
+                'publisher' => [
+                    'id' => 'Thalibul Ilmi Publishing & Education',
+                    'en' => 'Thalibul Ilmi Publishing & Education',
+                ],
                 'isbn' => '978-623-99544-6-8',
                 'type' => 'Textbook',
                 'authors' => 'Dr. Ir. I Gede Susrama Mas Diyasa, ST., MT., IPU',
@@ -93,8 +135,14 @@ class BookWritingSeeder extends Seeder
             ],
             [
                 'year' => 2022,
-                'title' => 'Pola Pergerakan Spermatozoa',
-                'publisher' => 'Thalibul Ilmi Publishing & Education',
+                'title' => [
+                    'id' => 'Pola Pergerakan Spermatozoa',
+                    'en' => 'Spermatozoa Movement Patterns',
+                ],
+                'publisher' => [
+                    'id' => 'Thalibul Ilmi Publishing & Education',
+                    'en' => 'Thalibul Ilmi Publishing & Education',
+                ],
                 'isbn' => '978-623-88380-2-8',
                 'type' => 'Textbook',
                 'authors' => 'Dr. Ir. I Gede Susrama Mas Diyasa, ST., MT., IPU',
@@ -103,8 +151,14 @@ class BookWritingSeeder extends Seeder
             ],
             [
                 'year' => 2022,
-                'title' => 'Standar Keamanan Pangan Produk UMKM',
-                'publisher' => 'RFM PRAMEDIA (Grup Penerbitan CV. RFM PRAMEDIA JEMBER)',
+                'title' => [
+                    'id' => 'Standar Keamanan Pangan Produk UMKM',
+                    'en' => 'Food Safety Standards for MSME Products',
+                ],
+                'publisher' => [
+                    'id' => 'RFM PRAMEDIA (Grup Penerbitan CV. RFM PRAMEDIA JEMBER)',
+                    'en' => 'RFM PRAMEDIA (CV. RFM PRAMEDIA JEMBER Publishing Group)',
+                ],
                 'isbn' => '978-623-5835-45-7',
                 'type' => 'Textbook',
                 'authors' => 'Dr. Ir. I Gede Susrama Mas Diyasa, ST., MT., IPU',
@@ -113,8 +167,14 @@ class BookWritingSeeder extends Seeder
             ],
             [
                 'year' => 2022,
-                'title' => 'Sistem Digitalisasi Parkir',
-                'publisher' => 'Thalibul Ilmi Publishing & Education',
+                'title' => [
+                    'id' => 'Sistem Digitalisasi Parkir',
+                    'en' => 'Parking Digitalization System',
+                ],
+                'publisher' => [
+                    'id' => 'Thalibul Ilmi Publishing & Education',
+                    'en' => 'Thalibul Ilmi Publishing & Education',
+                ],
                 'isbn' => '978-623-88380-4-2',
                 'type' => 'Textbook',
                 'authors' => 'Dr. Ir. I Gede Susrama Mas Diyasa, ST., MT., IPU',
@@ -123,8 +183,14 @@ class BookWritingSeeder extends Seeder
             ],
             [
                 'year' => 2022,
-                'title' => 'Modul Pengolahan Dan Analisis Data Dengan SPSS',
-                'publisher' => 'RFM PRAMEDIA (Grup Penerbitan CV. RFM PRAMEDIA JEMBER)',
+                'title' => [
+                    'id' => 'Modul Pengolahan Dan Analisis Data Dengan SPSS',
+                    'en' => 'Data Processing and Analysis Module with SPSS',
+                ],
+                'publisher' => [
+                    'id' => 'RFM PRAMEDIA (Grup Penerbitan CV. RFM PRAMEDIA JEMBER)',
+                    'en' => 'RFM PRAMEDIA (CV. RFM PRAMEDIA JEMBER Publishing Group)',
+                ],
                 'isbn' => '978-623-88380-4-2',
                 'type' => 'Textbook',
                 'authors' => 'Dr. Ir. I Gede Susrama Mas Diyasa, ST., MT., IPU',
@@ -133,8 +199,14 @@ class BookWritingSeeder extends Seeder
             ],
             [
                 'year' => 2022,
-                'title' => 'Otomatisasi Penentuan Hasil Analisis Sperma-Aplikasi Pada Sistem Informasi Dan Sistem Keputusan',
-                'publisher' => 'Thalibul Ilmi Publishing & Education',
+                'title' => [
+                    'id' => 'Otomatisasi Penentuan Hasil Analisis Sperma - Aplikasi Pada Sistem Informasi Dan Sistem Keputusan',
+                    'en' => 'Automation of Sperm Analysis Results Determination - Application in Information Systems and Decision Systems',
+                ],
+                'publisher' => [
+                    'id' => 'Thalibul Ilmi Publishing & Education',
+                    'en' => 'Thalibul Ilmi Publishing & Education',
+                ],
                 'isbn' => '978-623-88380-4-2',
                 'type' => 'Textbook',
                 'authors' => 'Dr. Ir. I Gede Susrama Mas Diyasa, ST., MT., IPU',
@@ -143,8 +215,14 @@ class BookWritingSeeder extends Seeder
             ],
             [
                 'year' => 2021,
-                'title' => 'Enterprise Resource Planning',
-                'publisher' => 'Indomedia Pustaka',
+                'title' => [
+                    'id' => 'Enterprise Resource Planning',
+                    'en' => 'Enterprise Resource Planning',
+                ],
+                'publisher' => [
+                    'id' => 'Indomedia Pustaka',
+                    'en' => 'Indomedia Pustaka',
+                ],
                 'isbn' => '978-623-6133-82-8',
                 'type' => 'Textbook',
                 'authors' => 'Dr. Ir. I Gede Susrama Mas Diyasa, ST., MT., IPU',
@@ -153,8 +231,14 @@ class BookWritingSeeder extends Seeder
             ],
             [
                 'year' => 2020,
-                'title' => 'Aplikasi Sistem Terintegrasi Uji Sertifikasi Kompetensi (SITUK)',
-                'publisher' => 'Indomedia Pustaka',
+                'title' => [
+                    'id' => 'Aplikasi Sistem Terintegrasi Uji Sertifikasi Kompetensi (SITUK)',
+                    'en' => 'Integrated Competency Certification Test System Application (SITUK)',
+                ],
+                'publisher' => [
+                    'id' => 'Indomedia Pustaka',
+                    'en' => 'Indomedia Pustaka',
+                ],
                 'isbn' => '9786237889977',
                 'type' => 'Textbook',
                 'authors' => 'Dr. Ir. I Gede Susrama Mas Diyasa, ST., MT., IPU',
@@ -163,8 +247,14 @@ class BookWritingSeeder extends Seeder
             ],
             [
                 'year' => 2019,
-                'title' => 'Tutorial Sederhana Menggunakan OJS3',
-                'publisher' => 'Indomedia Pustaka',
+                'title' => [
+                    'id' => 'Tutorial Sederhana Menggunakan OJS3',
+                    'en' => 'Simple Tutorial Using OJS3',
+                ],
+                'publisher' => [
+                    'id' => 'Indomedia Pustaka',
+                    'en' => 'Indomedia Pustaka',
+                ],
                 'isbn' => '9786237137511',
                 'type' => 'Textbook',
                 'authors' => 'Dr. Ir. I Gede Susrama Mas Diyasa, ST., MT., IPU',
@@ -173,8 +263,14 @@ class BookWritingSeeder extends Seeder
             ],
             [
                 'year' => 2018,
-                'title' => 'Sistem Cerdas Penjejakan Obyek Video Spermatozoa',
-                'publisher' => 'Sejahtera Mandiri',
+                'title' => [
+                    'id' => 'Sistem Cerdas Penjejakan Obyek Video Spermatozoa',
+                    'en' => 'Intelligent System for Spermatozoa Video Object Tracking',
+                ],
+                'publisher' => [
+                    'id' => 'Sejahtera Mandiri',
+                    'en' => 'Sejahtera Mandiri',
+                ],
                 'isbn' => '978-602-52190-2-3',
                 'type' => 'Textbook',
                 'authors' => 'Dr. Ir. I Gede Susrama Mas Diyasa, ST., MT., IPU',

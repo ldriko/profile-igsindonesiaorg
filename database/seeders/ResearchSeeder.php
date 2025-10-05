@@ -23,42 +23,87 @@ class ResearchSeeder extends Seeder
         $researches = [
             [
                 'year' => 2025,
-                'title' => 'Development of a UI/UX Interface For Real-Time Detection of Abnormal Sperm Motility Using Deep Learning',
+                'title' => [
+                    'id' => 'Pengembangan Antarmuka UI/UX Untuk Deteksi Real-Time Motilitas Sperma Abnormal Menggunakan Deep Learning',
+                    'en' => 'Development of a UI/UX Interface For Real-Time Detection of Abnormal Sperm Motility Using Deep Learning',
+                ],
                 'role' => 'Leader',
-                'funding_source' => 'Program Hibah: Dipa Universitas Pembangunan Nasional Veteran Jawa Timur',
-                'scheme' => 'Penelitian Skripsi',
+                'funding_source' => [
+                    'id' => 'Program Hibah: DIPA Universitas Pembangunan Nasional Veteran Jawa Timur',
+                    'en' => 'Grant Program: DIPA National Development University Veteran East Java',
+                ],
+                'scheme' => [
+                    'id' => 'Penelitian Skripsi',
+                    'en' => 'Thesis Research',
+                ],
                 'fund_amount' => 10000000,
             ],
             [
                 'year' => 2025,
-                'title' => 'Reduksi Noise Pada Citra Magnetic Resonance Imaging (MRI) Otak Menggunakan Convolutional Autoencoder (CAE)',
+                'title' => [
+                    'id' => 'Reduksi Noise Pada Citra Magnetic Resonance Imaging (MRI) Otak Menggunakan Convolutional Autoencoder (CAE)',
+                    'en' => 'Noise Reduction in Brain Magnetic Resonance Imaging (MRI) Images Using Convolutional Autoencoder (CAE)',
+                ],
                 'role' => 'Leader',
-                'funding_source' => 'Program Hibah: Dipa Universitas Pembangunan Nasional Veteran Jawa Timur',
-                'scheme' => 'Penelitian Kerjasama Internasional',
+                'funding_source' => [
+                    'id' => 'Program Hibah: DIPA Universitas Pembangunan Nasional Veteran Jawa Timur',
+                    'en' => 'Grant Program: DIPA National Development University Veteran East Java',
+                ],
+                'scheme' => [
+                    'id' => 'Penelitian Kerjasama Internasional',
+                    'en' => 'International Collaborative Research',
+                ],
                 'fund_amount' => 42000000,
             ],
             [
                 'year' => 2024,
-                'title' => 'Real-Time Detection of Abnormal Sperm Motility with Deep Learning Mobilenet-SSD',
+                'title' => [
+                    'id' => 'Deteksi Real-Time Motilitas Sperma Abnormal Menggunakan Deep Learning Mobilenet-SSD',
+                    'en' => 'Real-Time Detection of Abnormal Sperm Motility with Deep Learning Mobilenet-SSD',
+                ],
                 'role' => 'Leader',
-                'funding_source' => 'Program Hibah: Dipa Universitas Pembangunan Nasional Veteran Jawa Timur',
-                'scheme' => 'Penelitian Kerjasama Internasional',
+                'funding_source' => [
+                    'id' => 'Program Hibah: DIPA Universitas Pembangunan Nasional Veteran Jawa Timur',
+                    'en' => 'Grant Program: DIPA National Development University Veteran East Java',
+                ],
+                'scheme' => [
+                    'id' => 'Penelitian Kerjasama Internasional',
+                    'en' => 'International Collaborative Research',
+                ],
                 'fund_amount' => 42000000,
             ],
             [
                 'year' => 2024,
-                'title' => 'Design and implementation of VIRTUAL REALITY E-TOURISM (VIRETO) Tourism Village, realizing the destination experience in Banten Province',
+                'title' => [
+                    'id' => 'Desain dan Implementasi VIRTUAL REALITY E-TOURISM (VIRETO) Desa Wisata, Mewujudkan Pengalaman Destinasi di Provinsi Banten',
+                    'en' => 'Design and Implementation of VIRTUAL REALITY E-TOURISM (VIRETO) Tourism Village, Realizing the Destination Experience in Banten Province',
+                ],
                 'role' => 'Member',
-                'funding_source' => 'Program Hibah: Penelitian Kompetitif Nasional',
-                'scheme' => 'Penelitian Fundamental',
+                'funding_source' => [
+                    'id' => 'Program Hibah: Penelitian Kompetitif Nasional',
+                    'en' => 'Grant Program: National Competitive Research',
+                ],
+                'scheme' => [
+                    'id' => 'Penelitian Fundamental',
+                    'en' => 'Fundamental Research',
+                ],
                 'fund_amount' => 97750000,
             ],
             [
                 'year' => 2023,
-                'title' => 'Smart Sim-Fare: A Smart System-Based Prior Learning Recognition (RPL) Application Form Management Information System & E-Portfolio',
+                'title' => [
+                    'id' => 'Smart Sim-Fare: Sistem Informasi Manajemen Formulir Aplikasi Rekognisi Pembelajaran Lampau (RPL) Berbasis Sistem Cerdas & E-Portfolio',
+                    'en' => 'Smart Sim-Fare: A Smart System-Based Prior Learning Recognition (RPL) Application Form Management Information System & E-Portfolio',
+                ],
                 'role' => 'Leader',
-                'funding_source' => 'Program Hibah: DIPA Universitas Pembangunan Nasional Veteran Jawa Timur',
-                'scheme' => 'Terapan',
+                'funding_source' => [
+                    'id' => 'Program Hibah: DIPA Universitas Pembangunan Nasional Veteran Jawa Timur',
+                    'en' => 'Grant Program: DIPA National Development University Veteran East Java',
+                ],
+                'scheme' => [
+                    'id' => 'Penelitian Terapan',
+                    'en' => 'Applied Research',
+                ],
                 'fund_amount' => 32000000,
             ],
         ];

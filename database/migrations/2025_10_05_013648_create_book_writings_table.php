@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('personal_info_id')->constrained('personal_infos')->cascadeOnDelete();
             $table->year('year');
-            $table->text('title');
-            $table->string('publisher');
+            $table->json('title');
+            $table->json('publisher');
             $table->string('isbn')->nullable();
             $table->enum('type', ['Textbook', 'ReferenceBook', 'Monograph', 'Chapter']);
             $table->string('authors');

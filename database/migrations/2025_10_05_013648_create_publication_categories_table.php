@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->integer('parent_id')->default(-1)->index();
             $table->integer('order')->default(0)->index();
-            $table->string('title');
+            $table->json('title');
             $table->string('code')->nullable();
-            $table->text('description')->nullable();
+            $table->json('description')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

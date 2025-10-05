@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('teaching_experiences', function (Blueprint $table) {
             $table->id();
             $table->foreignId('personal_info_id')->constrained('personal_infos')->cascadeOnDelete();
-            $table->string('course_name');
+            $table->json('course_name');
             $table->enum('level', ['Diploma', 'Bachelor', 'Master', 'Doctorate']);
-            $table->string('program');
+            $table->json('program');
             $table->string('institution');
             $table->string('academic_year');
             $table->timestamps();

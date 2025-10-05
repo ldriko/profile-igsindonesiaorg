@@ -6,6 +6,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Pixelpeter\FilamentLanguageTabs\Forms\Components\LanguageTabs;
 
 class BookWritingForm
 {
@@ -19,11 +20,13 @@ class BookWritingForm
                 TextInput::make('year')
                     ->required()
                     ->numeric(),
-                Textarea::make('title')
-                    ->required()
-                    ->columnSpanFull(),
-                TextInput::make('publisher')
-                    ->required(),
+                LanguageTabs::make([
+                    Textarea::make('title')
+                        ->required()
+                        ->columnSpanFull(),
+                    TextInput::make('publisher')
+                        ->required(),
+                ]),
                 TextInput::make('isbn'),
                 TextInput::make('type')
                     ->required(),

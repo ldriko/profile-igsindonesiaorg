@@ -16,9 +16,9 @@ return new class extends Migration
             $table->foreignId('personal_info_id')->constrained('personal_infos')->cascadeOnDelete();
             $table->enum('level', ['S1', 'S2', 'S3']);
             $table->string('institution');
-            $table->string('department');
+            $table->json('department');
             $table->year('graduation_year');
-            $table->text('thesis_title');
+            $table->json('thesis_title');
             $table->string('advisor');
             $table->timestamps();
         });

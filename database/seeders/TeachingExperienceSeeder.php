@@ -22,37 +22,67 @@ class TeachingExperienceSeeder extends Seeder
 
         $teachingExperiences = [
             [
-                'course_name' => 'Kepemimpinan (Leadership)',
+                'course_name' => [
+                    'id' => 'Kepemimpinan',
+                    'en' => 'Leadership',
+                ],
                 'level' => 'Bachelor',
-                'program' => 'UPN Veteran Jawa Timur All Study Programs',
+                'program' => [
+                    'id' => 'Semua Program Studi UPN Veteran Jawa Timur',
+                    'en' => 'UPN Veteran Jawa Timur All Study Programs',
+                ],
                 'institution' => 'UPN Veteran Jawa Timur',
                 'academic_year' => '2021-2024',
             ],
             [
-                'course_name' => 'Bela Negara (State Defending)',
+                'course_name' => [
+                    'id' => 'Bela Negara',
+                    'en' => 'State Defending',
+                ],
                 'level' => 'Bachelor',
-                'program' => 'UPN Veteran Jawa Timur All Study Programs & Master of Information Technology',
+                'program' => [
+                    'id' => 'Semua Program Studi UPN Veteran Jawa Timur & Magister Teknologi Informasi',
+                    'en' => 'UPN Veteran Jawa Timur All Study Programs & Master of Information Technology',
+                ],
                 'institution' => 'UPN Veteran Jawa Timur',
                 'academic_year' => '2021 to Present',
             ],
             [
-                'course_name' => 'Pengenalan Pola (Pattern Recognition)',
+                'course_name' => [
+                    'id' => 'Pengenalan Pola',
+                    'en' => 'Pattern Recognition',
+                ],
                 'level' => 'Bachelor',
-                'program' => 'UPN Veteran Jawa Timur Department of Informatics',
+                'program' => [
+                    'id' => 'Program Studi Informatika UPN Veteran Jawa Timur',
+                    'en' => 'UPN Veteran Jawa Timur Department of Informatics',
+                ],
                 'institution' => 'UPN Veteran Jawa Timur',
                 'academic_year' => '2021 - 2022',
             ],
             [
-                'course_name' => 'Metode Penelitian (Research Methods)',
+                'course_name' => [
+                    'id' => 'Metode Penelitian',
+                    'en' => 'Research Methods',
+                ],
                 'level' => 'Bachelor',
-                'program' => 'UPN Veteran Jawa Timur Department of Informatics/Information System/Digital Business & Master of Information Technology',
+                'program' => [
+                    'id' => 'Program Studi Informatika/Sistem Informasi/Bisnis Digital UPN Veteran Jawa Timur & Magister Teknologi Informasi',
+                    'en' => 'UPN Veteran Jawa Timur Department of Informatics/Information System/Digital Business & Master of Information Technology',
+                ],
                 'institution' => 'UPN Veteran Jawa Timur',
                 'academic_year' => '2021 to Present',
             ],
             [
-                'course_name' => 'Sistem Informasi Manajemen Penerbangan (Aviation Management Information System)',
+                'course_name' => [
+                    'id' => 'Sistem Informasi Manajemen Penerbangan',
+                    'en' => 'Aviation Management Information System',
+                ],
                 'level' => 'Diploma',
-                'program' => 'Air Transportation Management Study Programme -Politeknik Penerbangan Surabaya',
+                'program' => [
+                    'id' => 'Program Studi Manajemen Transportasi Udara - Politeknik Penerbangan Surabaya',
+                    'en' => 'Air Transportation Management Study Programme - Politeknik Penerbangan Surabaya',
+                ],
                 'institution' => 'Politeknik Penerbangan Surabaya',
                 'academic_year' => '2021 - 2023',
             ],

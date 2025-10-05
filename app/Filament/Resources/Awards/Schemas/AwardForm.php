@@ -6,6 +6,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Pixelpeter\FilamentLanguageTabs\Forms\Components\LanguageTabs;
 
 class AwardForm
 {
@@ -19,12 +20,14 @@ class AwardForm
                 TextInput::make('year')
                     ->required()
                     ->numeric(),
-                TextInput::make('title')
-                    ->required(),
-                TextInput::make('organization')
-                    ->required(),
-                Textarea::make('description')
-                    ->columnSpanFull(),
+                LanguageTabs::make([
+                    TextInput::make('title')
+                        ->required(),
+                    TextInput::make('organization')
+                        ->required(),
+                    Textarea::make('description')
+                        ->columnSpanFull(),
+                ]),
                 TextInput::make('url')
                     ->url(),
             ]);

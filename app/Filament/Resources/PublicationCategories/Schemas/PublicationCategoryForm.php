@@ -6,6 +6,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
+use Pixelpeter\FilamentLanguageTabs\Forms\Components\LanguageTabs;
 
 class PublicationCategoryForm
 {
@@ -13,15 +14,17 @@ class PublicationCategoryForm
     {
         return $schema
             ->components([
-                TextInput::make('title')
-                    ->required()
-                    ->maxLength(255),
+                LanguageTabs::make([
+                    TextInput::make('title')
+                        ->required()
+                        ->maxLength(255),
+                    Textarea::make('description')
+                        ->rows(3)
+                        ->columnSpanFull(),
+                ]),
                 TextInput::make('code')
                     ->maxLength(255)
                     ->placeholder('e.g., J, P, B'),
-                Textarea::make('description')
-                    ->rows(3)
-                    ->columnSpanFull(),
                 Toggle::make('is_active')
                     ->default(true)
                     ->required(),

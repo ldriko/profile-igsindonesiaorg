@@ -5,11 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Translatable\HasTranslations;
 
 class Conference extends Model
 {
     /** @use HasFactory<\Database\Factories\ConferenceFactory> */
     use HasFactory;
+    use HasTranslations;
+
+    public array $translatable = ['title', 'conference_name', 'location', 'paper_title'];
+
+    protected function casts(): array
+    {
+        return [
+            'title' => 'array',
+            'conference_name' => 'array',
+            'location' => 'array',
+            'paper_title' => 'array',
+        ];
+    }
 
     public function personalInfo(): BelongsTo
     {

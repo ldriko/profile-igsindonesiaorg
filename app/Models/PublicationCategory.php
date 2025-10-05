@@ -6,12 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use SolutionForest\FilamentTree\Concern\ModelTree;
+use Spatie\Translatable\HasTranslations;
 
 class PublicationCategory extends Model
 {
     /** @use HasFactory<\Database\Factories\PublicationCategoryFactory> */
     use HasFactory;
+    use HasTranslations;
     use ModelTree;
+
+    public array $translatable = ['title', 'description'];
 
     protected $fillable = [
         'parent_id',
@@ -28,6 +32,8 @@ class PublicationCategory extends Model
             'parent_id' => 'integer',
             'order' => 'integer',
             'is_active' => 'boolean',
+            'title' => 'array',
+            'description' => 'array',
         ];
     }
 

@@ -6,6 +6,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
+use Pixelpeter\FilamentLanguageTabs\Forms\Components\LanguageTabs;
 
 class ResearchForm
 {
@@ -19,14 +20,16 @@ class ResearchForm
                 TextInput::make('year')
                     ->required()
                     ->numeric(),
-                Textarea::make('title')
-                    ->required()
-                    ->columnSpanFull(),
+                LanguageTabs::make([
+                    Textarea::make('title')
+                        ->required()
+                        ->columnSpanFull(),
+                    TextInput::make('funding_source')
+                        ->required(),
+                    TextInput::make('scheme')
+                        ->required(),
+                ]),
                 TextInput::make('role')
-                    ->required(),
-                TextInput::make('funding_source')
-                    ->required(),
-                TextInput::make('scheme')
                     ->required(),
                 TextInput::make('fund_amount')
                     ->required()

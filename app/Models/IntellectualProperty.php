@@ -5,11 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Translatable\HasTranslations;
 
 class IntellectualProperty extends Model
 {
     /** @use HasFactory<\Database\Factories\IntellectualPropertyFactory> */
     use HasFactory;
+    use HasTranslations;
+
+    public array $translatable = ['title'];
+
+    protected function casts(): array
+    {
+        return [
+            'title' => 'array',
+        ];
+    }
 
     public function personalInfo(): BelongsTo
     {

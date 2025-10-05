@@ -24,25 +24,43 @@ class EducationSeeder extends Seeder
             [
                 'level' => 'S1',
                 'institution' => 'ITATS (Institut Teknologi Adhi Tama Surabaya)',
-                'department' => 'Electrical Engineering',
+                'department' => [
+                    'id' => 'Teknik Elektro',
+                    'en' => 'Electrical Engineering',
+                ],
                 'graduation_year' => 1993,
-                'thesis_title' => 'Sistem Pengaturan Temperatur Dengan Menggunakan Kontrol PID (Temperature Control System Using PID Control)',
+                'thesis_title' => [
+                    'id' => 'Sistem Pengaturan Temperatur Dengan Menggunakan Kontrol PID',
+                    'en' => 'Temperature Control System Using PID Control',
+                ],
                 'advisor' => 'Ir. Paulus Karmain',
             ],
             [
                 'level' => 'S2',
                 'institution' => 'ITS (Institut Teknologi Sepuluh November Surabaya)',
-                'department' => 'Informatics Engineering',
+                'department' => [
+                    'id' => 'Teknik Informatika',
+                    'en' => 'Informatics Engineering',
+                ],
                 'graduation_year' => 2000,
-                'thesis_title' => 'Rancang Bangun Perangkat Lunak Sistem Pengaturan Dengan Modeling Objek (Management System Software Design with Object Modeling)',
+                'thesis_title' => [
+                    'id' => 'Rancang Bangun Perangkat Lunak Sistem Pengaturan Dengan Modeling Objek',
+                    'en' => 'Management System Software Design with Object Modeling',
+                ],
                 'advisor' => 'Prof. Dr. Ir. Drs.ec. Riyannarto Sarno, Phd',
             ],
             [
                 'level' => 'S3',
                 'institution' => 'ITS (Institut Teknologi Sepuluh November Surabaya)',
-                'department' => 'Electrical Engineering',
+                'department' => [
+                    'id' => 'Teknik Elektro',
+                    'en' => 'Electrical Engineering',
+                ],
                 'graduation_year' => 2019,
-                'thesis_title' => 'Identifikasi Ketidaknormalan Motiliti Spermatozoa Menggunakan Metode Support Vector Machine Dan Logika Fuzzy (Identification of Abnormal Spermatozoa Motility Using Support Vector Machine Method and Fuzzy Logic)',
+                'thesis_title' => [
+                    'id' => 'Identifikasi Ketidaknormalan Motiliti Spermatozoa Menggunakan Metode Support Vector Machine Dan Logika Fuzzy',
+                    'en' => 'Identification of Abnormal Spermatozoa Motility Using Support Vector Machine Method and Fuzzy Logic',
+                ],
                 'advisor' => 'Prof. Dr. Mauridhi Hery Purnomo, M.Eng, Dr. I Ketut Eddy Purnama, ST., MT.',
             ],
         ];

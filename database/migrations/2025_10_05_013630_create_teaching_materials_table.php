@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('teaching_materials', function (Blueprint $table) {
             $table->id();
             $table->foreignId('personal_info_id')->constrained('personal_infos')->cascadeOnDelete();
-            $table->text('title');
-            $table->string('program');
-            $table->string('type');
+            $table->json('title');
+            $table->json('program');
+            $table->json('type');
             $table->enum('format', ['Printed', 'Digital']);
             $table->string('isbn')->nullable();
             $table->year('year');
