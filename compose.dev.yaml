@@ -35,6 +35,9 @@ services:
     env_file:
       # Load the environment variables from the Laravel application
       - .env
+    environment:
+      # Override DB_HOST for containerized app to use Docker service name
+      - DB_HOST=postgres
     user: "${UID:-1000}:${GID:-1000}"
     volumes:
       # Mount the application code for live updates
@@ -65,6 +68,9 @@ services:
     stdin_open: true  # Keeps standard input open for 'docker exec'
     env_file:
       - .env
+    environment:
+      # Override DB_HOST for containerized workspace to use Docker service name
+      - DB_HOST=postgres
     volumes:
       - ./:/var/www
     networks:
