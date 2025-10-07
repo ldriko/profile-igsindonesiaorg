@@ -511,6 +511,8 @@ export default function ProfileIndex({
                                                         item.description
                                                     }
                                                     date={item.date}
+                                                    url={item.url as string | undefined}
+                                                    t={t}
                                                 />
                                             ),
                                         )}

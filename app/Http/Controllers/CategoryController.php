@@ -169,10 +169,31 @@ class CategoryController extends Controller
             'conferences' => [
                 'location' => $item->location ?? null,
                 'role' => $item->role ?? null,
+                'url' => $item->url ?? null,
             ],
             'researches' => [
                 'funding_source' => $item->funding_source ?? null,
                 'fund_amount' => $item->fund_amount ?? null,
+            ],
+            'book_writings' => [
+                'url' => $item->url ?? null,
+                'isbn' => $item->isbn ?? null,
+                'type' => $item->type ?? null,
+            ],
+            'intellectual_properties' => [
+                'url' => $item->url ?? null,
+                'registration_number' => $item->registration_number ?? null,
+                'status' => $item->status ?? null,
+            ],
+            'teaching_materials' => [
+                'url' => $item->url ?? null,
+                'isbn' => $item->isbn ?? null,
+                'format' => $item->format ?? null,
+            ],
+            'trainings' => [
+                'url' => $item->url ?? null,
+                'duration_hours' => $item->duration_hours ?? null,
+                'type' => $item->type ?? null,
             ],
             default => [],
         };
