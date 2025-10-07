@@ -445,29 +445,6 @@ export default function ProfileIndex({
                                 </div>
                             </div>
                         </div>
-
-                        {/* Stats Section */}
-                        <div className="mx-auto max-w-screen-lg p-4 lg:py-16">
-                            <StatsCard
-                                stats={[
-                                    {
-                                        label: t("Categories"),
-                                        value: categories.length,
-                                    },
-                                    {
-                                        label: t("Total Items"),
-                                        value: categories.reduce(
-                                            (sum, cat) => sum + cat.count,
-                                            0,
-                                        ),
-                                    },
-                                    {
-                                        label: t("Updated"),
-                                        value: new Date().getFullYear(),
-                                    },
-                                ]}
-                            />
-                        </div>
                     </div>
                 ) : (
                     /* Content View - Sidebar + Content */
