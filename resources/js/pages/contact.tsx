@@ -1,9 +1,28 @@
-import { Card } from "@/components/ui/card";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
+import { useLanguage } from "@/contexts/language-context";
 import { Head } from "@inertiajs/react";
 import { Mail, MapPin, Phone } from "lucide-react";
 
-export default function Contact() {
-    const locale = "en"; // You can get this from your Laravel app
+interface PersonalInfo {
+    name: string;
+    institution: string;
+    address_office: string;
+    phone: string;
+    email: string;
+}
+
+interface Props {
+    personal_info: PersonalInfo | null;
+}
+
+export default function Contact({ personal_info }: Props) {
+    const { t } = useLanguage();
 
     return (
         <>
@@ -15,79 +34,79 @@ export default function Contact() {
                         {/* Hero Section */}
                         <div className="text-center">
                             <h1 className="mb-4 text-4xl font-bold text-foreground">
-                                {locale === "en"
-                                    ? "Contact Us"
-                                    : "Hubungi Kami"}
+                                {t("Contact Us")}
                             </h1>
                             <p className="mx-auto max-w-3xl text-xl text-muted-foreground">
-                                {locale === "en"
-                                    ? "Get in touch with us for inquiries, collaborations, or more information about our academic work."
-                                    : "Hubungi kami untuk pertanyaan, kolaborasi, atau informasi lebih lanjut tentang karya akademik kami."}
+                                {t("Get in touch with us for inquiries, collaborations, or more information about our academic work.")}
                             </p>
                         </div>
 
                         {/* Contact Information Cards */}
                         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                             {/* Email Card */}
-                            <Card className="p-6 text-center transition-all hover:shadow-lg">
-                                <div className="mb-4 flex justify-center">
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                                        <Mail className="h-6 w-6 text-primary" />
+                            <Card className="text-center transition-all hover:shadow-lg">
+                                <CardHeader>
+                                    <div className="mb-2 flex justify-center">
+                                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                                            <Mail className="h-6 w-6 text-primary" />
+                                        </div>
                                     </div>
-                                </div>
-                                <h3 className="mb-2 text-lg font-semibold text-foreground">
-                                    {locale === "en" ? "Email" : "Email"}
-                                </h3>
-                                <p className="text-muted-foreground">
-                                    contact@igsindonesia.org
-                                </p>
+                                    <CardTitle>{t("Email")}</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <p className="text-muted-foreground">
+                                        {personal_info?.email}
+                                    </p>
+                                </CardContent>
                             </Card>
 
                             {/* Phone Card */}
-                            <Card className="p-6 text-center transition-all hover:shadow-lg">
-                                <div className="mb-4 flex justify-center">
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                                        <Phone className="h-6 w-6 text-primary" />
+                            <Card className="text-center transition-all hover:shadow-lg">
+                                <CardHeader>
+                                    <div className="mb-2 flex justify-center">
+                                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                                            <Phone className="h-6 w-6 text-primary" />
+                                        </div>
                                     </div>
-                                </div>
-                                <h3 className="mb-2 text-lg font-semibold text-foreground">
-                                    {locale === "en" ? "Phone" : "Telepon"}
-                                </h3>
-                                <p className="text-muted-foreground">
-                                    +62 21 1234 5678
-                                </p>
+                                    <CardTitle>{t("Phone")}</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <p className="text-muted-foreground">
+                                        {personal_info?.phone}
+                                    </p>
+                                </CardContent>
                             </Card>
 
                             {/* Address Card */}
-                            <Card className="p-6 text-center transition-all hover:shadow-lg">
-                                <div className="mb-4 flex justify-center">
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                                        <MapPin className="h-6 w-6 text-primary" />
+                            <Card className="text-center transition-all hover:shadow-lg">
+                                <CardHeader>
+                                    <div className="mb-2 flex justify-center">
+                                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+                                            <MapPin className="h-6 w-6 text-primary" />
+                                        </div>
                                     </div>
-                                </div>
-                                <h3 className="mb-2 text-lg font-semibold text-foreground">
-                                    {locale === "en" ? "Address" : "Alamat"}
-                                </h3>
-                                <p className="text-muted-foreground">
-                                    Jakarta, Indonesia
-                                </p>
+                                    <CardTitle>{t("Address")}</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <p className="text-muted-foreground">
+                                        {personal_info?.address_office}
+                                    </p>
+                                </CardContent>
                             </Card>
                         </div>
 
                         {/* Additional Info Card */}
                         <Card className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground">
-                            <div className="p-8 text-center">
-                                <h2 className="mb-2 text-2xl font-bold">
-                                    {locale === "en"
-                                        ? "We'd Love to Hear From You"
-                                        : "Kami Ingin Mendengar Dari Anda"}
-                                </h2>
-                                <p className="text-primary-foreground/80">
-                                    {locale === "en"
-                                        ? "Whether you have questions about our research, want to collaborate, or simply want to learn more, feel free to reach out."
-                                        : "Baik Anda memiliki pertanyaan tentang penelitian kami, ingin berkolaborasi, atau sekadar ingin mempelajari lebih lanjut, jangan ragu untuk menghubungi."}
-                                </p>
-                            </div>
+                            <CardHeader className="text-center">
+                                <CardTitle className="text-2xl">
+                                    {t("We'd Love to Hear From You")}
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent className="text-center">
+                                <CardDescription className="text-primary-foreground/80">
+                                    {t("Whether you have questions about our research, want to collaborate, or simply want to learn more, feel free to reach out.")}
+                                </CardDescription>
+                            </CardContent>
                         </Card>
                     </div>
                 </div>

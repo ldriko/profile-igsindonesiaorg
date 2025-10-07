@@ -27,7 +27,7 @@ export function CategoryCard({
     return (
         <button
             onClick={onClick}
-            className="group w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-1rem)]"
+            className="group w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-1rem)] cursor-pointer"
         >
             <Card className="h-full transform border-border bg-muted p-0.5 transition-all duration-500 hover:-translate-y-2 hover:scale-105 hover:border-primary hover:shadow-xl">
                 <Card className="h-full bg-gradient-to-br from-card to-muted group-hover:from-card group-hover:to-primary/5">

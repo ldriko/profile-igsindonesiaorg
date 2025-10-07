@@ -37,5 +37,15 @@ Route::get('/category', function () {
 })->name('category');
 
 Route::get('/contact', function () {
-    return Inertia::render('contact');
+    $personalInfo = \App\Models\PersonalInfo::first();
+    
+    return Inertia::render('contact', [
+        'personal_info' => $personalInfo ? [
+            'name' => $personalInfo->name,
+            'institution' => $personalInfo->institution,
+            'address_office' => $personalInfo->address_office,
+            'phone' => $personalInfo->phone,
+            'email' => $personalInfo->email,
+        ] : null,
+    ]);
 })->name('contact');

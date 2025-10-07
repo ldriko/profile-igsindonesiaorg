@@ -2,6 +2,7 @@ import { CategoryCard } from "@/components/profile/category-card";
 import { CategoryNavMenu } from "@/components/profile/category-nav-menu";
 import { CategorySidebar } from "@/components/profile/category-sidebar";
 import { ContentCard } from "@/components/profile/content-card";
+import { ContentDetailView } from "@/components/profile/content-detail-view";
 import { ProfileCard } from "@/components/profile/profile-card";
 import { StatsCard } from "@/components/profile/stats-card";
 import { Button } from "@/components/ui/button";
@@ -112,6 +113,7 @@ export default function ProfileIndex({
     const [selectedCategory] = useState<ModelCategory | null>(null);
     const [isContentView] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [selectedItem, setSelectedItem] = useState<ContentItem | null>(null);
 
     // Debounced search using Inertia reload
     useEffect(() => {
@@ -571,6 +573,7 @@ export default function ProfileIndex({
                                                     }
                                                     date={item.date}
                                                     url={item.url as string | undefined}
+                                                    onViewDetails={() => setSelectedItem(item)}
                                                     t={t}
                                                 />
                                             ),
@@ -594,6 +597,24 @@ export default function ProfileIndex({
                                 </div>
                             )}
                         </main>
+
+                        {/* Detail View Sheet */}
+                        <Sheet open={!!selectedItem} onOpenChange={(open) => !open && setSelectedItem(null)}>
+                            <SheetContent side="right" className="w-full sm:max-w-2xl overflow-y-auto">
+                                <SheetHeader>
+                                    <SheetTitle>{t("Details")}</SheetTitle>
+                                </SheetHeader>
+                                <div className="mt-6">
+                                    {selectedItem && activeCategory && (
+                                        <ContentDetailView
+                                            item={selectedItem}
+                                            category={activeCategory.name}
+                                            t={t}
+                                        />
+                                    )}
+                                </div>
+                            </SheetContent>
+                        </Sheet>
                     </div>
                 )}
 

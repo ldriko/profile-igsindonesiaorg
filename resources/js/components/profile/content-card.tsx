@@ -27,7 +27,13 @@ export function ContentCard({
     t,
 }: ContentCardProps) {
     return (
-        <Card className="group flex h-full transform flex-col border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg">
+        <Card
+            className="group flex h-full transform flex-col border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg cursor-pointer"
+            onClick={onViewDetails}
+            role="button"
+            tabIndex={0}
+            aria-label={t("View Details")}
+        >
             <div className="flex-1">
                 <CardHeader>
                     <CardTitle className="text-lg group-hover:text-primary">
@@ -44,7 +50,7 @@ export function ContentCard({
             </div>
             <CardFooter className="mt-auto flex items-center justify-between">
                 {url && (
-                    <Button variant="outline" size="sm" asChild>
+                    <Button variant="outline" size="sm" asChild onClick={e => e.stopPropagation()}>
                         <a
                             href={url}
                             target="_blank"
@@ -59,7 +65,10 @@ export function ContentCard({
                 <Button
                     variant="outline"
                     size="sm"
-                    onClick={onViewDetails}
+                    onClick={e => {
+                        e.stopPropagation();
+                        if (onViewDetails) onViewDetails();
+                    }}
                     className="gap-1 transition-all hover:gap-2"
                 >
                     {t("View Details")}
