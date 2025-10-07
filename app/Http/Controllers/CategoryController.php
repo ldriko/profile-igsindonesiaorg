@@ -201,7 +201,18 @@ class CategoryController extends Controller
 
     public function bookWritings(): Response
     {
-        $items = BookWriting::orderBy('year', 'desc')->get();
+        $query = BookWriting::query();
+        
+        if (request('search')) {
+            $search = strtolower(request('search'));
+            $query->where(function ($q) use ($search) {
+                $q->whereRaw('LOWER(CAST(title AS TEXT)) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(CAST(publisher AS TEXT)) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(isbn) LIKE ?', ["%{$search}%"]);
+            });
+        }
+        
+        $items = $query->orderBy('year', 'desc')->get();
 
         return Inertia::render('index', [
             'personal_info' => $this->getPersonalInfo(),
@@ -213,7 +224,18 @@ class CategoryController extends Controller
 
     public function communityServices(): Response
     {
-        $items = CommunityService::orderBy('year', 'desc')->get();
+        $query = CommunityService::query();
+        
+        if (request('search')) {
+            $search = strtolower(request('search'));
+            $query->where(function ($q) use ($search) {
+                $q->whereRaw('LOWER(CAST(title AS TEXT)) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(role) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(institution) LIKE ?', ["%{$search}%"]);
+            });
+        }
+        
+        $items = $query->orderBy('year', 'desc')->get();
 
         return Inertia::render('index', [
             'personal_info' => $this->getPersonalInfo(),
@@ -225,7 +247,19 @@ class CategoryController extends Controller
 
     public function conferences(): Response
     {
-        $items = Conference::orderBy('year', 'desc')->get();
+        $query = Conference::query();
+        
+        if (request('search')) {
+            $search = strtolower(request('search'));
+            $query->where(function ($q) use ($search) {
+                $q->whereRaw('LOWER(CAST(title AS TEXT)) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(CAST(conference_name AS TEXT)) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(CAST(location AS TEXT)) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(role) LIKE ?', ["%{$search}%"]);
+            });
+        }
+        
+        $items = $query->orderBy('year', 'desc')->get();
 
         return Inertia::render('index', [
             'personal_info' => $this->getPersonalInfo(),
@@ -237,7 +271,19 @@ class CategoryController extends Controller
 
     public function education(): Response
     {
-        $items = Education::orderBy('graduation_year', 'desc')->get();
+        $query = Education::query();
+        
+        if (request('search')) {
+            $search = strtolower(request('search'));
+            $query->where(function ($q) use ($search) {
+                $q->whereRaw('LOWER(level) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(institution) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(CAST(department AS TEXT)) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(major) LIKE ?', ["%{$search}%"]);
+            });
+        }
+        
+        $items = $query->orderBy('graduation_year', 'desc')->get();
 
         return Inertia::render('index', [
             'personal_info' => $this->getPersonalInfo(),
@@ -249,7 +295,18 @@ class CategoryController extends Controller
 
     public function institutionPositions(): Response
     {
-        $items = InstitutionPosition::orderBy('start_year', 'desc')->get();
+        $query = InstitutionPosition::query();
+        
+        if (request('search')) {
+            $search = strtolower(request('search'));
+            $query->where(function ($q) use ($search) {
+                $q->whereRaw('LOWER(CAST(position AS TEXT)) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(CAST(institution AS TEXT)) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(CAST(description AS TEXT)) LIKE ?', ["%{$search}%"]);
+            });
+        }
+        
+        $items = $query->orderBy('start_year', 'desc')->get();
 
         return Inertia::render('index', [
             'personal_info' => $this->getPersonalInfo(),
@@ -261,7 +318,19 @@ class CategoryController extends Controller
 
     public function intellectualProperties(): Response
     {
-        $items = IntellectualProperty::orderBy('year', 'desc')->get();
+        $query = IntellectualProperty::query();
+        
+        if (request('search')) {
+            $search = strtolower(request('search'));
+            $query->where(function ($q) use ($search) {
+                $q->whereRaw('LOWER(CAST(title AS TEXT)) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(type) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(registration_number) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(status) LIKE ?', ["%{$search}%"]);
+            });
+        }
+        
+        $items = $query->orderBy('year', 'desc')->get();
 
         return Inertia::render('index', [
             'personal_info' => $this->getPersonalInfo(),
@@ -273,7 +342,18 @@ class CategoryController extends Controller
 
     public function organizations(): Response
     {
-        $items = Organization::orderBy('start_year', 'desc')->get();
+        $query = Organization::query();
+        
+        if (request('search')) {
+            $search = strtolower(request('search'));
+            $query->where(function ($q) use ($search) {
+                $q->whereRaw('LOWER(CAST(organization_name AS TEXT)) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(CAST(role AS TEXT)) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(description) LIKE ?', ["%{$search}%"]);
+            });
+        }
+        
+        $items = $query->orderBy('start_year', 'desc')->get();
 
         return Inertia::render('index', [
             'personal_info' => $this->getPersonalInfo(),
@@ -285,7 +365,19 @@ class CategoryController extends Controller
 
     public function policyExperiences(): Response
     {
-        $items = PolicyExperience::orderBy('year', 'desc')->get();
+        $query = PolicyExperience::query();
+        
+        if (request('search')) {
+            $search = strtolower(request('search'));
+            $query->where(function ($q) use ($search) {
+                $q->whereRaw('LOWER(CAST(title AS TEXT)) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(CAST(role AS TEXT)) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(CAST(institution AS TEXT)) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(CAST(description AS TEXT)) LIKE ?', ["%{$search}%"]);
+            });
+        }
+        
+        $items = $query->orderBy('year', 'desc')->get();
 
         return Inertia::render('index', [
             'personal_info' => $this->getPersonalInfo(),
@@ -297,7 +389,19 @@ class CategoryController extends Controller
 
     public function publications(): Response
     {
-        $items = Publication::with('publicationCategory')->orderBy('year', 'desc')->get();
+        $query = Publication::with('publicationCategory');
+        
+        if (request('search')) {
+            $search = strtolower(request('search'));
+            $query->where(function ($q) use ($search) {
+                $q->whereRaw('LOWER(title) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(journal_name) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(doi) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(publication_type) LIKE ?', ["%{$search}%"]);
+            });
+        }
+        
+        $items = $query->orderBy('year', 'desc')->get();
 
         return Inertia::render('index', [
             'personal_info' => $this->getPersonalInfo(),
@@ -309,7 +413,18 @@ class CategoryController extends Controller
 
     public function research(): Response
     {
-        $items = Research::orderBy('year', 'desc')->get();
+        $query = Research::query();
+        
+        if (request('search')) {
+            $search = strtolower(request('search'));
+            $query->where(function ($q) use ($search) {
+                $q->whereRaw('LOWER(CAST(title AS TEXT)) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(CAST(funding_source AS TEXT)) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(description) LIKE ?', ["%{$search}%"]);
+            });
+        }
+        
+        $items = $query->orderBy('year', 'desc')->get();
 
         return Inertia::render('index', [
             'personal_info' => $this->getPersonalInfo(),
@@ -321,7 +436,18 @@ class CategoryController extends Controller
 
     public function teachingExperiences(): Response
     {
-        $items = TeachingExperience::orderBy('academic_year', 'desc')->get();
+        $query = TeachingExperience::query();
+        
+        if (request('search')) {
+            $search = strtolower(request('search'));
+            $query->where(function ($q) use ($search) {
+                $q->whereRaw('LOWER(CAST(course_name AS TEXT)) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(institution) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(academic_year) LIKE ?', ["%{$search}%"]);
+            });
+        }
+        
+        $items = $query->orderBy('academic_year', 'desc')->get();
 
         return Inertia::render('index', [
             'personal_info' => $this->getPersonalInfo(),
@@ -333,7 +459,19 @@ class CategoryController extends Controller
 
     public function teachingMaterials(): Response
     {
-        $items = TeachingMaterial::orderBy('year', 'desc')->get();
+        $query = TeachingMaterial::query();
+        
+        if (request('search')) {
+            $search = strtolower(request('search'));
+            $query->where(function ($q) use ($search) {
+                $q->whereRaw('LOWER(CAST(title AS TEXT)) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(CAST(program AS TEXT)) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(isbn) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(format) LIKE ?', ["%{$search}%"]);
+            });
+        }
+        
+        $items = $query->orderBy('year', 'desc')->get();
 
         return Inertia::render('index', [
             'personal_info' => $this->getPersonalInfo(),
@@ -345,7 +483,18 @@ class CategoryController extends Controller
 
     public function trainings(): Response
     {
-        $items = Training::orderBy('created_at', 'desc')->get();
+        $query = Training::query();
+        
+        if (request('search')) {
+            $search = strtolower(request('search'));
+            $query->where(function ($q) use ($search) {
+                $q->whereRaw('LOWER(CAST(title AS TEXT)) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(CAST(organizer AS TEXT)) LIKE ?', ["%{$search}%"])
+                  ->orWhereRaw('LOWER(type) LIKE ?', ["%{$search}%"]);
+            });
+        }
+        
+        $items = $query->orderBy('created_at', 'desc')->get();
 
         return Inertia::render('index', [
             'personal_info' => $this->getPersonalInfo(),

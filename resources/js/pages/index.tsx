@@ -1,9 +1,18 @@
 import { CategoryCard } from "@/components/profile/category-card";
+import { CategoryNavMenu } from "@/components/profile/category-nav-menu";
 import { CategorySidebar } from "@/components/profile/category-sidebar";
 import { ContentCard } from "@/components/profile/content-card";
 import { ProfileCard } from "@/components/profile/profile-card";
 import { StatsCard } from "@/components/profile/stats-card";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+    Sheet,
+    SheetContent,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet";
 import { useLanguage } from "@/contexts/language-context";
 import { Head, router } from "@inertiajs/react";
 import {
@@ -17,13 +26,14 @@ import {
     GraduationCap,
     Lightbulb,
     LucideIcon,
+    Menu,
     Newspaper,
     Presentation,
     School,
     Search as SearchIcon,
     Users,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface ModelCategory {
     name: string;
@@ -101,6 +111,21 @@ export default function ProfileIndex({
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedCategory] = useState<ModelCategory | null>(null);
     const [isContentView] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    // Debounced search using Inertia reload
+    useEffect(() => {
+        if (!selected_category) return;
+
+        const timer = setTimeout(() => {
+            router.reload({
+                data: { search: searchTerm },
+                only: ['category_items'],
+            });
+        }, 300);
+
+        return () => clearTimeout(timer);
+    }, [searchTerm, selected_category]);
 
     const categories: ModelCategory[] = [
         {
@@ -290,6 +315,8 @@ export default function ProfileIndex({
     });
 
     const handleCategoryClick = (category: ModelCategory) => {
+        setIsMobileMenuOpen(false);
+        setSearchTerm("");
         router.get(category.route, {}, {
             preserveScroll: true,
             preserveState: true,
@@ -315,10 +342,11 @@ export default function ProfileIndex({
     };
 
     const handleBackToHome = () => {
+        setIsMobileMenuOpen(false);
+        setSearchTerm("");
         router.get("/", {}, {
             preserveScroll: false,
         });
-        setSearchTerm("");
     };
 
     // Get content items from props (passed from backend)
@@ -445,7 +473,7 @@ export default function ProfileIndex({
                         id="content-view"
                         className="flex min-h-screen border-y-1"
                     >
-                        {/* Sidebar */}
+                        {/* Desktop Sidebar */}
                         <CategorySidebar
                             categories={categories}
                             selectedCategory={activeCategory?.name || null}
@@ -456,29 +484,58 @@ export default function ProfileIndex({
                         />
 
                         {/* Main Content Area */}
-                        <main className="flex-1 bg-muted/30 p-8">
+                        <main className="flex-1 bg-muted/30 p-4 lg:p-8">
                             {activeCategory && (
                                 <div className="mx-auto max-w-screen-xl">
                                     {/* Header */}
                                     <div className="mb-8">
-                                        <div className="mb-4 flex items-start justify-between">
+                                        <div className="mb-4 flex items-start justify-between gap-4">
                                             <div className="flex items-center gap-4">
+                                                {/* Mobile Menu Button */}
+                                                <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+                                                    <SheetTrigger asChild>
+                                                        <Button
+                                                            variant="outline"
+                                                            size="icon"
+                                                            className="lg:hidden"
+                                                        >
+                                                            <Menu className="h-5 w-5" />
+                                                            <span className="sr-only">{t("Open menu")}</span>
+                                                        </Button>
+                                                    </SheetTrigger>
+                                                    <SheetContent side="left" className="w-80 overflow-y-auto">
+                                                        <SheetHeader>
+                                                            <SheetTitle>{t("Categories")}</SheetTitle>
+                                                        </SheetHeader>
+                                                        <div className="mt-6">
+                                                            <CategoryNavMenu
+                                                                categories={categories}
+                                                                selectedCategory={activeCategory?.name || null}
+                                                                onCategorySelect={handleCategoryClick}
+                                                                onBackToHome={handleBackToHome}
+                                                                getLocalizedName={getLocalizedName}
+                                                                t={t}
+                                                            />
+                                                        </div>
+                                                    </SheetContent>
+                                                </Sheet>
+
                                                 {(() => {
                                                     const IconComponent =
                                                         activeCategory.icon;
                                                     return (
-                                                        <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 to-primary/20">
-                                                            <IconComponent className="h-8 w-8 text-primary" />
+                                                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 to-primary/20 lg:h-16 lg:w-16">
+                                                            <IconComponent className="h-6 w-6 text-primary lg:h-8 lg:w-8" />
                                                         </div>
                                                     );
                                                 })()}
                                                 <div>
-                                                    <h1 className="text-3xl font-bold text-foreground">
+                                                    <h1 className="text-2xl font-bold text-foreground lg:text-3xl">
                                                         {getLocalizedName(
                                                             activeCategory,
                                                         )}
                                                     </h1>
-                                                    <p className="mt-1 text-muted-foreground">
+                                                    <p className="mt-1 text-sm text-muted-foreground lg:text-base">
                                                         {getLocalizedDescription(
                                                             activeCategory,
                                                         )}
@@ -496,6 +553,8 @@ export default function ProfileIndex({
                                                 placeholder={t(
                                                     "Search items...",
                                                 )}
+                                                value={searchTerm}
+                                                onChange={(e) => setSearchTerm(e.target.value)}
                                             />
                                         </div>
                                     </div>
@@ -526,9 +585,9 @@ export default function ProfileIndex({
                                                 {t("No items found")}
                                             </h3>
                                             <p className="text-muted-foreground">
-                                                {t(
-                                                    "There are currently no items in this category.",
-                                                )}
+                                                {searchTerm
+                                                    ? t("No items match your search. Try different keywords.")
+                                                    : t("There are currently no items in this category.")}
                                             </p>
                                         </div>
                                     )}

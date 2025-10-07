@@ -272,5 +272,7 @@
     "Search items...": "Search items...",
     "No items found": "No items found",
     "There are currently no items in this category.": "There are currently no items in this category.",
+    "No items match your search. Try different keywords.": "No items match your search. Try different keywords.",
+    "Open menu": "Open menu",
     "This is a sample description for the content item. In a real application, this would be fetched from the backend.": "This is a sample description for the content item. In a real application, this would be fetched from the backend."
 }

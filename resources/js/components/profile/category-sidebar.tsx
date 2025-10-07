@@ -1,7 +1,5 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { Home, LucideIcon } from "lucide-react";
+import { LucideIcon } from "lucide-react";
+import { CategoryNavMenu } from "./category-nav-menu";
 
 interface ModelCategory {
     name: string;
@@ -32,51 +30,16 @@ export function CategorySidebar({
     t,
 }: CategorySidebarProps) {
     return (
-        <aside className="w-64 border-r border-border bg-muted/30 p-4">
-            <div className="sticky top-4 space-y-4">
-                {/* Back to Home Button */}
-                <Button
-                    onClick={onBackToHome}
-                    className="w-full justify-start gap-3"
-                    variant="outline"
-                >
-                    <Home className="h-5 w-5" />
-                    <span>{t("Back to Home")}</span>
-                </Button>
-
-                {/* Category Menu Items */}
-                <nav className="space-y-2">
-                    {categories.map((category, index) => {
-                        const Icon = category.icon;
-                        const isSelected = selectedCategory === category.name;
-                        return (
-                            <Button
-                                key={index}
-                                onClick={() => onCategorySelect(category)}
-                                variant={isSelected ? "default" : "ghost"}
-                                className={cn(
-                                    "h-auto w-full justify-start gap-3 py-3",
-                                    !isSelected && "hover:bg-primary/10",
-                                )}
-                            >
-                                <Icon className="h-5 w-5 shrink-0" />
-                                <div className="flex flex-1 flex-col items-start gap-0.5">
-                                    <span className="text-sm font-medium">
-                                        {getLocalizedName(category)}
-                                    </span>
-                                    <Badge
-                                        variant={
-                                            isSelected ? "secondary" : "outline"
-                                        }
-                                        className="text-xs"
-                                    >
-                                        {category.count} {t("items")}
-                                    </Badge>
-                                </div>
-                            </Button>
-                        );
-                    })}
-                </nav>
+        <aside className="hidden w-64 border-r border-border bg-muted/30 p-4 lg:block">
+            <div className="sticky top-4">
+                <CategoryNavMenu
+                    categories={categories}
+                    selectedCategory={selectedCategory}
+                    onCategorySelect={onCategorySelect}
+                    onBackToHome={onBackToHome}
+                    getLocalizedName={getLocalizedName}
+                    t={t}
+                />
             </div>
         </aside>
     );

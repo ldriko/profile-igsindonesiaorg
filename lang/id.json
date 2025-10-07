@@ -272,5 +272,7 @@
     "Search items...": "Cari item...",
     "No items found": "Tidak ada item ditemukan",
     "There are currently no items in this category.": "Saat ini tidak ada item dalam kategori ini.",
-    "This is a sample description for the content item. In a real application, this would be fetched from the backend.": "Ini adalah deskripsi contoh untuk item konten. Dalam aplikasi nyata, ini akan diambil dari backend."
+    "No items match your search. Try different keywords.": "Tidak ada item yang cocok dengan pencarian Anda. Coba kata kunci lain.",
+    "Open menu": "Buka menu",
+    "This is a sample description for the content item. In a real application, this would be fetched from the backend.": "Ini adalah contoh deskripsi untuk item konten. Dalam aplikasi nyata, ini akan diambil dari backend."
 }
