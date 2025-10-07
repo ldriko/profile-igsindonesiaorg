@@ -1,4 +1,8 @@
-import { Card } from "@/components/ui/card";
+import { CategoryCard } from "@/components/profile/category-card";
+import { CategorySidebar } from "@/components/profile/category-sidebar";
+import { ContentCard } from "@/components/profile/content-card";
+import { ProfileCard } from "@/components/profile/profile-card";
+import { StatsCard } from "@/components/profile/stats-card";
 import { Input } from "@/components/ui/input";
 import { useLanguage } from "@/contexts/language-context";
 import { Head, Link } from "@inertiajs/react";
@@ -83,6 +87,9 @@ export default function ProfileIndex({
 }: Props) {
     const { locale, t } = useLanguage();
     const [searchTerm, setSearchTerm] = useState("");
+    const [selectedCategory, setSelectedCategory] =
+        useState<ModelCategory | null>(null);
+    const [isContentView, setIsContentView] = useState(false);
 
     const categories: ModelCategory[] = [
         {
@@ -262,258 +269,303 @@ export default function ProfileIndex({
         return name.includes(search) || description.includes(search);
     });
 
+    const handleCategoryClick = (category: ModelCategory) => {
+        setSelectedCategory(category);
+        setIsContentView(true);
+        // Scroll to content view section after state updates with offset for navbar
+        setTimeout(() => {
+            const contentSection = document.getElementById("content-view");
+            if (contentSection) {
+                const navbarHeight = 80; // Adjust this value based on your navbar height
+                const elementPosition =
+                    contentSection.getBoundingClientRect().top;
+                const offsetPosition =
+                    elementPosition + window.pageYOffset - navbarHeight;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth",
+                });
+            }
+        }, 100);
+    };
+
+    const handleBackToHome = () => {
+        setSelectedCategory(null);
+        setIsContentView(false);
+        setSearchTerm("");
+    };
+
+    // Mock content items for demonstration
+    const getContentItems = (category: ModelCategory) => {
+        return Array.from({ length: category.count }, (_, i) => ({
+            id: i + 1,
+            title: `${getLocalizedName(category)} Item ${i + 1}`,
+            description: t(
+                "This is a sample description for the content item. In a real application, this would be fetched from the backend.",
+            ),
+            date: new Date(
+                2024,
+                Math.floor(Math.random() * 12),
+                Math.floor(Math.random() * 28) + 1,
+            ).toLocaleDateString(locale === "en" ? "en-US" : "id-ID", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+            }),
+        }));
+    };
+
     return (
         <>
             <Head title="Academic Profile - IGS Indonesia" />
 
             <div className="min-h-screen bg-background">
-                <div>
-                    {/* Personal Info Section */}
-                    <div className="mx-auto max-w-screen-lg px-4 py-4 lg:py-16">
-                        {personal_info && (
-                            <Card className="overflow-hidden bg-gradient-to-br from-card to-muted/30 py-6 lg:py-0">
-                                <div className="flex flex-col items-center gap-6 lg:flex-row lg:items-start lg:gap-12">
-                                    {/* Profile Picture */}
-                                    {personal_info.picture && (
-                                        <div className="aspect-square px-6 lg:aspect-auto lg:self-stretch lg:px-0">
-                                            <img
-                                                src={`/storage/${personal_info.picture}`}
-                                                alt={personal_info.name}
-                                                className="aspect-square h-full rounded-lg border-2 object-cover lg:aspect-auto lg:rounded-none lg:border-0 lg:border-r-2"
+                {/* Personal Info Section - Always Visible */}
+                <div className="mx-auto max-w-screen-lg px-4 py-4 lg:py-16">
+                    {personal_info && (
+                        <ProfileCard
+                            personalInfo={personal_info}
+                            locale={locale}
+                        />
+                    )}
+                </div>
+
+                {!isContentView ? (
+                    /* Home View - Categories Grid */
+                    <div>
+                        {/* Search and Categories Section */}
+                        <div className="border-y-1 bg-muted/30 py-8 lg:py-16">
+                            <div className="mx-auto max-w-screen-lg px-4">
+                                <div className="space-y-8">
+                                    <div className="text-center">
+                                        <h1 className="mb-4 text-4xl font-bold text-foreground">
+                                            {t("Academic Profile")}
+                                        </h1>
+                                        <p className="mx-auto max-w-3xl text-lg text-muted-foreground">
+                                            {t(
+                                                "Explore comprehensive academic achievements, research contributions, and professional experience. Select a category below to view detailed information.",
+                                            )}
+                                        </p>
+                                    </div>
+                                    <div className="mx-auto max-w-md">
+                                        <div className="group relative">
+                                            <SearchIcon className="absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-primary" />
+                                            <Input
+                                                type="text"
+                                                className="pl-10"
+                                                placeholder={t(
+                                                    "Search categories...",
+                                                )}
+                                                value={searchTerm}
+                                                onChange={(e) =>
+                                                    setSearchTerm(
+                                                        e.target.value,
+                                                    )
+                                                }
                                             />
                                         </div>
-                                    )}
+                                    </div>
 
-                                    {/* Profile Info */}
-                                    <div className="flex-1 px-6 pb-12 text-center lg:px-0 lg:py-12 lg:pr-12 lg:text-justify">
-                                        <h2 className="mb-2 text-3xl font-bold text-foreground">
-                                            {personal_info.name}
-                                        </h2>
-                                        <p className="mb-2 text-lg font-medium text-primary">
-                                            {personal_info.academic_position}
-                                        </p>
-                                        <p className="mb-4 text-sm text-muted-foreground">
-                                            {personal_info.institution}
-                                        </p>
-                                        <p className="text-base leading-relaxed text-foreground">
-                                            {locale === "en"
-                                                ? personal_info
-                                                      .short_description.en
-                                                : personal_info
-                                                      .short_description.id}
-                                        </p>
-
-                                        {/* Academic Profile Links */}
-                                        <div className="mt-6 flex flex-wrap justify-center gap-8">
-                                            {personal_info.scopus_id && (
-                                                <a
-                                                    href={`https://www.scopus.com/authid/detail.uri?authorId=${personal_info.scopus_id}`}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="transition-opacity hover:opacity-80"
-                                                >
-                                                    <img
-                                                        src="/img/scopus.png"
-                                                        alt="SCOPUS"
-                                                        className="h-12 w-auto object-contain"
+                                    {/* Categories Grid */}
+                                    {filteredCategories.length > 0 ? (
+                                        <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+                                            {filteredCategories.map(
+                                                (category, index) => (
+                                                    <CategoryCard
+                                                        key={index}
+                                                        name={getLocalizedName(
+                                                            category,
+                                                        )}
+                                                        description={getLocalizedDescription(
+                                                            category,
+                                                        )}
+                                                        icon={category.icon}
+                                                        count={category.count}
+                                                        onClick={() =>
+                                                            handleCategoryClick(
+                                                                category,
+                                                            )
+                                                        }
                                                     />
-                                                </a>
-                                            )}
-                                            {personal_info.sinta_id && (
-                                                <a
-                                                    href={`https://sinta.kemdiktisaintek.go.id/authors/profile/${personal_info.sinta_id}`}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="transition-opacity hover:opacity-80"
-                                                >
-                                                    <img
-                                                        src="/img/sinta.jpg"
-                                                        alt="SINTA"
-                                                        className="h-12 w-auto object-contain"
-                                                    />
-                                                </a>
-                                            )}
-                                            {personal_info.google_scholar_id && (
-                                                <a
-                                                    href={`https://scholar.google.com/citations?user=${personal_info.google_scholar_id}`}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="transition-opacity hover:opacity-80"
-                                                >
-                                                    <img
-                                                        src="/img/scholar.jpg"
-                                                        alt="Google Scholar"
-                                                        className="h-12 w-auto object-contain"
-                                                    />
-                                                </a>
+                                                ),
                                             )}
                                         </div>
-                                    </div>
+                                    ) : (
+                                        /* No Results Message */
+                                        <div className="py-12 text-center">
+                                            <SearchIcon className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+                                            <p className="text-lg text-muted-foreground">
+                                                {t(
+                                                    "No categories found matching your search.",
+                                                )}
+                                            </p>
+                                        </div>
+                                    )}
                                 </div>
-                            </Card>
-                        )}
-                    </div>
-
-                    {/* Search and Categories Section */}
-                    <div className="border-y-1 bg-muted/30 py-8 lg:py-16">
-                        <div className="mx-auto max-w-screen-lg px-4">
-                            <div className="space-y-8">
-                                <div className="text-center">
-                                    <h1 className="mb-4 text-4xl font-bold text-foreground">
-                                        {t("Academic Profile")}
-                                    </h1>
-                                    <p className="mx-auto max-w-3xl text-lg text-muted-foreground">
-                                        {t(
-                                            "Explore comprehensive academic achievements, research contributions, and professional experience. Select a category below to view detailed information.",
-                                        )}
-                                    </p>
-                                </div>
-                                <div className="mx-auto max-w-md">
-                                    <div className="group relative">
-                                        <SearchIcon className="absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-primary" />
-                                        <Input
-                                            type="text"
-                                            className="pl-10"
-                                            placeholder={t(
-                                                "Search categories...",
-                                            )}
-                                            value={searchTerm}
-                                            onChange={(e) =>
-                                                setSearchTerm(e.target.value)
-                                            }
-                                        />
-                                    </div>
-                                </div>
-
-                                {/* Categories Grid */}
-                                {filteredCategories.length > 0 ? (
-                                    <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-                                        {filteredCategories.map(
-                                            (category, index) => {
-                                                const IconComponent =
-                                                    category.icon;
-                                                return (
-                                                    <Link
-                                                        key={index}
-                                                        href={category.route}
-                                                        className="group w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-1rem)]"
-                                                    >
-                                                        <Card className="h-full transform border-border bg-muted p-0.5 transition-all duration-500 hover:-translate-y-2 hover:scale-105 hover:border-primary hover:shadow-xl">
-                                                            <Card className="h-full bg-gradient-to-br from-card to-muted p-6 group-hover:from-card group-hover:to-primary/5">
-                                                                <div className="flex flex-col items-center space-y-4 text-center">
-                                                                    {/* Icon */}
-                                                                    <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 to-primary/20 transition-colors group-hover:from-primary/20 group-hover:to-primary/30">
-                                                                        <IconComponent className="h-8 w-8 text-primary" />
-                                                                    </div>
-
-                                                                    <div className="space-y-1">
-                                                                        {/* Category Name */}
-                                                                        <h3 className="text-xl font-semibold text-foreground transition-colors group-hover:text-primary">
-                                                                            {getLocalizedName(
-                                                                                category,
-                                                                            )}
-                                                                        </h3>
-                                                                        {/* Description */}
-                                                                        <p className="text-sm leading-relaxed text-muted-foreground">
-                                                                            {getLocalizedDescription(
-                                                                                category,
-                                                                            )}
-                                                                        </p>
-                                                                    </div>
-
-                                                                    {/* Count */}
-                                                                    <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                                                                        <FileText className="h-4 w-4" />
-                                                                        <span>
-                                                                            {
-                                                                                category.count
-                                                                            }{" "}
-                                                                            {t(
-                                                                                "items",
-                                                                            )}
-                                                                        </span>
-                                                                    </div>
-
-                                                                    {/* Arrow */}
-                                                                    <div className="flex items-center text-primary transition-transform group-hover:translate-x-1">
-                                                                        <span className="text-sm font-medium">
-                                                                            {t(
-                                                                                "View Details",
-                                                                            )}
-                                                                        </span>
-                                                                        <svg
-                                                                            className="ml-2 h-4 w-4"
-                                                                            fill="none"
-                                                                            stroke="currentColor"
-                                                                            viewBox="0 0 24 24"
-                                                                        >
-                                                                            <path
-                                                                                strokeLinecap="round"
-                                                                                strokeLinejoin="round"
-                                                                                strokeWidth={
-                                                                                    2
-                                                                                }
-                                                                                d="M9 5l7 7-7 7"
-                                                                            />
-                                                                        </svg>
-                                                                    </div>
-                                                                </div>
-                                                            </Card>
-                                                        </Card>
-                                                    </Link>
-                                                );
-                                            },
-                                        )}
-                                    </div>
-                                ) : (
-                                    /* No Results Message */
-                                    <div className="py-12 text-center">
-                                        <SearchIcon className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
-                                        <p className="text-lg text-muted-foreground">
-                                            {t(
-                                                "No categories found matching your search.",
-                                            )}
-                                        </p>
-                                    </div>
-                                )}
                             </div>
                         </div>
-                    </div>
 
-                    {/* Stats Section */}
-                    <div className="mx-auto max-w-screen-lg p-4 lg:py-16">
-                        <Card className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground">
-                            <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
-                                <div>
-                                    <div className="mb-2 text-3xl font-bold">
-                                        {categories.length}
-                                    </div>
-                                    <div className="text-primary-foreground/80">
-                                        {t("Categories")}
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className="mb-2 text-3xl font-bold">
-                                        {categories.reduce(
+                        {/* Stats Section */}
+                        <div className="mx-auto max-w-screen-lg p-4 lg:py-16">
+                            <StatsCard
+                                stats={[
+                                    {
+                                        label: t("Categories"),
+                                        value: categories.length,
+                                    },
+                                    {
+                                        label: t("Total Items"),
+                                        value: categories.reduce(
                                             (sum, cat) => sum + cat.count,
                                             0,
+                                        ),
+                                    },
+                                    {
+                                        label: t("Updated"),
+                                        value: new Date().getFullYear(),
+                                    },
+                                ]}
+                            />
+                        </div>
+                    </div>
+                ) : (
+                    /* Content View - Sidebar + Content */
+                    <div
+                        id="content-view"
+                        className="flex min-h-screen border-y-1"
+                    >
+                        {/* Sidebar */}
+                        <CategorySidebar
+                            categories={categories}
+                            selectedCategory={selectedCategory?.name || null}
+                            onCategorySelect={handleCategoryClick}
+                            onBackToHome={handleBackToHome}
+                            getLocalizedName={getLocalizedName}
+                            t={t}
+                        />
+
+                        {/* Main Content Area */}
+                        <main className="flex-1 bg-muted/30 p-8">
+                            {selectedCategory && (
+                                <div className="mx-auto max-w-screen-xl">
+                                    {/* Header */}
+                                    <div className="mb-8">
+                                        <div className="mb-4 flex items-start justify-between">
+                                            <div className="flex items-center gap-4">
+                                                {(() => {
+                                                    const IconComponent =
+                                                        selectedCategory.icon;
+                                                    return (
+                                                        <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 to-primary/20">
+                                                            <IconComponent className="h-8 w-8 text-primary" />
+                                                        </div>
+                                                    );
+                                                })()}
+                                                <div>
+                                                    <h1 className="text-3xl font-bold text-foreground">
+                                                        {getLocalizedName(
+                                                            selectedCategory,
+                                                        )}
+                                                    </h1>
+                                                    <p className="mt-1 text-muted-foreground">
+                                                        {getLocalizedDescription(
+                                                            selectedCategory,
+                                                        )}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <Link
+                                                href={selectedCategory.route}
+                                                className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all hover:shadow-lg"
+                                            >
+                                                {t("View Full Page")}
+                                                <svg
+                                                    className="h-4 w-4"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth={2}
+                                                        d="M9 5l7 7-7 7"
+                                                    />
+                                                </svg>
+                                            </Link>
+                                        </div>
+
+                                        {/* Search Bar */}
+                                        <div className="relative max-w-md">
+                                            <SearchIcon className="absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+                                            <Input
+                                                type="text"
+                                                className="pl-10"
+                                                placeholder={t(
+                                                    "Search items...",
+                                                )}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* Content Grid */}
+                                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                                        {getContentItems(selectedCategory).map(
+                                            (item) => (
+                                                <ContentCard
+                                                    key={item.id}
+                                                    title={item.title}
+                                                    description={
+                                                        item.description
+                                                    }
+                                                    date={item.date}
+                                                />
+                                            ),
                                         )}
                                     </div>
-                                    <div className="text-primary-foreground/80">
-                                        {t("Total Items")}
-                                    </div>
+
+                                    {/* Empty State */}
+                                    {selectedCategory.count === 0 && (
+                                        <div className="py-16 text-center">
+                                            <FileText className="mx-auto mb-4 h-16 w-16 text-muted-foreground" />
+                                            <h3 className="mb-2 text-xl font-semibold text-foreground">
+                                                {t("No items found")}
+                                            </h3>
+                                            <p className="text-muted-foreground">
+                                                {t(
+                                                    "There are currently no items in this category.",
+                                                )}
+                                            </p>
+                                        </div>
+                                    )}
                                 </div>
-                                <div>
-                                    <div className="mb-2 text-3xl font-bold">
-                                        {new Date().getFullYear()}
-                                    </div>
-                                    <div className="text-primary-foreground/80">
-                                        {t("Updated")}
-                                    </div>
-                                </div>
-                            </div>
-                        </Card>
+                            )}
+                        </main>
                     </div>
+                )}
+
+                {/* Stats Section - Always Visible */}
+                <div className="mx-auto max-w-screen-lg p-4 lg:py-16">
+                    <StatsCard
+                        stats={[
+                            {
+                                label: t("Categories"),
+                                value: categories.length,
+                            },
+                            {
+                                label: t("Total Items"),
+                                value: categories.reduce(
+                                    (sum, cat) => sum + cat.count,
+                                    0,
+                                ),
+                            },
+                            {
+                                label: t("Updated"),
+                                value: new Date().getFullYear(),
+                            },
+                        ]}
+                    />
                 </div>
             </div>
         </>

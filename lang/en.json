@@ -266,5 +266,11 @@
     "English": "English",
     "Academic profile showcasing research, publications, and professional contributions in the field of Information Technology.": "Academic profile showcasing research, publications, and professional contributions in the field of Information Technology.",
     "Quick Links": "Quick Links",
-    "Contact": "Contact"
+    "Contact": "Contact",
+    "Back to Home": "Back to Home",
+    "View Full Page": "View Full Page",
+    "Search items...": "Search items...",
+    "No items found": "No items found",
+    "There are currently no items in this category.": "There are currently no items in this category.",
+    "This is a sample description for the content item. In a real application, this would be fetched from the backend.": "This is a sample description for the content item. In a real application, this would be fetched from the backend."
 }

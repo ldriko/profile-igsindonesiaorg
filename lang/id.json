@@ -266,5 +266,11 @@
     "English": "Bahasa Inggris",
     "Academic profile showcasing research, publications, and professional contributions in the field of Information Technology.": "Profil akademik yang menampilkan penelitian, publikasi, dan kontribusi profesional di bidang Teknologi Informasi.",
     "Quick Links": "Tautan Cepat",
-    "Contact": "Kontak"
+    "Contact": "Kontak",
+    "Back to Home": "Kembali ke Beranda",
+    "View Full Page": "Lihat Halaman Lengkap",
+    "Search items...": "Cari item...",
+    "No items found": "Tidak ada item ditemukan",
+    "There are currently no items in this category.": "Saat ini tidak ada item dalam kategori ini.",
+    "This is a sample description for the content item. In a real application, this would be fetched from the backend.": "Ini adalah deskripsi contoh untuk item konten. Dalam aplikasi nyata, ini akan diambil dari backend."
 }
