@@ -5,7 +5,7 @@ import { ProfileCard } from "@/components/profile/profile-card";
 import { StatsCard } from "@/components/profile/stats-card";
 import { Input } from "@/components/ui/input";
 import { useLanguage } from "@/contexts/language-context";
-import { Head, Link } from "@inertiajs/react";
+import { Head, router } from "@inertiajs/react";
 import {
     Award,
     BookOpen,
@@ -50,6 +50,14 @@ interface PersonalInfo {
     google_scholar_id: string;
 }
 
+interface ContentItem {
+    id: number;
+    title: string;
+    description: string;
+    date: string;
+    [key: string]: unknown;
+}
+
 interface Props {
     personal_info: PersonalInfo | null;
     awards_count: number;
@@ -67,6 +75,8 @@ interface Props {
     teaching_experiences_count: number;
     teaching_materials_count: number;
     trainings_count: number;
+    selected_category?: string;
+    category_items?: ContentItem[];
 }
 
 export default function ProfileIndex({
@@ -84,12 +94,13 @@ export default function ProfileIndex({
     teaching_experiences_count,
     teaching_materials_count,
     trainings_count,
+    selected_category,
+    category_items = [],
 }: Props) {
     const { locale, t } = useLanguage();
     const [searchTerm, setSearchTerm] = useState("");
-    const [selectedCategory, setSelectedCategory] =
-        useState<ModelCategory | null>(null);
-    const [isContentView, setIsContentView] = useState(false);
+    const [selectedCategory] = useState<ModelCategory | null>(null);
+    const [isContentView] = useState(false);
 
     const categories: ModelCategory[] = [
         {
@@ -262,6 +273,15 @@ export default function ProfileIndex({
             : category.description_id;
     };
 
+    // Find the selected category from the categories list based on the prop
+    const selectedCategoryObj = categories.find(
+        (cat) => cat.name === selected_category
+    ) || null;
+    
+    // Use prop data if available, otherwise fall back to client-side state
+    const activeCategory = selectedCategoryObj || selectedCategory;
+    const activeIsContentView = !!selected_category || isContentView;
+
     const filteredCategories = categories.filter((category) => {
         const name = getLocalizedName(category).toLowerCase();
         const description = getLocalizedDescription(category).toLowerCase();
@@ -270,50 +290,40 @@ export default function ProfileIndex({
     });
 
     const handleCategoryClick = (category: ModelCategory) => {
-        setSelectedCategory(category);
-        setIsContentView(true);
-        // Scroll to content view section after state updates with offset for navbar
-        setTimeout(() => {
-            const contentSection = document.getElementById("content-view");
-            if (contentSection) {
-                const navbarHeight = 80; // Adjust this value based on your navbar height
-                const elementPosition =
-                    contentSection.getBoundingClientRect().top;
-                const offsetPosition =
-                    elementPosition + window.pageYOffset - navbarHeight;
+        router.get(category.route, {}, {
+            preserveScroll: true,
+            preserveState: true,
+            onSuccess: () => {
+                // Scroll to content view section after navigation
+                setTimeout(() => {
+                    const contentSection = document.getElementById("content-view");
+                    if (contentSection) {
+                        const navbarHeight = 80;
+                        const elementPosition =
+                            contentSection.getBoundingClientRect().top;
+                        const offsetPosition =
+                            elementPosition + window.pageYOffset - navbarHeight;
 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth",
-                });
-            }
-        }, 100);
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth",
+                        });
+                    }
+                }, 100);
+            },
+        });
     };
 
     const handleBackToHome = () => {
-        setSelectedCategory(null);
-        setIsContentView(false);
+        router.get("/", {}, {
+            preserveScroll: false,
+        });
         setSearchTerm("");
     };
 
-    // Mock content items for demonstration
-    const getContentItems = (category: ModelCategory) => {
-        return Array.from({ length: category.count }, (_, i) => ({
-            id: i + 1,
-            title: `${getLocalizedName(category)} Item ${i + 1}`,
-            description: t(
-                "This is a sample description for the content item. In a real application, this would be fetched from the backend.",
-            ),
-            date: new Date(
-                2024,
-                Math.floor(Math.random() * 12),
-                Math.floor(Math.random() * 28) + 1,
-            ).toLocaleDateString(locale === "en" ? "en-US" : "id-ID", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-            }),
-        }));
+    // Get content items from props (passed from backend)
+    const getContentItems = () => {
+        return category_items;
     };
 
     return (
@@ -331,7 +341,7 @@ export default function ProfileIndex({
                     )}
                 </div>
 
-                {!isContentView ? (
+                {!activeIsContentView ? (
                     /* Home View - Categories Grid */
                     <div>
                         {/* Search and Categories Section */}
@@ -438,7 +448,7 @@ export default function ProfileIndex({
                         {/* Sidebar */}
                         <CategorySidebar
                             categories={categories}
-                            selectedCategory={selectedCategory?.name || null}
+                            selectedCategory={activeCategory?.name || null}
                             onCategorySelect={handleCategoryClick}
                             onBackToHome={handleBackToHome}
                             getLocalizedName={getLocalizedName}
@@ -447,7 +457,7 @@ export default function ProfileIndex({
 
                         {/* Main Content Area */}
                         <main className="flex-1 bg-muted/30 p-8">
-                            {selectedCategory && (
+                            {activeCategory && (
                                 <div className="mx-auto max-w-screen-xl">
                                     {/* Header */}
                                     <div className="mb-8">
@@ -455,7 +465,7 @@ export default function ProfileIndex({
                                             <div className="flex items-center gap-4">
                                                 {(() => {
                                                     const IconComponent =
-                                                        selectedCategory.icon;
+                                                        activeCategory.icon;
                                                     return (
                                                         <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 to-primary/20">
                                                             <IconComponent className="h-8 w-8 text-primary" />
@@ -465,35 +475,16 @@ export default function ProfileIndex({
                                                 <div>
                                                     <h1 className="text-3xl font-bold text-foreground">
                                                         {getLocalizedName(
-                                                            selectedCategory,
+                                                            activeCategory,
                                                         )}
                                                     </h1>
                                                     <p className="mt-1 text-muted-foreground">
                                                         {getLocalizedDescription(
-                                                            selectedCategory,
+                                                            activeCategory,
                                                         )}
                                                     </p>
                                                 </div>
                                             </div>
-                                            <Link
-                                                href={selectedCategory.route}
-                                                className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-all hover:shadow-lg"
-                                            >
-                                                {t("View Full Page")}
-                                                <svg
-                                                    className="h-4 w-4"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    viewBox="0 0 24 24"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth={2}
-                                                        d="M9 5l7 7-7 7"
-                                                    />
-                                                </svg>
-                                            </Link>
                                         </div>
 
                                         {/* Search Bar */}
@@ -511,7 +502,7 @@ export default function ProfileIndex({
 
                                     {/* Content Grid */}
                                     <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                                        {getContentItems(selectedCategory).map(
+                                        {getContentItems().map(
                                             (item) => (
                                                 <ContentCard
                                                     key={item.id}
@@ -526,7 +517,7 @@ export default function ProfileIndex({
                                     </div>
 
                                     {/* Empty State */}
-                                    {selectedCategory.count === 0 && (
+                                    {category_items.length === 0 && (
                                         <div className="py-16 text-center">
                                             <FileText className="mx-auto mb-4 h-16 w-16 text-muted-foreground" />
                                             <h3 className="mb-2 text-xl font-semibold text-foreground">
