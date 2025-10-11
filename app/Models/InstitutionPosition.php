@@ -14,6 +14,15 @@ class InstitutionPosition extends Model
 
     use HasTranslations;
 
+    protected $fillable = [
+        'personal_info_id',
+        'position',
+        'institution',
+        'start_year',
+        'end_year',
+        'description',
+    ];
+
     public array $translatable = ['position', 'institution', 'description'];
 
     protected function casts(): array

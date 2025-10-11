@@ -153,6 +153,16 @@ export function Navbar() {
                             </NavigationMenuLink>
                         </NavigationMenuItem>
                         <NavigationMenuItem>
+                            <NavigationMenuLink
+                                asChild
+                                className={navigationMenuTriggerStyle({
+                                    className: "bg-transparent",
+                                })}
+                            >
+                                <Link href="/blog">{t("Blog")}</Link>
+                            </NavigationMenuLink>
+                        </NavigationMenuItem>
+                        <NavigationMenuItem>
                             <NavigationMenuTrigger className="bg-transparent">
                                 {t("Profile")}
                             </NavigationMenuTrigger>
@@ -234,6 +244,15 @@ export function Navbar() {
                                         onClick={() => setMobileMenuOpen(false)}
                                     >
                                         {t("Home")}
+                                    </Link>
+
+                                    {/* Blog Link */}
+                                    <Link
+                                        href="/blog"
+                                        className="rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                                        onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                        {t("Blog")}
                                     </Link>
 
                                     {/* Profile Section */}

@@ -14,6 +14,17 @@ class Conference extends Model
 
     use HasTranslations;
 
+    protected $fillable = [
+        'personal_info_id',
+        'year',
+        'title',
+        'conference_name',
+        'location',
+        'role',
+        'paper_title',
+        'url',
+    ];
+
     public array $translatable = ['title', 'conference_name', 'location', 'paper_title'];
 
     protected function casts(): array

@@ -14,6 +14,15 @@ class CommunityService extends Model
 
     use HasTranslations;
 
+    protected $fillable = [
+        'personal_info_id',
+        'year',
+        'title',
+        'role',
+        'funding_source',
+        'fund_amount',
+    ];
+
     public array $translatable = ['title', 'funding_source'];
 
     protected function casts(): array

@@ -14,6 +14,17 @@ class Training extends Model
 
     use HasTranslations;
 
+    protected $fillable = [
+        'personal_info_id',
+        'year',
+        'title',
+        'type',
+        'organizer',
+        'duration_hours',
+        'period',
+        'url',
+    ];
+
     public array $translatable = ['title', 'organizer'];
 
     protected function casts(): array

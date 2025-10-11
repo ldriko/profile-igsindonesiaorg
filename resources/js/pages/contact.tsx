@@ -37,7 +37,9 @@ export default function Contact({ personal_info }: Props) {
                                 {t("Contact Us")}
                             </h1>
                             <p className="mx-auto max-w-3xl text-xl text-muted-foreground">
-                                {t("Get in touch with us for inquiries, collaborations, or more information about our academic work.")}
+                                {t(
+                                    "Get in touch with us for inquiries, collaborations, or more information about our academic work.",
+                                )}
                             </p>
                         </div>
 
@@ -104,7 +106,9 @@ export default function Contact({ personal_info }: Props) {
                             </CardHeader>
                             <CardContent className="text-center">
                                 <CardDescription className="text-primary-foreground/80">
-                                    {t("Whether you have questions about our research, want to collaborate, or simply want to learn more, feel free to reach out.")}
+                                    {t(
+                                        "Whether you have questions about our research, want to collaborate, or simply want to learn more, feel free to reach out.",
+                                    )}
                                 </CardDescription>
                             </CardContent>
                         </Card>

@@ -14,6 +14,17 @@ class TeachingMaterial extends Model
 
     use HasTranslations;
 
+    protected $fillable = [
+        'personal_info_id',
+        'title',
+        'program',
+        'type',
+        'format',
+        'isbn',
+        'year',
+        'url',
+    ];
+
     public array $translatable = ['title', 'program', 'type'];
 
     protected function casts(): array

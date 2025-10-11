@@ -317,5 +317,19 @@
     "Address": "Address",
     "We'd Love to Hear From You": "We'd Love to Hear From You",
     "Whether you have questions about our research, want to collaborate, or simply want to learn more, feel free to reach out.": "Whether you have questions about our research, want to collaborate, or simply want to learn more, feel free to reach out.",
-    "This is a sample description for the content item. In a real application, this would be fetched from the backend.": "This is a sample description for the content item. In a real application, this would be fetched from the backend."
+    "This is a sample description for the content item. In a real application, this would be fetched from the backend.": "This is a sample description for the content item. In a real application, this would be fetched from the backend.",
+    "Blog": "Blog",
+    "Latest Posts": "Latest Posts",
+    "Read our latest articles and insights": "Read our latest articles and insights",
+    "Search blog posts...": "Search blog posts...",
+    "Read More": "Read More",
+    "No blog posts found": "No blog posts found",
+    "There are currently no published blog posts.": "There are currently no published blog posts.",
+    "No blog posts match your search. Try different keywords.": "No blog posts match your search. Try different keywords.",
+    "Back to Blog": "Back to Blog",
+    "Published on": "Published on",
+    "Gallery": "Gallery",
+    "Attachments": "Attachments",
+    "Download": "Download",
+    "See More Blog Posts": "See More Blog Posts"
 }

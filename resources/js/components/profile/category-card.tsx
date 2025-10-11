@@ -27,7 +27,7 @@ export function CategoryCard({
     return (
         <button
             onClick={onClick}
-            className="group w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-1rem)] cursor-pointer"
+            className="group w-full cursor-pointer sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-1rem)]"
         >
             <Card className="h-full transform border-border bg-muted p-0.5 transition-all duration-500 hover:-translate-y-2 hover:scale-105 hover:border-primary hover:shadow-xl">
                 <Card className="h-full bg-gradient-to-br from-card to-muted group-hover:from-card group-hover:to-primary/5">
@@ -36,7 +36,7 @@ export function CategoryCard({
                         <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 to-primary/20 transition-colors group-hover:from-primary/20 group-hover:to-primary/30">
                             <Icon className="h-8 w-8 text-primary" />
                         </div>
-                        
+
                         <div className="space-y-1">
                             {/* Category Name */}
                             <CardTitle className="text-xl transition-colors group-hover:text-primary">
@@ -48,14 +48,14 @@ export function CategoryCard({
                             </CardDescription>
                         </div>
                     </CardHeader>
-                    
+
                     <CardContent className="flex flex-col items-center space-y-4 text-center">
                         <Badge variant="outline" className="gap-2">
                             <FileText className="h-3 w-3" />
                             <span>{count} items</span>
                         </Badge>
                     </CardContent>
-                    
+
                     <CardFooter className="flex justify-center">
                         {/* Arrow */}
                         <div className="flex items-center text-primary transition-transform group-hover:translate-x-1">

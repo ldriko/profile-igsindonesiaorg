@@ -1,51 +1,59 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PageController;
+use App\Http\Middleware\SetLocale;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', [PageController::class, 'index'])->name('home');
+Route::middleware([SetLocale::class])->group(function () {
+    Route::get('/', [PageController::class, 'index'])->name('home');
 
-// Category routes
-Route::get('/book-writings', [CategoryController::class, 'bookWritings'])->name('book-writings');
-Route::get('/community-services', [CategoryController::class, 'communityServices'])->name('community-services');
-Route::get('/conferences', [CategoryController::class, 'conferences'])->name('conferences');
-Route::get('/education', [CategoryController::class, 'education'])->name('education');
-Route::get('/institution-positions', [CategoryController::class, 'institutionPositions'])->name('institution-positions');
-Route::get('/intellectual-properties', [CategoryController::class, 'intellectualProperties'])->name('intellectual-properties');
-Route::get('/organizations', [CategoryController::class, 'organizations'])->name('organizations');
-Route::get('/policy-experiences', [CategoryController::class, 'policyExperiences'])->name('policy-experiences');
-Route::get('/publications', [CategoryController::class, 'publications'])->name('publications');
-Route::get('/research', [CategoryController::class, 'research'])->name('research');
-Route::get('/teaching-experiences', [CategoryController::class, 'teachingExperiences'])->name('teaching-experiences');
-Route::get('/teaching-materials', [CategoryController::class, 'teachingMaterials'])->name('teaching-materials');
-Route::get('/trainings', [CategoryController::class, 'trainings'])->name('trainings');
+    // Blog routes
+    Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+    Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
-// Language switching route
-Route::get('/language/{locale}', function ($locale) {
-    if (in_array($locale, ['id', 'en'])) {
-        session(['locale' => $locale]);
-        app()->setLocale($locale);
-    }
+    // Category routes
+    Route::get('/book-writings', [CategoryController::class, 'bookWritings'])->name('book-writings');
+    Route::get('/community-services', [CategoryController::class, 'communityServices'])->name('community-services');
+    Route::get('/conferences', [CategoryController::class, 'conferences'])->name('conferences');
+    Route::get('/education', [CategoryController::class, 'education'])->name('education');
+    Route::get('/institution-positions', [CategoryController::class, 'institutionPositions'])->name('institution-positions');
+    Route::get('/intellectual-properties', [CategoryController::class, 'intellectualProperties'])->name('intellectual-properties');
+    Route::get('/organizations', [CategoryController::class, 'organizations'])->name('organizations');
+    Route::get('/policy-experiences', [CategoryController::class, 'policyExperiences'])->name('policy-experiences');
+    Route::get('/publications', [CategoryController::class, 'publications'])->name('publications');
+    Route::get('/research', [CategoryController::class, 'research'])->name('research');
+    Route::get('/teaching-experiences', [CategoryController::class, 'teachingExperiences'])->name('teaching-experiences');
+    Route::get('/teaching-materials', [CategoryController::class, 'teachingMaterials'])->name('teaching-materials');
+    Route::get('/trainings', [CategoryController::class, 'trainings'])->name('trainings');
 
-    return redirect(request('redirect', '/'));
-})->name('language.switch');
+    // Language switching route
+    Route::get('/language/{locale}', function ($locale) {
+        if (in_array($locale, ['id', 'en'])) {
+            session(['locale' => $locale]);
+            app()->setLocale($locale);
+        }
 
-Route::get('/category', function () {
-    return Inertia::render('category');
-})->name('category');
+        return redirect(request('redirect', '/'));
+    })->name('language.switch');
 
-Route::get('/contact', function () {
-    $personalInfo = \App\Models\PersonalInfo::first();
-    
-    return Inertia::render('contact', [
-        'personal_info' => $personalInfo ? [
-            'name' => $personalInfo->name,
-            'institution' => $personalInfo->institution,
-            'address_office' => $personalInfo->address_office,
-            'phone' => $personalInfo->phone,
-            'email' => $personalInfo->email,
-        ] : null,
-    ]);
-})->name('contact');
+    Route::get('/category', function () {
+        return Inertia::render('category');
+    })->name('category');
+
+    Route::get('/contact', function () {
+        $personalInfo = \App\Models\PersonalInfo::first();
+
+        return Inertia::render('contact', [
+            'personal_info' => $personalInfo ? [
+                'name' => $personalInfo->name,
+                'institution' => $personalInfo->institution,
+                'address_office' => $personalInfo->address_office,
+                'phone' => $personalInfo->phone,
+                'email' => $personalInfo->email,
+            ] : null,
+        ]);
+    })->name('contact');
+});

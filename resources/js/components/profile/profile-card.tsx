@@ -41,7 +41,7 @@ export function ProfileCard({ personalInfo, locale }: ProfileCardProps) {
                 )}
 
                 {/* Profile Info */}
-                <div className="flex-1 text-center lg:text-justify py-6">
+                <div className="flex-1 py-6 text-center lg:text-justify">
                     <CardHeader>
                         <CardTitle className="text-3xl">
                             {personalInfo.name}
@@ -53,7 +53,7 @@ export function ProfileCard({ personalInfo, locale }: ProfileCardProps) {
                             {personalInfo.institution}
                         </CardDescription>
                     </CardHeader>
-                    
+
                     <CardContent className="space-y-6">
                         <p className="text-base leading-relaxed text-foreground">
                             {locale === "en"

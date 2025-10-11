@@ -120,4 +120,9 @@ class PersonalInfo extends Model
     {
         return $this->hasMany(Link::class);
     }
+
+    public function blogPosts(): HasMany
+    {
+        return $this->hasMany(BlogPost::class);
+    }
 }

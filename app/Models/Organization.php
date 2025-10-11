@@ -14,6 +14,15 @@ class Organization extends Model
 
     use HasTranslations;
 
+    protected $fillable = [
+        'personal_info_id',
+        'organization_name',
+        'role',
+        'membership_type',
+        'start_year',
+        'end_year',
+    ];
+
     public array $translatable = ['organization_name', 'role'];
 
     protected function casts(): array

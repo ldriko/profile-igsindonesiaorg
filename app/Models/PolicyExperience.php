@@ -14,6 +14,15 @@ class PolicyExperience extends Model
 
     use HasTranslations;
 
+    protected $fillable = [
+        'personal_info_id',
+        'year',
+        'title',
+        'role',
+        'institution',
+        'description',
+    ];
+
     public array $translatable = ['title', 'role', 'institution', 'description'];
 
     protected function casts(): array

@@ -16,6 +16,16 @@ class Research extends Model
 
     protected $table = 'researches';
 
+    protected $fillable = [
+        'personal_info_id',
+        'year',
+        'title',
+        'role',
+        'funding_source',
+        'scheme',
+        'fund_amount',
+    ];
+
     public array $translatable = ['title', 'funding_source', 'scheme'];
 
     protected function casts(): array

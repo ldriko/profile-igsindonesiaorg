@@ -14,6 +14,16 @@ class IntellectualProperty extends Model
 
     use HasTranslations;
 
+    protected $fillable = [
+        'personal_info_id',
+        'title',
+        'type',
+        'registration_number',
+        'year',
+        'status',
+        'url',
+    ];
+
     public array $translatable = ['title'];
 
     protected function casts(): array

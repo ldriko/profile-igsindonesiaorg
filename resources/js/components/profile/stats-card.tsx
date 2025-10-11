@@ -10,7 +10,7 @@ interface StatsCardProps {
 export function StatsCard({ stats }: StatsCardProps) {
     return (
         <Card className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground">
-            <CardContent className="pt-6">
+            <CardContent>
                 <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3">
                     {stats.map((stat, index) => (
                         <div key={index}>

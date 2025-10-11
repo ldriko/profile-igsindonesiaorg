@@ -1,3 +1,4 @@
+import { BlogPostCard } from "@/components/blog/blog-post-card";
 import { CategoryCard } from "@/components/profile/category-card";
 import { CategoryNavMenu } from "@/components/profile/category-nav-menu";
 import { CategorySidebar } from "@/components/profile/category-sidebar";
@@ -15,12 +16,13 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet";
 import { useLanguage } from "@/contexts/language-context";
-import { Head, router } from "@inertiajs/react";
+import { Head, Link, router } from "@inertiajs/react";
 import {
     Award,
     BookOpen,
     Briefcase,
     Building,
+    ChevronRight,
     FileEdit,
     FileText,
     FlaskConical,
@@ -69,6 +71,15 @@ interface ContentItem {
     [key: string]: unknown;
 }
 
+interface BlogPost {
+    id: number;
+    slug: string;
+    title: string;
+    excerpt: string;
+    published_at: string;
+    featured_image: string;
+}
+
 interface Props {
     personal_info: PersonalInfo | null;
     awards_count: number;
@@ -88,6 +99,7 @@ interface Props {
     trainings_count: number;
     selected_category?: string;
     category_items?: ContentItem[];
+    latest_blog_posts?: BlogPost[];
 }
 
 export default function ProfileIndex({
@@ -107,6 +119,7 @@ export default function ProfileIndex({
     trainings_count,
     selected_category,
     category_items = [],
+    latest_blog_posts = [],
 }: Props) {
     const { locale, t } = useLanguage();
     const [searchTerm, setSearchTerm] = useState("");
@@ -122,7 +135,7 @@ export default function ProfileIndex({
         const timer = setTimeout(() => {
             router.reload({
                 data: { search: searchTerm },
-                only: ['category_items'],
+                only: ["category_items"],
             });
         }, 300);
 
@@ -301,10 +314,9 @@ export default function ProfileIndex({
     };
 
     // Find the selected category from the categories list based on the prop
-    const selectedCategoryObj = categories.find(
-        (cat) => cat.name === selected_category
-    ) || null;
-    
+    const selectedCategoryObj =
+        categories.find((cat) => cat.name === selected_category) || null;
+
     // Use prop data if available, otherwise fall back to client-side state
     const activeCategory = selectedCategoryObj || selectedCategory;
     const activeIsContentView = !!selected_category || isContentView;
@@ -319,36 +331,47 @@ export default function ProfileIndex({
     const handleCategoryClick = (category: ModelCategory) => {
         setIsMobileMenuOpen(false);
         setSearchTerm("");
-        router.get(category.route, {}, {
-            preserveScroll: true,
-            preserveState: true,
-            onSuccess: () => {
-                // Scroll to content view section after navigation
-                setTimeout(() => {
-                    const contentSection = document.getElementById("content-view");
-                    if (contentSection) {
-                        const navbarHeight = 80;
-                        const elementPosition =
-                            contentSection.getBoundingClientRect().top;
-                        const offsetPosition =
-                            elementPosition + window.pageYOffset - navbarHeight;
+        router.get(
+            category.route,
+            {},
+            {
+                preserveScroll: true,
+                preserveState: true,
+                onSuccess: () => {
+                    // Scroll to content view section after navigation
+                    setTimeout(() => {
+                        const contentSection =
+                            document.getElementById("content-view");
+                        if (contentSection) {
+                            const navbarHeight = 80;
+                            const elementPosition =
+                                contentSection.getBoundingClientRect().top;
+                            const offsetPosition =
+                                elementPosition +
+                                window.pageYOffset -
+                                navbarHeight;
 
-                        window.scrollTo({
-                            top: offsetPosition,
-                            behavior: "smooth",
-                        });
-                    }
-                }, 100);
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: "smooth",
+                            });
+                        }
+                    }, 100);
+                },
             },
-        });
+        );
     };
 
     const handleBackToHome = () => {
         setIsMobileMenuOpen(false);
         setSearchTerm("");
-        router.get("/", {}, {
-            preserveScroll: false,
-        });
+        router.get(
+            "/",
+            {},
+            {
+                preserveScroll: false,
+            },
+        );
     };
 
     // Get content items from props (passed from backend)
@@ -371,11 +394,52 @@ export default function ProfileIndex({
                     )}
                 </div>
 
+                {/* Blog Posts Section - Only on Home View */}
+                {!activeIsContentView && latest_blog_posts.length > 0 && (
+                    <div className="border-y-1 bg-muted/30 py-8 lg:py-16">
+                        <div className="mx-auto max-w-screen-lg px-4">
+                            <div className="mb-8 text-center">
+                                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 to-primary/20">
+                                    <Newspaper className="h-6 w-6 text-primary" />
+                                </div>
+                                <h2 className="mb-2 text-3xl font-bold text-foreground">
+                                    {t("Latest Posts")}
+                                </h2>
+                                <p className="mx-auto max-w-2xl text-muted-foreground">
+                                    {t("Read our latest articles and insights")}
+                                </p>
+                            </div>
+                            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                                {latest_blog_posts.map((post) => (
+                                    <BlogPostCard
+                                        key={post.id}
+                                        post={post}
+                                        t={t}
+                                    />
+                                ))}
+                            </div>
+                            <div className="mt-8 text-center">
+                                <Button
+                                    asChild
+                                    variant="outline"
+                                    size="lg"
+                                    className="gap-2"
+                                >
+                                    <Link href="/blog">
+                                        {t("See More Blog Posts")}
+                                        <ChevronRight className="h-5 w-5" />
+                                    </Link>
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
                 {!activeIsContentView ? (
                     /* Home View - Categories Grid */
                     <div>
                         {/* Search and Categories Section */}
-                        <div className="border-y-1 bg-muted/30 py-8 lg:py-16">
+                        <div className="border-y-1 py-8 lg:py-16">
                             <div className="mx-auto max-w-screen-lg px-4">
                                 <div className="space-y-8">
                                     <div className="text-center">
@@ -471,7 +535,12 @@ export default function ProfileIndex({
                                         <div className="mb-4 flex items-start justify-between gap-4">
                                             <div className="flex items-center gap-4">
                                                 {/* Mobile Menu Button */}
-                                                <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+                                                <Sheet
+                                                    open={isMobileMenuOpen}
+                                                    onOpenChange={
+                                                        setIsMobileMenuOpen
+                                                    }
+                                                >
                                                     <SheetTrigger asChild>
                                                         <Button
                                                             variant="outline"
@@ -479,20 +548,40 @@ export default function ProfileIndex({
                                                             className="lg:hidden"
                                                         >
                                                             <Menu className="h-5 w-5" />
-                                                            <span className="sr-only">{t("Open menu")}</span>
+                                                            <span className="sr-only">
+                                                                {t("Open menu")}
+                                                            </span>
                                                         </Button>
                                                     </SheetTrigger>
-                                                    <SheetContent side="left" className="w-80 overflow-y-auto">
+                                                    <SheetContent
+                                                        side="left"
+                                                        className="w-80 overflow-y-auto"
+                                                    >
                                                         <SheetHeader>
-                                                            <SheetTitle>{t("Categories")}</SheetTitle>
+                                                            <SheetTitle>
+                                                                {t(
+                                                                    "Categories",
+                                                                )}
+                                                            </SheetTitle>
                                                         </SheetHeader>
                                                         <div className="mt-6">
                                                             <CategoryNavMenu
-                                                                categories={categories}
-                                                                selectedCategory={activeCategory?.name || null}
-                                                                onCategorySelect={handleCategoryClick}
-                                                                onBackToHome={handleBackToHome}
-                                                                getLocalizedName={getLocalizedName}
+                                                                categories={
+                                                                    categories
+                                                                }
+                                                                selectedCategory={
+                                                                    activeCategory?.name ||
+                                                                    null
+                                                                }
+                                                                onCategorySelect={
+                                                                    handleCategoryClick
+                                                                }
+                                                                onBackToHome={
+                                                                    handleBackToHome
+                                                                }
+                                                                getLocalizedName={
+                                                                    getLocalizedName
+                                                                }
                                                                 t={t}
                                                             />
                                                         </div>
@@ -533,28 +622,34 @@ export default function ProfileIndex({
                                                     "Search items...",
                                                 )}
                                                 value={searchTerm}
-                                                onChange={(e) => setSearchTerm(e.target.value)}
+                                                onChange={(e) =>
+                                                    setSearchTerm(
+                                                        e.target.value,
+                                                    )
+                                                }
                                             />
                                         </div>
                                     </div>
 
                                     {/* Content Grid */}
                                     <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                                        {getContentItems().map(
-                                            (item) => (
-                                                <ContentCard
-                                                    key={item.id}
-                                                    title={item.title}
-                                                    description={
-                                                        item.description
-                                                    }
-                                                    date={item.date}
-                                                    url={item.url as string | undefined}
-                                                    onViewDetails={() => setSelectedItem(item)}
-                                                    t={t}
-                                                />
-                                            ),
-                                        )}
+                                        {getContentItems().map((item) => (
+                                            <ContentCard
+                                                key={item.id}
+                                                title={item.title}
+                                                description={item.description}
+                                                date={item.date}
+                                                url={
+                                                    item.url as
+                                                        | string
+                                                        | undefined
+                                                }
+                                                onViewDetails={() =>
+                                                    setSelectedItem(item)
+                                                }
+                                                t={t}
+                                            />
+                                        ))}
                                     </div>
 
                                     {/* Empty State */}
@@ -566,8 +661,12 @@ export default function ProfileIndex({
                                             </h3>
                                             <p className="text-muted-foreground">
                                                 {searchTerm
-                                                    ? t("No items match your search. Try different keywords.")
-                                                    : t("There are currently no items in this category.")}
+                                                    ? t(
+                                                          "No items match your search. Try different keywords.",
+                                                      )
+                                                    : t(
+                                                          "There are currently no items in this category.",
+                                                      )}
                                             </p>
                                         </div>
                                     )}
@@ -576,8 +675,16 @@ export default function ProfileIndex({
                         </main>
 
                         {/* Detail View Sheet */}
-                        <Sheet open={!!selectedItem} onOpenChange={(open) => !open && setSelectedItem(null)}>
-                            <SheetContent side="right" className="w-full sm:max-w-2xl overflow-y-auto">
+                        <Sheet
+                            open={!!selectedItem}
+                            onOpenChange={(open) =>
+                                !open && setSelectedItem(null)
+                            }
+                        >
+                            <SheetContent
+                                side="right"
+                                className="w-full overflow-y-auto sm:max-w-2xl"
+                            >
                                 <SheetHeader>
                                     <SheetTitle>{t("Details")}</SheetTitle>
                                 </SheetHeader>

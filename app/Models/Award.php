@@ -14,6 +14,15 @@ class Award extends Model
 
     use HasTranslations;
 
+    protected $fillable = [
+        'personal_info_id',
+        'year',
+        'title',
+        'organization',
+        'description',
+        'url',
+    ];
+
     public array $translatable = ['title', 'organization', 'description'];
 
     protected function casts(): array

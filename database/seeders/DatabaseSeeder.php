@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
             AwardSeeder::class,
             OrganizationSeeder::class,
             LinkSeeder::class,
+            BlogPostSeeder::class,
         ]);
     }
 }

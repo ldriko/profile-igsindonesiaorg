@@ -16,6 +16,16 @@ class Education extends Model
 
     protected $table = 'educations';
 
+    protected $fillable = [
+        'personal_info_id',
+        'level',
+        'institution',
+        'department',
+        'graduation_year',
+        'thesis_title',
+        'advisor',
+    ];
+
     public array $translatable = ['department', 'thesis_title'];
 
     protected function casts(): array

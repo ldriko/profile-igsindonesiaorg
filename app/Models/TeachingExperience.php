@@ -14,6 +14,15 @@ class TeachingExperience extends Model
 
     use HasTranslations;
 
+    protected $fillable = [
+        'personal_info_id',
+        'course_name',
+        'level',
+        'program',
+        'institution',
+        'academic_year',
+    ];
+
     public array $translatable = ['course_name', 'program'];
 
     protected function casts(): array

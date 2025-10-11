@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BlogPost;
 use App\Models\BookWriting;
 use App\Models\CommunityService;
 use App\Models\Conference;
@@ -23,6 +24,25 @@ class PageController extends Controller
     public function index()
     {
         $personalInfo = PersonalInfo::first();
+
+        // Get latest 3 published blog posts
+        $latestBlogPosts = BlogPost::query()
+            ->published()
+            ->orderBy('published_at', 'desc')
+            ->limit(3)
+            ->get()
+            ->map(function ($post) {
+                $featuredImage = $post->getFirstMedia('featured_image');
+
+                return [
+                    'id' => $post->id,
+                    'slug' => $post->slug,
+                    'title' => $post->title,
+                    'excerpt' => $post->excerpt,
+                    'published_at' => $post->published_at?->format('F d, Y'),
+                    'featured_image' => $featuredImage ? $featuredImage->getTemporaryUrl(now()->addHours(2)) : null,
+                ];
+            });
 
         return Inertia::render('index', [
             'personal_info' => $personalInfo ? [
@@ -48,6 +68,7 @@ class PageController extends Controller
             'teaching_experiences_count' => TeachingExperience::count(),
             'teaching_materials_count' => TeachingMaterial::count(),
             'trainings_count' => Training::count(),
+            'latest_blog_posts' => $latestBlogPosts,
         ]);
     }
 }

@@ -14,6 +14,14 @@ class BookWriting extends Model
 
     use HasTranslations;
 
+    public $fillable = [
+        'personal_info_id',
+        'year',
+        'title',
+        'publisher',
+        'isbn',
+    ];
+
     public array $translatable = ['title', 'publisher'];
 
     protected function casts(): array

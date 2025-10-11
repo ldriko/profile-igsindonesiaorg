@@ -11,6 +11,21 @@ class Publication extends Model
     /** @use HasFactory<\Database\Factories\PublicationFactory> */
     use HasFactory;
 
+    protected $fillable = [
+        'personal_info_id',
+        'publication_category_id',
+        'year',
+        'title',
+        'publication_type',
+        'journal_name',
+        'doi',
+        'url',
+        'publisher',
+        'index_type',
+        'rank',
+        'author_role',
+    ];
+
     public function personalInfo(): BelongsTo
     {
         return $this->belongsTo(PersonalInfo::class);

@@ -11,6 +11,12 @@ class Link extends Model
     /** @use HasFactory<\Database\Factories\LinkFactory> */
     use HasFactory;
 
+    protected $fillable = [
+        'personal_info_id',
+        'platform',
+        'url',
+    ];
+
     public function personalInfo(): BelongsTo
     {
         return $this->belongsTo(PersonalInfo::class);
